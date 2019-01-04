@@ -1,0 +1,273 @@
+\documentclass{article}  
+\usepackage[utf8]{inputenc}            % Teckenkodning
+\usepackage[T1]{fontenc}               % Fixa kopiering av texten
+%\usepackage[swedish]{babel} 
+\usepackage{graphicx,epstopdf,float}   % Bilder
+\usepackage{amsmath,amssymb,amsfonts}  % Matematik
+\usepackage{enumerate}                 % Fler typer av listor
+\usepackage{fancyhdr}                  % Sidhuvud/sidfot
+\usepackage{geometry}                  % Sidlayout m.m.
+\usepackage{hyperref}                  % HyperlÃ€nkar
+\usepackage{ amssymb }
+\usepackage{color}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{tikz}
+%\usepackage{pgfplots}
+
+% Lägger på massa imports
+\usepackage[swedish,english]{babel}
+\usepackage{mathtools, bm} 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ulem}
+\usepackage{graphicx,caption,subcaption}
+\usepackage{amsmath,amsfonts,amssymb,esint,hyperref}
+\usepackage{enumitem}
+\usepackage[top=3cm, bottom=3cm, left=2.5cm, right=2.5cm, a4paper]{geometry}
+\usepackage[section]{placeins}
+\usepackage{titlesec}
+\usepackage[allowzeroexp=true,numdigits,obeymode=true,redefsymbols,textcelsius,textdegree,textminute,textmu,load={abbr,addn},decimalsymbol=comma]{siunitx}
+\usepackage{epstopdf}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{color}
+\usepackage{amsmath} 
+\usepackage{stmaryrd}
+\definecolor{mygreen}{RGB}{28,172,0}
+
+
+
+\begin{document}
+
+
+\newpage
+\section*{Speed gained from acceleration by mass ejection}
+
+\begin{figure}[H]
+\begin{center} 
+\includegraphics[width=0.9\textwidth]{scsh.png}
+\caption{}
+\label{fig:fig1}
+\end{center}
+\end{figure}
+
+In Figure 1, mass (fuel) is ejected straight backwards at a constant rate of $q$ mass units per time unit, (e.g. $kg/s$) with a speed $u$. Assume that the rocket has an initial mass $M_0$, of which the fuel is some fraction: $M_{fuel}<M_0$. 
+
+Now, a problem regarding actual bodies (probably rockets) in space:
+\\ \\
+\textbf{Question:} Assume that $q$ and $u$ are constant, the ejected mass is continuous (not in chunks as in the figure) and the mass is ejected straight backwards. What is the rockets \textit{gained} velocity $v(t)$ after the burn? 
+\\ \\
+(\textbf{No other forces such as gravity can be assumed to act on the rocket}).
+
+\newpage
+\noindent
+\textbf{Answer}
+\\
+The rocket has some initial mass $M_0$ before the burn begins. The rockets mass after $t$ time units is given by 
+\begin{equation*}
+    M(t)=M_0-qt \quad \quad (1)   
+\end{equation*}
+(Remember that $q$ is the rate of mass ejected). 
+
+Next, we need a natural law connecting mass to velocity. Fortunately, Newtonian mechanics provides us with conservation of momentum: $m_1\Delta v_1+m_2\Delta v_2=0$. Note that the ejected mass moves in opposite direction and therefore must have opposite sign! 
+
+This means that for a small interval $\delta t$ in time:
+\begin{equation*}
+    M(t+\delta t)\Big(v(t+\delta t)-v(t)\Big) -(q\cdot\delta t)(u-0)=0  \quad \quad (2)
+\end{equation*}
+Rewrite relation (2):
+$$
+\frac{v(t+\delta t)-v(t)}{\delta t}=\frac{qu}{M(t+\delta t)}
+$$
+Let $\delta t \rightarrow 0$ (which is possible since the mass ejection is assumed to be continuous). The definition of derivatives gives us:
+$$
+\dot{v}(t)=\frac{qu}{M(t)}
+$$
+And thus the \textbf{gained} speed is
+$$
+v(t) = qu\int_0^t\frac{1}{M(\tau)}d\tau \ .
+$$
+We now have an exercise in calculus. Since $M(\tau)=M_0-q\tau$, we make the substitution:
+$$
+\xi=M_0-q\tau \implies \frac{d\xi}{d\tau}=-q \implies d\tau=-\frac{1}{q}d\xi \ .
+$$
+We also have that $(\tau=0,\tau=t)$ becomes $(\xi=M_0,\xi=M_0-qt)$. For the integral, this means:
+$$
+qu\int_0^t\frac{1}{M(\tau)}d\tau \quad \longrightarrow \quad qu\int_{M_0}^{M_0-qt}\frac{1}{\xi}(-\frac{1}{q})d\xi
+=-u\int_{M_0}^{M_0-qt}\frac{1}{\xi}d\xi $$
+This integral is analytically solvable and is the natural logarithm, so:
+$$
+v(t) = -u\Big[\ln(\xi)\Big]_{\xi=M_0}^{M_0-qt}=-u\big(\ln(M_0-qt)-\ln(M_0)\big) = u\big(\ln(M_0)-\ln(M_0-qt)\big)
+$$
+\textbf{Again, this is the speed gained from the burn. The rockets total speed is this added to the initial speed.}\\ 
+
+The equation can obtain a more compact form, using logarithm rules:
+\\
+\vspace{1 cm} \\
+\textsc{The Rocket Equation:}
+$$
+v(t)=u\cdot\ln\Big(\frac{M_0}{M_0-qt}\Big) \ , \quad 0\leq qt\leq \textrm{Fuel mass}< M_0 \ .
+$$
+
+\newpage
+\section*{Low earth orbital speed}
+\textbf{Question:} What speed is required for a satellite to remain in low earth orbit, given the satellites mass is $m$ and negligible to that of earths mass $M$?
+\\ \\
+\textbf{Answer}
+\\
+This is an easy one. We're describing a circular motion (approximating the earths gravity field to be uniform) and thus using simple maths from high school physics. 
+\\ \\
+Let the radius of the earth plus the orbital height (typically a bit over 100 km) be denoted by $R$.
+\\ \\
+What we need is the expression for centripetal acceleration, Newtons 2nd law of motion (the force equation) and Newtons law of gravity:
+\begin{equation*}
+    \begin{split}
+        a_{cen}=\frac{v^2}{R} \quad \quad &(1) \\
+        F=ma  \quad \quad &(2)
+        \\
+        F=G\frac{Mm}{R^2} \quad \quad &(3)
+    \end{split}
+\end{equation*}
+Now, substitute the acceleration of (1) into (2)
+$$
+F=m\frac{v^2}{R} \quad \quad (4)
+$$
+Since the forces in (2) and (3) describe the same phenomenon, insert the right hand side of (4) into the left hand side of (3):
+$$
+m\frac{v^2}{R}=G\frac{Mm}{R^2}
+$$
+Solve this for $v$:
+$$
+v=\sqrt{\frac{GM}{R}}
+$$
+And there we have it. Inserting values one can verify the result (about 7.8 km/s) with a google search.
+
+\newpage
+\section*{Escape velocity}
+\textbf{Question:} If we want a satellite with mass $m$ to reach beyond the earths gravity well (e.g. going to mars), what is the \textit{minimal} speed the satellite has to have after the rockets burn so that it doesn't get dragged back to earth? (Let the earth mass be denoted $M$ and note that this is true for any planet).
+\\ \\
+\textbf{Answer}
+\\
+This one is tricky in the sense of formulating the problem correctly. \textbf{Note: The text sometime says "work", but this is just energy and treated accordingly in the math.}
+
+
+From high school physics we know that the work $\delta E_{work}$ put into dragging an object a distance $\delta r$ against a force $F$ (note that the work here is the gravitational pull from the earth exerted on the satellite) is simply 
+
+$$
+\delta E_{work}=F\cdot\delta r \quad \quad (1)
+$$
+Also from high school physics we know that an object with mass $m$ and velocity $v$ has kinetic energy
+
+$$
+E_k = \frac{mv^2}{2} \quad \quad (2)
+$$
+As the satellite moves away from the earth, the gravitational pull decreases. The pull at distance $r$ is of course given by Newtons law of gravitation
+
+$$
+F(r)=G\frac{Mm}{r^2} \quad \quad (3)
+$$
+So when the satellite moves from $r\rightarrow r+\delta r$ the work exerted on the satellite by the earth can be approximated using (1) and (3) as
+$$
+\delta E_{work}\approx F(r)\cdot\delta r= G\frac{Mm}{r^2}\delta r
+$$
+(being exact when $\delta r\rightarrow 0$). 
+
+Now, assuming that the rockets burn terminates at a distance $R$ from the earths center, we don't want the speed to decrease to zero until the satellite is infinitely far away from the earth. 
+
+Formulating this mathematically we sum the work exerted as the satellite moves away (after the burn terminates) and letting $\delta r\rightarrow 0$, giving the total amount of work as an integral:
+
+$$
+E_{work}=\int_R^{\infty}G\frac{Mm}{r^2}dr=GMm\int_R^{\infty}\frac{1}{r^2}dr=GMm\big[-\frac{1}{r}\big]_{r=R}^{\infty}=-GMm\big(0-\frac{1}{R}\big)=\frac{GMm}{R}
+$$
+
+According to the law of energy conservation, the work exerted on the satellite must equal the kinetic energy (2) the satellite had just after the rockets burn (given by the escape velocity $v_e$). This gives the relation:
+$$
+E_k=E_{work} \implies \frac{mv_e^2}{2}=\frac{GMm}{R}
+$$
+Solving this for $v$ we get the escape velocity to
+$$
+v_e=\sqrt{\frac{2GM}{R}} \quad \approx \quad 11.01 \ km/s \quad , \quad (R=\textrm{earth radius + 100 km})
+$$
+
+\newpage
+
+\section*{Geostationary orbital speed and radius}
+As should be known, the earth completes one revolution around its own axis every 24 hours. It's common that a satellite needs to be in contact with some specific point at the surface at all time, and thus the satellite has to have the same period in revolution as the earth to remain above the same longitude at all times. 
+\\ \\
+OBS: The satellite orbits the earths center, so the geostationary orbit is only possible for orbits extending out from the equator! (A satellite with an orbit passing by e.g. the poles, with a period of 24 h, will pass each pole with a 24 h time interval)
+\\ \\
+\textbf{Question:} How can we place a satellite in orbit such that it has the same period in revolution around the earths center as the earth itself?
+\\ \\
+\textbf{Answer:}
+\\
+To begin with we can calculate what the period is for a satellite in low earth orbit (e.g. the International Space Station):
+
+The speed was calculated to be around 7.8 km/s for low earth orbit. The orbit is assumed to be circular and the radius $R$ is about 100 km above the surface. The period $T$ is calculated as
+$$
+T_{low} = \frac{2\pi R_{low}}{v_{low}} = \frac{2\pi(R_{earth}+100km)}{7.8 km/s} \approx 89.6 \ \  \textrm{min} \quad \quad (1)
+$$
+(The ISS orbits the earth in 92.65 min, but its orbit is about 400 km above the surface).
+\\
+\textbf{So the low earth orbit is way to fast (low?) to be geostationary.}
+\\ \\
+To solve the problem then, we need; as usual; to establish some independent relations. Start by inserting $T_{geo}:=24 \ h$ into (1):
+$$
+T_{geo}=\frac{2\pi R_{geo}}{v_{geo}} \quad \quad (2)
+$$
+\textit{From now on we only work with the geostationary values, so let's drop the "geo"-subscript.} 
+\\ \\
+We have two unknowns ($R, \ v$) so we need some other relation. Once again Sir I. Newton is our knight in shining armour. Let as usual $m$
+be the mass of the
+satellite and $M$ the mass of the earth, then:
+\begin{equation*}
+    \begin{split}
+        a_{cen}=\frac{v^2}{R} \quad \quad &(3) \\
+        F=ma  \quad \quad &(4)
+        \\
+        F=G\frac{Mm}{R^2} \quad \quad &(5)
+    \end{split}
+\end{equation*}
+If we now can figure out either one of $R$ or $v$ we can insert this into (2) and solve for the other.
+\\ \\
+Now recall that we have already done a lot of the calculations- when solving the \textit{low earth orbital problem}- with equations (3),(4) and (5); see "Low Earth Orbital Speed" above! The relations holds true no matter the values of radius and speed, so the conclusion is the same for geostationary orbit:
+$$
+v=\sqrt{\frac{GM}{R}} \quad \quad (6)
+$$
+What we have now is two equations, (2) and (6), with two unknowns, $v$ and $R$. So we want to solve for the unknowns in a practical way. For the non math-initiated, this can take some testing. But i'm pretty sure that this is the best way to do it:
+\\ \\
+Square (6) and solve for $R$
+$$
+R=\frac{GM}{v^2}
+$$
+Insert into (2)
+$$
+T=\frac{2\pi}{v}\frac{GM}{v^2}
+$$
+Solve for $v$
+$$
+v^3=\frac{2\pi GM}{T} \implies v=\Big(\frac{2\pi GM}{T}\Big)^{1/3}
+$$
+Now we can insert the obtained value for $v$ into (2) to get $R$.
+
+In conclusion, the geostationary orbital radius and speed is (with calculated values):
+\\ \\
+\textbf{Answer:}
+\\
+$$
+v_{geo}=\Big(\frac{2\pi GM}{T_{geo}}\Big)^{1/3} \quad \approx \quad 3.071 \ km/s
+$$
+$$
+R_{geo}=\frac{T_{geo}}{2\pi}\Big(\frac{2\pi GM}{T_{geo}}\Big)^{1/3} \quad \approx \quad 42 \ 227 \ km
+$$
+\\
+
+Observe that $R_{geo}$ is given as the distance from the earths center. So the geostationary distance from earths surface is about 35 656 km (quite the difference from the low earth orbit at 100 km).
+\\ \\
+\textit{A google search says that the speed is pretty much exact, but the height differs with about 130 km. This might seem weird since the orbital height is completely determined by the speed. Maybe it's a conspiracy and the earth is actually flat...}
+\section*{Given perigeum, calculate apogeum}
+
+
+
+
+\end{document}

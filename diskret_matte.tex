@@ -1,0 +1,2321 @@
+\documentclass{article} 
+
+\usepackage[utf8]{inputenc}            % Teckenkodning
+\usepackage[T1]{fontenc}               % Fixa kopiering av texten
+\usepackage[swedish]{babel} 
+\usepackage{graphicx,epstopdf,float}   % Bilder
+\usepackage{amsfonts}  % Matematik
+\usepackage{enumerate}                 % Fler typer av listor
+\usepackage{fancyhdr}                  % Sidhuvud/sidfot
+\usepackage{geometry}                  % Sidlayout m.m.
+\usepackage{hyperref}                  % HyperlÃ€nkar
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{sidecap}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{extpfeil}
+%\pagestyle{fancy}
+%\lhead{Sebastian Angermund}
+%\rhead{1989 10 29 - 0132}
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+\pagenumbering{roman} % Start roman numbering
+
+\begin{document}
+\tableofcontents
+\newpage
+\section*{Kapitel}
+Material (SF1679):\\
+
+\underline{Biggs:}
+
+4.3-7 \hspace{0.5 cm} \checkmark
+
+5 \hspace{0.5 cm} \checkmark
+
+6 \hspace{0.5 cm} \checkmark
+
+7.2-3 \hspace{0.5 cm} \checkmark
+
+8 \hspace{0.5 cm} \checkmark
+
+9.7 \hspace{0.5 cm} \checkmark
+
+10-13$\setminus\{10.3 \ ; \ 11.5-7 \ ; \ 13.4-5\}$ \hspace{0.5 cm} \checkmark
+
+15 \hspace{0.5 cm} \checkmark 
+
+17$\setminus\{17.2-5, \ (6?)\}$  \hspace{0.5 cm} \checkmark 
+
+20$\setminus\{20.9\}$ \hspace{0.5 cm} \checkmark 
+
+21 \hspace{0.5 cm} \checkmark 
+
+Frivilligt $\begin{cases} 24.1-4\\25.1-4\\26.1-4 \end{cases}$
+
+\underline{Stenciler:}
+
+RSA-Kryptering
+
+Planära grafer
+
+Gruppers verkan på mängder\\
+
+\underline{Samt:} Föreläsningsanteckningar i SF1662. (Bl.a kromatiska polynom och normala delgrupper)
+\newpage
+\section*{Vad saker betyder}
+Pilen $\implies$ betyder $"$medför$"$ eller $"$innebär att$"$. Pilen $\Longleftrightarrow$ betyder $"$är ekvivalent med$"$.
+\\ \\
+$\mathbb{N}$ är mängden naturliga tal (positiva heltal). D.v.s $\mathbb{N}=\{1,2,3,4,...\}$. 
+\\ \\
+$\mathbb{Z}$ är mängden av heltal. D.v.s. $\mathbb{Z}=\{...,-2,-1,0,1,2,3,...\}$.
+\\ \\
+Versala bokstäver används typiskt för mängder, exempelvis kan man skriva $I=\{1,2,3,4\}$.
+\\ \\
+Vill vi säga att ett element $n$ tillhör en viss mängd $I$ skriver vi 
+\begin{equation*}
+    n\in I \ .
+\end{equation*}
+Om ett element $n$ INTE tillhör en mängd $I$ skriver vi
+\begin{equation*}
+    n \notin I \ .
+\end{equation*}
+Om $n\in I=\{1,2,3,4\}$ är då alltså $n$ ett eller flera av talen $1,2,3,4$. (Korrekt säger man att $n$ kan anta ett eller flera av talen)...
+\\ \\
+Uttrycket
+\begin{equation*}
+    \exists n\in I \ ...
+\end{equation*}
+uttalas $"$det existerar(åtminstone) ett element $n$ i mängden $I..."$. Observera att detta kan gälla ETT ELLER FLERA element i mängden $I$.
+\\ \\
+Vill vi säga att ALLA element i mängden $I$ uppfyller en egenskap så skriver vi
+\begin{equation*}
+    \forall n\in I \ ...
+\end{equation*}
+Detta uttalas $"$för alla element $n$ i mängden $I..."$.
+\\ \\
+\textsc{Exempel:}
+\\
+Låt $I=\{1,2,3,4\}$. Nu är det sant att
+\begin{equation*}
+    \exists n\in I, \quad n^2=4 \ . \quad \textrm{Samt så gäller det att} \quad \forall n\in I, \ \exists m\in\mathbb{N}, \ m=n \ .    
+\end{equation*}
+Med ord: Det finns ett tal $n$ i mängden $I$ sådant att $n^2=4$. Samt så gäller det att för alla tal $n$ i mängden $I$, finns det ett naturligt heltal $m$ som är lika med $n$.
+\\ \\
+\textbf{Varför definitioner, satser och bevis?}
+\\
+Matematik är mänskligt, därför finns ingen universell sanning. Därför DEFINIERAS det vi tycker är viktigt. För att sedan säga att något UPPFYLLER en eller flera DEFINITIONER uttrycker vi detta med en SATS. Detta är oftast inte självklart utan behöver BEVISAS.
+\\ \\
+\textsc{Exempel} (Definitionerna är påhitt av mig. Man får definiera vad man vill!)
+\\
+\textbf{Definition 1:} Ett jämnt heltal är ett tal som, när det delas med 2, ger ett heltal.
+\\
+\textbf{Definition 2:} En kvadrat är ett tal som är multiplicerat med sig självt.
+\\ \\
+\textbf{Sats:} Alla kvadrater av JÄMNA HELTAL är jämna heltal.
+\\
+\textbf{Bevis:} Låt $n\in\mathbb{Z}$ vara jämnt. Enligt Definition 1 kan $n$ skrivas som $n=2\cdot m$, \  $m\in\mathbb{Z}$ ($m$ är ett heltal som inte nödvändigtvis är jämnt). Nu gäller det enligt Definition 2 att $n^2=(2\cdot m)^2=4\cdot m^2=2\cdot(2\cdot m^2)$. Uppenbarligen är $n^2$ delbart med $2$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+\textbf{Mängder vs. element}
+\\
+Ett ELEMENT är en sak som inte innehåller något annat än sig självt, vilket oftast är tal så som $1,2,3..$  Ett element kan även vara ett spelkort $"$hjärter ess$"$, eller en människa $"$Pelle$"$. 
+\\ \\
+Mängder är däremot något som kan innehålla ett flertal av element (samt finns det mängder av mängder, mängder av mängder av mängder, o s v.).
+\\ \\
+\textsc{Exempel}
+\\
+En mängd kan vara $M=\{0\}$. Ett annat exempel är mängden $\mathbb{N}=\{1,2,3,...\}$. En mängd kan också vara några personer $P=\{anders,pelle,anna\}$.
+\\
+Observera att en mängd skrivs med måsvingar eftersom att man vill visa att det är något som KAN innehålla flera saker. Medans ett ELEMENT är en enskild sak och skrivs bara som det är.
+\\ \\
+\textbf{Uttryck gällande mängder}
+\\
+Om en mängd $B$ innehåller en del, men inte alla, av elementen i en mängd $A$ skriver man detta som
+\begin{equation*}
+    B\subset A \ . \quad (B \ \textrm{är en delmängd av} \ A) \ .
+\end{equation*}
+Om en mängd $D$ innehåller en del, och kanske alla, elementen av en mängd $C$ så skrivs detta som
+\begin{equation*}
+    D\subseteq C \ . \quad (D \ \textrm{är en delmängd eller lika med} \ C) \ . 
+\end{equation*}
+Exempelvis, om $A=\{1,2,3,4\}$ och $B=\{2,3\}$ så gäller det att $B\subset A$. Samt om $C=\{1,2,3\}$ och $D=\{1,2,3\}$ så gäller det att $D\subseteq C$. Men även att $C\subseteq D$ och $C=D$. 
+\\ \\
+En UNION av två mängder $X\cup Y$ är alla element av $X$ och $Y$. En SKÄRNING $X\cap Y$ av två mängder $X$ och $Y$ är alla gemensamma element av $X$ och $Y$.
+\\ \\
+\textsc{Exempel}
+\\
+$X=\{pelle,anna,monica,mohammed\}$, $Y=\{mohammed,rolf\}$.
+\begin{equation*}
+    X\cup Y = \{pelle,anna,monica,mohammed,rolf\} \ , \quad X\cap Y=\{mohammed\} \ .
+\end{equation*}
+\\ \\
+\textbf{Mängdnotation}
+\\
+Antag att vi vill säga $"$ $M$ är mängden av alla element $x\in X$ som uppfyller att $x=y"$ av någon anledning. Då skrivs detta som
+\begin{equation*}
+   M = \{x\in X \ | \ x=y\} \ .
+\end{equation*}
+\\ \\
+\textbf{Begränsade vs. oändliga mängder}
+\\
+En mängd säges vara begränsad om den har ett sista element. En mängd säges vara oändlig om den inte har ett sista element. Exempelvis så är $I=\{1,2,3\}$ begränsad medans $\mathbb{N}=\{1,2,3...\}$ inte är det.
+\\ \\
+\textbf{Definitionsmängd vs. Värdemängd} 
+\\
+En funktion $f$ tilldelar element i en Definitionsmängd värden i en Värdemängd.
+\\ \\
+\textsc{Exempel:}
+\\
+Låt $X=\{1,2,3\}$ vara en definitionsmängd och $f(x)=x^2$ vara en funktion som kvadrerar talen från någon definitionsmängd till någon värdemängd. Då säges uttrycket
+\begin{equation*}
+    f:X\longrightarrow Y
+\end{equation*}
+ta definitionsmängden $X$ till värdemängden $Y=\{1,4,9\}$.
+\\ \\
+\textbf{Storleken av en mängd} \\
+Om $I$ är en mängd så säges $|I|$ vara antal element i mängden $I$. Exempelvis: $I=\{1,2,3,4\}$ så är $|I|=4$. 
+\\ \\
+\textbf{Negation}
+\\
+Låt $P$ vara ett påstående. Då betyder $\neg P$ $"$negationen av påståendet $P"$. 
+\\ \\
+\textsc{Exempel}
+\\
+$P="$Alla böcker är intressanta$"$, $\neg P="$Det finns åtmistone en bok som inte är intressant$"$. 
+\\ \\
+\textbf{Motsägelser}
+\\
+Många bevis visas m.h.a. så kallade motsägelsebevis. Dessa fungerar på följande sätt:
+\\ \\
+Ett påstående vill bevisas, (ex. det finns oändligt många naturliga heltal). Då ges ett argument som påstår negationen (det finns ett största naturligt heltal). Om en motsägelse kan hittas till negationen (ta detta största tal och addera 1) så måste det ursprungliga påståendet vara sant (det finns inget största naturligt heltal).
+
+Vilket bevisar vårt ursprungliga påstående. \textit{Observera att ett påstående i detta samanhang har antingen värdet sant eller värdet falskt. Påståendets negation har per definition motsatt värde.}
+\\ \\
+\textbf{Summation}
+\begin{equation*}
+    \sum_{i=1}^nf(i)=f(1)+f(2)+f(3)+...+f(n-1)+f(n) \ .
+\end{equation*}
+\textsc{Exempel}
+\\
+$$ \sum_{i=1}^{\infty}\frac{1}{2^i}=\frac{1}{2}+\frac{1}{4}+\frac{1}{8}+...=1 \ . $$
+Detta är ett exempel på en geometrisk summa. Läs mer på Wikipedia.
+\newpage
+\section{Axiom för $\mathbb{N}$}
+Följande axiom definierar mägden $\mathbb{N}=\{1,2,3,...\}$ av naturliga tal.\\ \\
+\textbf{Axiom:}\\ 
+Om $a,b,c\in\mathbb{N}$ så:
+\begin{enumerate}%[label=(\roman*)]
+    \item $a+b\in\mathbb{N}.$ 
+    \item $a\cdot b\in\mathbb{N}.$
+    \item $a+b=b+a$.
+    \item $(a+b)+c=a+(b+c)$
+    \item $a\cdot b=b\cdot a$.
+    \item $(a\cdot b)\cdot c=a\cdot(b \cdot c)$.
+    \item $\exists 1\in\mathbb{N}$ så att $1\cdot a=a \ \forall a\in\mathbb{N}$.
+    \item Om det för $b,c\in\mathbb{N}$ gäller att $a\cdot b=a\cdot c$ för något $a\in\mathbb{N}$ så $b=c$.
+    \item $a\cdot(b+c)=a\cdot b+a\cdot c$.
+    \item $\forall a,b\in
+    \mathbb{N}$ gäller något av $a<b, \ a=b$ eller $a>b$.
+\end{enumerate}
+\newpage
+\section{$\mathbb{N}$}
+\subsection{Induktion}
+Vi vill visa att ett påstående $P(n)$ är sant för alla tal $n\in\mathbb{N}$. Induktionsbevis följer då stegen
+\begin{enumerate}%[label=(\roman*)]
+    \item Verifiera $P(1)$,
+    \item antag $P(k)$,
+    \item visa $P(k)\implies P(k+1).$
+\end{enumerate}
+Om dessa tre steg kan uppfyllas så är $P(n)$ sant. Detta är såklart endast möjligt då en förmodan $P$ finns. Skulle en sådan inte finnas är det möjligt att göra en lista för $(i,\sum_1^k f(i))$ och se om ett mönster uppstår. Mönstret formuleras sedan som en förmodan och bekräftas med induktion.
+\\ \\
+\textsc{Exempel 2.1.1 (Aritmetisk Summa):}
+\\Låt en förmodan $P(n)$ vara:
+\begin{equation*}
+    \sum_{i=1}^ni=\frac{n(n+1)}{2} \ . \quad (\textrm{d v s.} \  1+2+3+...+n=n(n+1)/2 \ )
+\end{equation*}
+Visa med induktionsbevis:
+\\
+(1): P(1) ger
+\begin{equation*}
+    1=\frac{1(1+1)}{2}
+\end{equation*}
+
+vilket uppenbarligen är sant.
+\\
+(2): Antag att $P(k)$ är sant för något $k\in\mathbb{N}$.
+\\
+(3): Undersök $P(k+1)$:
+\begin{equation*}
+    \begin{split}
+        \sum_{i=1}^{k+1}i=\sum_{i=1}^ki+(k+1) &= (\textrm{använd (2)})= \frac{k(k+1)}{2}+(k+1)=\frac{k(k+1)+2(k+1)}{2}=
+        \\
+        &=\frac{(k+2)(k+1)}{2}=\frac{(k+1)((k+1)+1)}{2}
+    \end{split}
+\end{equation*}
+vilket innebär att $P(k)\implies P(k+1)$ och därmed är förmodan $P(n)$ sann!
+\subsection{Rekursivitet}
+Korrekt definition av fakultet $n!=1\times2\times ... \times n$ är
+$$
+1!=1 \ , \quad n!=(n-1)!\times n \ .
+$$
+Korrekt definition av summation $\sum_1^n k=1+2+...+n$ är 
+$$
+\sum_{k=1}^1k=1 \ , \quad \sum_{k=1}^nk=\sum_{k=1}^{n-1}k+n \ .
+$$
+Detta är exempel på rekursion.\\ \\
+Induktion kan visa att rekursionsrelationer är sanna.\\ 
+Tag en allmän rekursion av formen
+$$
+u_1=a, \ u_2=b, \quad f(u_{k-1},u_k)=g(u_{k+1}) \implies u_n=h(n).
+$$ 
+Nu blir induktionen
+\begin{enumerate}%[label=(\roman*)]
+    \item Verifiera $u_1=h(1)$ och $u_2=h(2)$,
+    \item antag $u_{k-1}=h(k-1)$ och $u_k=h(k)$,
+    \item visa $f(u_{k-1},u_k)=g(u_{k+1})\implies u_{k+1}=h(k+1)$.
+\end{enumerate} 
+\vspace{0.5 cm}
+Ett känt exempel på en rekursionsformel är Fibonacci-talen, vilka uppfyller 
+$$u_1=1, \ u_2=2, \ u_{k-1}+u_k=u_{k+1} \quad \implies $$
+$$ u_n=\frac{\phi^n-(1-\phi)^n}{\sqrt{5}}, \quad \textrm{där}  \ \phi \ \textrm{är det gyllene snittet} \ 1.618... $$
+Detta kan bekräftas med induktion, men är lite knepigt och visas hellre med andra metoder som inte är en dela av denna kurs.
+\subsection{Största och minsta medlemmar}
+\textbf{Definition 2.3.1:} För $m,n\in\mathbb{N}$ gäller det att uttrycket $m<n$ betyder att $\exists x\in\mathbb{N}$ så att $m+x=n$.\\ \\
+\textbf{Sats 2.3.1:} Om $a<b$ och $b<c$, där $a,b,c\in\mathbb{N}$, så är $a<c$.\\ \\
+\textbf{Bevis}\\
+Använd Definition 2.3.1 och sätt $a+x=b$, samt $b+y=c$. Det följer att $(a+x)+y=c\implies a+(x+y)=c$. Då $x,y\in\mathbb{N}$ så måste satsen vara sann.
+\begin{flushright}
+$\Box$
+\end{flushright}
+\textbf{Definition 2.3.2:} Låt $X\subset\mathbb{N}$. Ett element $l\in X$ är en \textit{minsta medlem} av $X$ om $l\leq x \ \forall x\in X$. Ett element $g\in X$ är en största medlem av $X$ om $g\geq x \ \forall x \in X$. Man säger ofta att $l$ och $g$ är minimum respektive maximum av $X$.
+\section{Funktioner}
+Låt i denna sektion $X$ vara någon värdemängd och $Y$ vara någon målmängd (ofta $\subset\mathbb{N}$ i denna kurs). En funktion $f(x)$ kan beskrivas som
+$$
+f:X\rightarrow Y \ .
+$$
+Vi har två (viktiga) krav på funktioner:
+\begin{enumerate}%[label=(\roman*)]
+    \item $f(x)$ är definierad för varje $x\in X$.
+    \item $\forall x\in X$ finns \textit{som mest} ett element $y\in Y$ sådant att $f(x)=y$.
+\end{enumerate}
+\textbf{Definition 3.1:}
+Funktionen $f:X\rightarrow Y$ är \textit{surjektiv} om det $\forall y\in Y \ \exists x\in X$ så att $f(x)=y$. Funktionen är \textit{injektiv} om det $\forall y\in Y$ finns \textbf{som mest} ett $x\in X$ så att $f(x)=y$. Funktionen är \textit{bijektiv} om den både är surjektiv och injektiv. (Googla bijektiv och läs mer på Wikipedia).
+\\ \\
+
+En vanlig teknik för att visa att en funktion är injektiv är att visa
+$$
+f(x)=f(x')\implies x=x' \ .
+$$
+Följande definition är ofta användbar.\\ \\
+\textbf{Definition 3.2:} För alla mängder $X$ är funktionen $i:X\rightarrow X$, sådan att $i(x)=x$, kallad \textit{identitetsfunktionen på} $X$.
+
+Om $X\subset Y$ så är funktionen $j:X\rightarrow Y$, sådan att $j(x)=x$, kallad \textit{inneslutningsfunktionen} från $X$ till $Y$.\\ \\
+Det inses lätt att identitetsfunktionen är bijektiv och att inneslutningsfunktionen är injektiv.\\ \\
+\textbf{Sats 3.1:} Låt $f:X\rightarrow Y$ och $g:Y\rightarrow Z$. Om både $f,g$ är injektiva, surjektiva eller bijektiva så gäller det respektivt även för sammansättningen $g(f(x))=gf(x)$.\\ \\
+\textbf{Bevis}\\
+\begin{enumerate}%[label=(\roman*)]
+    \item Antag att $g(f(x))=g(f(x'))$. Eftersom $g$ är injektiv så måste $f(x)=f(x')$. Men $f$ var också injektiv och alltså är $x=x'$. Detta visar att sammansättningen är injektiv.
+    \item Om $g$ är surjektiv så måste det för varje $z\in Z$ finnas ett $y\in Y$ så att $g(y)=z$. Samt, eftersom $f$ är surjektiv, så måste det finnas något $x\in X$ så att $f(x)=y$. Alltså, för alla $z\in Z$ finns det en avbildning $gf(x)=z$.
+    \item Låt $f,g$ båda vara både injektiva och surjektiva så följer det att $gf(x)$ är bijektiv.
+\end{enumerate}
+\begin{flushright}
+$\Box$
+\end{flushright}
+\vspace{0.5 cm}
+\noindent
+\textbf{Definition 3.3:} En funktion $f:X\rightarrow Y$ har en \textit{invers funktion} $g:Y\rightarrow X$ om det för alla $x\in X, \ y\in Y$ gäller att
+$$
+gf(x)=x, \quad fg(y)=y \ .
+$$
+Med andra ord är $gf$ identitetsfunktionen på $X$ och $fg$ på $Y$.\\ \\
+\textbf{Sats 3.2:} En funktion har en invers omm den är bijektiv.
+\\ \\
+Inget bevis ges till denna sats då det är uppenbart om man tänker efter.
+
+\section{Hur man räknar}
+Man kan räkna saker, mer eller mindre abstrakta, genom att para ihop mängden saker man vill räkna mot en mängd $\mathbb{N}_m=\{1,2,..,m\}$.\\ \\
+\textbf{Definition 4.0:} Om en (abstrakt) mängd $S$ har $m$ st element så finns det en bijektion från $S$ till $\mathbb{N}_m$.
+\subsection{Storleken av en mängd}
+Följande logiska följd går enkelt att bevisa
+$$
+A\implies B \quad  \Longleftrightarrow \quad \neg B\implies \neg A \ .
+$$
+Ex. $"$jag mår alltid bra när jag dricker vin$"$ $\Longleftrightarrow$ $"$Om jag mår dåligt så innebär det att jag inte dricker vin$"$.
+\\ \\
+Betrakta nu påståendet: \textit{Om ant brev > ant personer så måste minst en person ha fått fler än ett brev.} Den logiska relationen ger: \textit{Om varje person får som mest ett brev så är ant personer $\geq$ ant brev}.\\ \\
+Jämför resonemanget med följande sats:\\ \\
+\textbf{Sats 4.1.1:} Låt $m\in\mathbb{N}$, då gäller det $\forall n\in\mathbb{N}$ att om det finns en injektion från $\mathbb{N}_n$ till $\mathbb{N}_m$ så måste $n\leq m$.\\ \\
+Det följer då av logiken att: Om $n>m$ så finns det ingen injektion från $\mathbb{N}_n$ till $\mathbb{N}_m$. Detta kallas för \textit{lådprincipen}.
+\\ \\
+\textsc{\textbf{Exempel 4.1.2}} Om det går 400 elever på en skola, finns det då garanterat två elever som fyller år samma dag? Ja, låt födelsedagar representeras av lådor och lägg studenterna i sina respektive lådor. Det finns 400 studenter men maximalt endast 365 lådor. Alltså ligger det garanterat två eller fler studenter i någon låda.
+\\ \\
+Det är av intresse att visa att en (abstrakt) ändlig mängd $S$ har ett bestämt antal medlemmar. D v s oberoende hur du räknar dem så får du samma antal. Följande definition hjälper att visa detta:\\ \\
+\textbf{Definition 4.1.1:} Om det finns en bijektion mellan $S$ och $\mathbb{N}_m$ så $|S|=m$. Vilket uttalas att $S$ har kardinalitet-, eller storlek, $m$.\\ \\
+\textbf{Sats 4.1.2:} Om det för en mängd $S$ gäller att $|S|=s$ och $|S|=t$ så $s=t$.\\ \\
+\textbf{Bevis}\\
+Det finns alltså bijektioner $f:S\rightarrow\mathbb{N}_s$ och $g:S\rightarrow\mathbb{N}_t$. Då finns också en invers $f^{-1}:\mathbb{N}_s\rightarrow S$ och en sammansättning $gf^{-1}:\mathbb{N}_s\rightarrow\mathbb{N}_t$ som också är bijektiv. Speciellt är då $gf^{-1}$ även injektiv. Sats 4.1.1 säger då att $t\geq s$. Det omvända fallet $fg^{-1}$ gäller också vilket ger $s\geq t$. Alltså måste $s=t$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+\subsection{Oändliga mängder}
+\textbf{Definition 4.2.1:} En mängd $S$ är \textit{ändlig} om $S=\emptyset$ (tom mängd) eller om $|S|=m, \ m\in\mathbb{N}$. En mängd som inte är ändlig säges vara \textit{oändlig}.\\ \\
+Alltså är en mängd $S$ oändlig om det inte finns någon bijektion mellan $S$ och $\mathbb{N}_m, \ m\in\mathbb{N}$.\\ \\
+\textbf{Sats 4.2.1:} Mängden $\mathbb{N}$ är oändlig.\\ \\
+\textbf{Bevis}\\
+Axiom 7 säger speciellt att $\mathbb{N}$ inte är tom. Om nu $\mathbb{N}$ är ändlig så måste det finnas en bijektion mellan $\mathbb{N}$ och någon mängd $\{1,2,...,m\}$. Vi kan därför lista medlemmarna i $\mathbb{N}$ som $n_1,n_2,...,n_m$.
+
+Det följer nu från Axiom 1 att $s=n_1+n_2+...+n_m\in\mathbb{N}$, men för alla tal $n_r, \ 1\leq r\leq m$, är $n_r<s$. Från Axiom 10 så kan $s$ inte vara något tal i $\mathbb{N}$. Detta ger en motsägelse mot att $\mathbb{N}$ är ändlig och måste därför vara oändlig.
+\begin{flushright}
+$\Box$
+\end{flushright}
+\section{Heltal}
+\subsection{Ekvivalensrelationer}
+\textbf{Definition 5.1.1:} En \textit{relation} $R$ på en mängd $X$ är en mängd ordnade par bestående av element ur $X$.\\
+
+För någon relation $R$ på mängden $X$ kan någon av följande egenskaper hålla:
+\begin{enumerate}%[label=(\roman*)]
+    \item $R$ är \textit{reflexiv} om $xRx \ \forall x\in X.$ 
+    \item $R$ är \textit{symmetrisk} om, då $xRy$ är sant, även $yRx$ är sant.
+    \item $R$ är \textit{transitiv} om, då $xRy$ och $yRz$ gäller, även $xRz$ gäller.
+\end{enumerate}
+Speciellt intressant är relationer då alla tre ovanstående egenskaper är uppfyllda.\\ \\
+\textbf{Definition 5.1.2:} En \textit{ekvivalensrelation} är en relation $R$ som är reflexiv, symmetrisk och transitiv.\\ \\
+\textbf{Exempel:} Undersök om relationerna $"xy=24"$, $"x+y$ är ett jämnt tal$"$, $"x>y"$ är reflexiva, symmetriska respektive transitiva.\\ \\
+\textbf{Lösning:}\\
+\underline{$xy=24$}\\
+reflexiv: Nej, eftersom $xx=x^2$ inte alltid är lika med $24$.\\
+Symmetrisk: Ja, eftersom $xy=24\implies yx=24$.\\
+Transitiv: Nej, $xy=24$ och $yz=24$ innebär inte att $xz=24$.\\
+\underline{$x+y$ är ett jämnt tal}\\
+reflexiv: Ja, För alla heltal gäller att $x+x=2x$ är ett jämnt tal.\\
+Symmetrisk: Ja, om $x+y$ är ett jämnt tal så är även $y+x$ ett jämnt tal.\\
+Transitiv: Ja, om $x+y=2a$ och $y+z=2b$ så är $x+z=2a-y+2b-y=2(a+b-y)$.\\
+\underline{$x>y$}\\
+reflexiv: Nej, $x>x$ är falskt.\\
+Symmetrisk: Nej, om $x>y$ så är inte $y>x$.\\
+Transitiv: Ja, om $x>y$ och $y>z$ så är $x>z$.
+
+\subsection{Klassifikation}
+\textbf{Definition 5.2.1:} Lår $R$ vara en ekvivalensrelation på $X$. Kalla en mängd $[x]\subset X$ för en \textit{ekvivalensklass} m a p $R$ om det för något $x\in X$ gäller att
+$$
+[x]=\{y\in X \ | \ yRx\} \ .
+$$
+Detta är speciellt ekvivalensklassen som innehåller $x$.\\
+
+Ett exempel på en ekvivalensklass är, om $X$ är alla primtal mindre än $100$, att låta $R$ vara $"$tal med lika sista siffra$"$. Nu blir exempelvis $[11]=\{11,31,41,61,71\}$.\\ \\
+En viktig egenskap för ekvivalensklasser är att alla ekvivalensklasser m a p $R$ bildar en partition av $X$. D v s ekvivalensklasserna är disjunkta och dess union bildar $X$ självt.\\ \\
+\textbf{Sats 5.2.1:} Givet en ekvivalensrelation $R$ på $X$ är varje medlem av $X$ i en och endast en ekvivalensklass m a p $R$.\\ \\
+\textbf{Bevis}\\
+Först inses att alla $x\in X$ tillhör en ekvivalensklass: eftersom $xRx$ så är åtminstone $x\in[x]$. Från definitionen följer vidare att om $C$ är en ekvivalensklass och $x\in C$ så måste $C=[x]$, alltså kan $x$ endast tillhöra \textit{en} ekvivalensklass.
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+\section{Delbarhet och primtal}
+Ett tal $x$ som är delbart med $y$ går att skriva som $x=yq$ för något $q\in\mathbb{Z}$. Detta kan även skrivas som
+$$
+y|x \quad (\textrm{med ord: y delar x}) \ .
+$$
+Exempelvis, för $x=27$ och $y=3$ gäller $27=9\cdot3\implies 3|27$. Däremot om $x=27$ och $y=6$ så gäller detta inte. Det är dock känt att $"6$ går $4$ ggr i $27$ med en rest $3"$. D v s $27=4\cdot6+3$. Men det är även sant att $27=3\cdot6+9$. Vi har dock lärt oss att skriva ut resten som den minsta möjliga, men detta kräver en ordentlig definition.\\ \\  
+Definiera nu $\mathbb{N}_0=\mathbb{N}\cup\{0\} \ .$ Detta är en nödvändig definition då $0$ kommer att behövas som rest.\\ \\
+\textbf{Sats 6.1} För två positiva heltal $a$ och $b$ finns det $q,r\in\mathbb{N}_0$ så att
+$$
+a=bq+r \ , \quad 0\leq r <b \ .
+$$
+\textbf{Bevis}\\
+Mängden av alla rester kan skrivas som
+$$
+R=\{x\in\mathbb{N}_0 \ | \ a=by+x \ , \ y\in\mathbb{N}_0\} \ .
+$$
+$R$ är inte tom, då $y=0\implies x=a$. Nu måste $R$ ha en minsta medlem, kalla den för $r$. Alltså finns det ett $q\in\mathbb{N}_0$ så att $a=bq+r$. Det återstår att övertyga sig om att $r<b$. Skriv ut $a=b(q+1)+(r-b)$. Om nu $r\geq b$ så måste $r-b\in R$, men vi hade antagit att $r$ var den minsta medlemmen av $R$, så $r-b\notin R$ och $r<b$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+\subsection{Heltalsrepresentation}
+M h a Sats 6.1 går det att representera heltal i godtycklig bas. (De mest kända baser att representera tal i är 10 och 2). Man kan nyttja Sats 6.1 för att uttrycka ett tal $x$ i basen $t$:
+\begin{equation*}
+    \begin{split}
+        x=tq_0+r_0 \\
+        q_0=tq_1+r_1 \\
+        \vdots \\
+        q_{n-1}=tq_n+r_n \ .
+    \end{split}
+\end{equation*}
+Denna procedur kan upprepas t o m $q_n=0$ (detta är uppenbart då $x>q_0>...>q_n$). Sätt nu in uttrycken så att
+$$
+x=t(tq_1+r_1)+r_0=t(t(tq_2+r_2)+r_1)+r_0=...=r_nt^n+r_{n-1}t^{n-1}+...+r_0 \ .
+$$
+Man skriver konventionellt ut detta som $(r_nr_{n-1}...r_0)_t$. T ex är det som känt så att
+$$
+(1989)_{10}=1\cdot10^3+9\cdot10^2+8\cdot10^1+9\equiv1989 \ .
+$$
+(Utan basnotationen då man är i bas $10$).\\ \\
+\textbf{Exempel 6.1.1:} Vad är $(109)_{10}$ i bas $2$?\\ \\
+\begin{equation*}
+    \begin{split}
+        109=2\cdot54+1 \\
+        54=2\cdot27+0 \\
+        27=2\cdot13+1 \\
+        13=2\cdot6+1 \\
+        6=2\cdot3+0 \\
+        3=2\cdot1+1 \\
+        1=2\cdot0+1 \ .
+    \end{split}
+\end{equation*}
+Alltså är $(109)_{10}=1\cdot2^6+1\cdot2^5+0\cdot2^4+1\cdot2^3+1\cdot2^2+0\cdot2^1+1\equiv(1101101)_2$.
+
+\subsection{SGD}
+Givet två tal $a,b\in\mathbb{Z}$, definiera mängden tal som delar $a$ och $b$ respektive med $D_a$ och $D_b$. Eftersom $1|a,b$,
+
+$a|a$ och $b|b$ och eftersom $-a$ är det minsta talet som delar $a$ och $a$ är det största, så är $D_a$ och $D_b$ begränsade. 
+
+Vidare så får vi talen som delar både $a$ och $b$ med snittet $D_a\cap D_b$. Nu måste alltså $D_a\cap D_b$ ha en största och en minsta medlem (åtminstone är $1$ en medlem). Den största medlemmen kallar man för $SGD(a,b)$.\\ \\
+\textbf{Definition 6.2.1:} Om $a,b\in\mathbb{N}_0$ säger man att $d$ är $SGD(a,b)$ om
+$$
+(i) \ d|a, \ d|b \quad (ii) \  c|a,b\implies c\leq d \ .
+$$
+
+Vi vill nu bestämma en metod för att hitta $SGD$ för två godtyckliga tal. Med restsatsen och följande påstående
+$$
+a=bq+r\implies SGD(a,b)=SGD(b,r)
+$$
+kan vi hitta Euklides algorithm.\\ \\
+\textbf{Exempel 6.2.1:} Hitta $SGD(2406,654)$.\\ \\
+\begin{equation*}
+    \begin{split}
+        2406=3\cdot654+444 \implies SGD(2406,654)=SGD(654,444), \\
+        654=1\cdot444+210 \implies SGD(654,444)=SGD(444,210), \\
+        444=2\cdot210+24\implies SGD(444,210)=SGD(210,24), \\
+        210=8\cdot24+18 \implies SGD(210,24)=SGD(24,18), \\
+        24=1\cdot18+6 \implies SGD(24,18)=SGD(18,6), \\
+        18=3\cdot6+0 \implies SGD(18,6)=SGD(6,0)\ .
+    \end{split}
+\end{equation*}
+Eftersom $SGD(6,0)=6$ och $SGD(2406,654)=SGD(6,0)$ så $SGD(2406,654)=6$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Det är ganska självklart att denna metod fungerar för två godtyckliga tal, kvot och rest blir alltid mindre och i värsta fall om $SGD=1$ så kommer ändå resten till slut att bli noll. 
+
+Vi har nu kommit till en ny viktig sats.\\ \\
+\textbf{Sats 6.2.1:} Låt $a,b\in\mathbb{N}$ och låt $d=SGD(a,b)$. Det finns nu heltal $m,n$ sådana att
+$$
+d=ma+nb \ .
+$$
+\textbf{Bevis}\\
+Beviset går ut på att hitta $SGD(a,b)$ (godtyckligt) och sedan följa stegen baklänges. Från Exempel 6.2.1 blir detta:
+$$
+6=1\cdot24-1\cdot18\implies 6=1\cdot24-1\cdot(210-8\cdot24)=(-1)\cdot(210)+9\cdot24
+$$
+Substituera vidare $24=444-2\cdot210$, förenkla och upprepa tills ett uttryck i form av det sökta ($6=28\cdot2406+(-103)\cdot654\implies m=28, \ n=-103$) har hittats. 
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+\noindent
+\textbf{Definition 6.2.2:} Om $SGD(a,b)=1$ säges $a$ och $b$ vara \textit{relativt prima}. Sats 6.2.1 säger då att $\exists m,n\in\mathbb{Z}$ så att $1=ma+nb$. Detta faktum används senare för att visa en av de viktigaste satserna i matematik.\\
+
+\subsection{Primtal}
+\textbf{Definition 6.3.1:} Ett positivt heltal $p$ är ett primtal om $p\geq2$ och om de enda positiva tal som delar $p$ är $1$ och $p$ självt.\\ \\
+\textbf{Sats 6.3.1:} Varje tal $n\in\mathbb{N}$ går att skriva som en produkt av primtal.\\ \\
+\textbf{Bevis}\\
+Om $n$ är ett primtal så är vi klara: $n=p$. Annars, enligt Definition 6.3.1, kan $n$ skrivas $n=st, \ s,t\in\mathbb{N}$ där $1<s,t<n$. Med detta klargjort gör vi ett motsägelsebevis:
+
+Antag att det finns ett tal $n\in\mathbb{N}$ som inte är ett primtal och som inte går att primtalsfaktorisera. Nu måste det finnas ett minsta sådant tal $n$ eftersom det finns ett minsta element i $\mathbb{N}$. Låt $n$ vara detta minsta $"$dåliga$"$ tal. Vi vet att $n=st$, och att $1<s,t<n$. Men $n$ var det minsta $"$dåliga$"$ talet vilket betyder att $s,t$ går att primfaktorisera. Nu är $st$ en primtalsfaktorisering vilket är en motsägelse.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Det är även viktigt att visa att en primtalsfaktorisering av ett tal är \textit{unik}. D v s att det inte finns olika uppsättningar primtal vars produkter är lika. Beviset utesluts från denna pdf eftersom att det är tekniskt enkelt men desto längre att skriva ut. Ett lemma som används i beviset är dock intressant: \\ \\
+\textbf{Lemma 6.3.1:} Om $x_1,x_2,...,x_n\in\mathbb{N}$ och $p|x_1x_2\hdots x_n$, där $p$ är ett primtal, så $p|x_i, \ 1\leq i \leq n$.\\ \\
+\textbf{Bevis}\\
+Börja med att notera: ifall $p$ inte är ett primtal så gäller detta inte generellt. Exempelvis så $6|24\implies 6|8\cdot3$. Men $6$ delar varken $8$ eller $3$.
+
+Beviset är ett induktionsbevis. Börja med $n=2$ som basfall, d v s $p|x_1x_2$. Antag att $p$ \textit{inte} delar $x_1$ så att vill vi visa $p|x_2$. Det gäller nu (eftersom $p$ inte delar $x_1$) att $SGD(p,x_1)=1$ då $p$ är prim. Sats 6.2.1 säger vidare att $\exists s,t\in\mathbb{Z}$ så att $1=sp+tx_1$. Alltså kan vi skriva
+$$
+x_2=(sp+tx_1)x_2=(sx_2)p+(x_1x_2)t \ .
+$$
+Nu, eftersom $p|x_1x_2$, är det tydligt att $p|x_2$.
+
+Induktionssteget blir: antag att $p|x_1x_2\hdots x_k$ och visa sedan $p|x_1x_2\hdots x_kx_{k+1}$. Låt $x_1x_2\hdots x_k=X$ så att vi får $p|Xx_{k+1}$. Om nu $p$ är en delare till någon av $x_i, \ 1\leq i\leq k$ så är vi klara. Om inte så återfår vi bassteget, d v s vi visar att $p$ måste dela $x_{k+1}$ och vi är klara.
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+\section{Räkneprinciper}
+\textbf{Påstående 7.0, Generaliserade lådprincipen:} Om $m$ objekt är placerade i $n$ olika lådor, samt om $m>n\cdot r$, så innehåller åtminstone en låda åtminstone $r+1$ objekt. 
+
+(Detta inses enkelt med lite eftertanke).\\ \\
+\textbf{Exempel 7.0} Visa att bland vilka $6$ personer som helst så finns det antingen $3$ gemensamma vänner eller $3$ ömsesidiga främlingar. \\ \\
+\textbf{Lösning}\\
+Kalla personerna för $"1,2,3,4,5,6"$ och lägg personer $2-6$ i lådor som representerar $"$känner/känner inte person $1"$. En av lådorna kommer att innehålla åtminstone $3$ personer enligt lådprincipen. Antag att lådan med tre eller fler personer känner $1$ (funkar på samma sätt med inte). Antag att dessa är $2,3,4$ (funkar på samma sätt med fler personer och/eller andra personer). Om nångon av $2,3,4$ känner varandra, säg $2,3$ (funkar med vilka som helst) så är $\{1,2,3\}$ en mängd gemensamma vänner. Om ingen av $2,3,4$ känner varandra så är $\{2,3,4\}$ en mängd ömsesidigt obekanta.
+\begin{flushright}
+$\Box$
+\end{flushright}
+\subsection{Mängder av par}
+Allmänt för två mängder $X$ och $Y$ definieras \textit{produktmängden} $X\times Y$ som mängden av alla ordnade par $(x,y)$. Vi söker nu en metod för att bestämma storleken av en delmängd $S\subset X\times Y$. Man kan para ihop alla element i ett rutnät (tänk $X$-elementen på $x-$axeln och $Y$-elementen på $y-$axeln).
+
+Det går nu att räkna elementen i $S$ genom att först räkna de paren av $(1,y_1),(2,y_1),...,(|X|,y_1)$ som är med i $S$, sedan de av $(1,y_2),(2,y_2),...,(|X|,y_2)$ som är med i $S$ o s v upp till och med\\ $(1,y_{|Y|}),(2,y_{|Y|}),...,(|X|,y_{|Y|})$. Med detta tänkt som ett system av rader och kolumner har vi nu alltså räknat $"$radvis$"$, vi kan säga att då vi bestämt $|S|$ på detta vis har vi bestämt $r_1(S)+r_2(S)+...+r_{|X|}(S)$. D v s
+$$
+|S|=\sum_{x\in X}r_x(S) \ .
+$$
+Det funkar lika bra att göra detta $"$kolumn$"$-vis. D v s
+$$
+|S|=\sum_{y\in Y}k_y(S) \ .
+$$
+\textbf{Sats 7.1.1:} Låt $X$ och $Y$ vara ändliga icke tomma mängder och låt $S\subset X\times Y$. då gäller följande:\\
+
+(i): $|S|$ ges av
+$$
+|S|=\sum_{x\in X}r_x(S)=\sum_{y\in Y}k_y(S) \ .
+$$
+
+(ii): Om $r_x(S),k_y(S)$ är konstanter $r,k$ så gäller
+$$
+|S|=r|X|=k|Y| \ .
+$$
+
+(iii): Storleken $|X\times Y|$ ges av $|X|\times|Y|$.
+
+\noindent
+Sats 7.1.1 behöver inte riktigt bevisas, med en enkel uppställning i rader och kolumner inses att detta är sant.
+\subsection{Funktioner och urval}
+Betrakta en funktion $f:\mathbb{N}_m\rightarrow Y$. Värdemängden $Y$ kan betraktas som funktionsvärdena\\ $(f(1),f(2),...,f(m))$ som är en $"$m-tupel$"$. Definitionen av en mängdprodukt säger nu att denna $m$-tupel tillhör $Y^m=Y\times Y\times...\times Y$ ($m$ ggr). Vidare är varje element $(y_1,y_2,...,y_m)\in Y^m$ en $m-$tupel av någon funktion $(f(1),...,f(m))$.\\ \\
+\textbf{Sats 7.2.1:} Låt $X$ och $Y$ vara ändliga icke tomma mängder och definiera $F$ som mängden av alla funktioner $f:X\rightarrow Y$. Om $|X|=m$ och $|Y|=n$ så gäller nu att $|F|=|Y|^{|X|}=n^m$.\\ \\ 
+\textbf{Bevis}\\
+Då varje $f_i(x_j)$ kan ha en av $|Y|$ värden, och $|F|$ definieras av alla möjliga $m$-tuplar $(f(x_1),...,f(x_m))$ så finns det $|Y|^{|X|}$ möjliga $m$-tuplar.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Observera att funktionerna i $F$ ovan inte behöver vara varken surjektiva eller injektiva. Man säger formellt att en funktion från $\mathbb{N}_m\rightarrow Y$ är en matematisk modell av \textit{ordnat urval med repetition} av $m$ objekt från mängden $Y$. Det är alltså visat att man kan välja $m$ objekt från $Y$, $|Y|=n$, på $n^m$ olika sätt. (Detta känns igen från elementär kombinatorik).
+\subsection{Injektion och ordnat urval utan repetition}
+I sektion 7.2 visades det att \textit{med repetition} var det tillåtet av en funktion $f:\mathbb{N}_m\rightarrow Y$ att ha flera definitionselement som pekar på samma värdeelement: $f(a)=f(b)=y_k$. I och med detta fanns det $|Y|^{|X|}$ unika funktioner $f\in\ F$.
+
+Om vi begränsar oss till injektiva funktioner ($\forall y\in Y$ finns \textbf{som mest} ett $x\in X$ så att $f(x)=y$) så erhåller vi ett känt uttryck för antalet sådana funktioner.\\ \\
+\textbf{Sats 7.3.1:} Antalet ordnade urval av $m$ element utan repetition ur en mängd $Y$, där $|Y|=n$, är lika med antalet injektioner från $\mathbb{N}_m\rightarrow Y$. Antalet ges av 
+$$
+n(n-1)\hdots(n-m+1)=\frac{n(n-1)\hdots2\cdot1}{m(m-1)\hdots2\cdot1}=\frac{n!}{(n-m)!} \ .
+$$
+\textbf{Bevis}\\
+För en funktion $f:\mathbb{N}_m\rightarrow Y$ gäller det att $f(1)$ kan anta ett av $|Y|=n$ värden. Utan repetition kan nu $f(2)$ anta ett av $|Y|-1=n-1$ värden. Detta mönster fotsätter t o m sista värdet i $X$. Nu är $m-1$ element i $Y$ $"$upptagna$"$ och det finns $n-(m-1)$ värden kvar för $f(m)$ att anta. Därmed antalet.
+\begin{flushright}
+$\Box$
+\end{flushright}
+\textbf{Om speciellt n=m så definieras 0!=1 och antalet blir n!}
+\\ \\
+\noindent
+\textbf{Exempel 7.3.1:} Låt $Y$ vara en mängd av $12$ tävlande och ta ut alla möjliga kombinationer av brons-, silver- och guldmedaljörer. (Alla möjliga pallplatser).\\ \\
+\textbf{Lösning}\\
+Låt $a,b,c\in Y$ och låt trippeln $\{a,b,c\}$ stå för $\{guld,silver,brons\}$. Samma person kan inte vinna två medaljer, alltså har vi ingen upprepning. Däremot skiljer man på ordningen (det är inte samma sak att få silver som att få guld). Vi får direkt av Sats 7.3.1 att svaret ges av antalet injektioner från $\{1,2,3\}\rightarrow\{y_1,y_2,...,y_{12}\}$. Svaret är alltså
+$$
+Kombinationer=\frac{12!}{(12-3)!}=12\cdot11\cdot10=1320 \ st.
+$$
+\subsection{Permutationer}
+En permutation av en icke tom, ändlig mängd $X$ är en bijektion $\alpha:X\rightarrow X$. Ofta är $X=\mathbb{N}_n=\{1,2,...,n\}$ och om inte annat är detta en bra mängd att jobba med för förståelse. Exempelvis kan en permutation $\alpha$ av $\mathbb{N}_5$ se ut som
+$$
+\alpha(1)=5, \ \alpha(2)=4, \ \alpha(3)=1, \ \alpha(4)=3, \ \alpha(5)=2 \ .
+$$
+En bijektion från en ändlig mängd till sig själv är en injektion. M h a Sats 7.3.1 kan vi alltså bestämma antalet permutationer av en $n-$mängd eftersom det är lika med antalet injektioner från $\mathbb{N}_n\rightarrow\mathbb{N}_n$. D v s
+$$
+n\cdot(n-1)\cdot\cdot\cdot2\cdot1=n! \ st \ .
+$$
+Vi ska hädanefter beteckna mängden av alla permutationer av mängden $\mathbb{N}_n$ som $S_n$ (detta kan ses som en mängd av mängder men det ska visa sig nyttigt att betrakta en permutation $\alpha$ som en funktion). (Testa att skriva ut alla permutationer av $S_3$, det är 6 st).\\ \\ Det är viktigt för intuitionen att tolka en permutation på något sätt. Permutationen $\alpha$ ovan kan tolkas som att den arrangerar om ordningen
+$$
+12345 \longrightarrow 54132 \ .
+$$
+Det är ibland nyttigt att se dessa ordningar som $"$samma sak$"$ och ibland inte. Hur som helst så är det viktigt att komma ihåg:
+
+\textit{en permutation är en slags funktion.}\\ \\ 
+Med tanken att permutationer är funktioner kan man göra sammansättningar. Betrakta t ex permutationen $\beta$ av $\mathbb{N}_5$
+$$
+\beta(1)=2, \ \beta(2)=3, \ \beta(3)=4,\ \beta(4)=5, \ \beta(5)=1 \ .
+$$
+En sammansättning $\beta\alpha=\beta(\alpha(n))$ kan nu göras:
+$$
+\beta\alpha(1)=1, \ \beta\alpha(2)=5, \ \beta\alpha(3)=2, \ \beta\alpha(4)=4, \ \beta\alpha(5)=3 \ .
+$$
+D v s $\beta\alpha$ arrangerar om $12345\longrightarrow 15243$.\\ \\ 
+Det finns fyra egenskaper hos sammansättningar av permutationer som är viktiga. Dessa tas upp i följande sats och kommer att tas upp vidare i sektion 13.\\ \\ 
+\textbf{Sats 7.4.1:} Följande egenskaper håller i mängden $S_n$ av alla permutationer av $\mathbb{N}_n$.\\ 
+
+(i) Om $\pi,\sigma\in S_n$ så är $\pi\sigma\in S_n$ (sammansättningen av permutationerna).\\ 
+
+(ii) För permutationer $\pi,\sigma,\tau\in S_n$ gäller $(\pi\sigma)\tau=\pi(\sigma\tau)$.\\ 
+
+(iii) Identitetsfunktionen, id, definierad som id$(r)=r \ \forall r\in\mathbb{N}_n$ är en permutation och $\forall\pi\in S_n$ 
+
+gäller id$\pi=\pi$id$=\pi$.\\ 
+
+(iv) $\forall\pi\in S_n \ \exists \pi^{-1}$ så att $\pi\pi^{-1}=\pi^{-1}\pi=$id.\\ \\
+\textbf{Bevis} (ish)\\ 
+Beviset följer från satser i tidigare sektioner gällande injektioner och bijektioner. Speciellt följer (iv) från att alla bijektioner har en invers.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Det är bekvämt att ha en kompakt notation för permutationer. Detta görs konventionellt genom att bilda s.k cykler. Betrakta exempelvis permutationen
+$$
+\pi(1)=2, \ \pi(2)=4, \ \pi(3)=5, \ \pi(4)=1, \ \pi(5)=3 \ .
+$$
+Tar vi nu successivt $\pi(1), \ \pi(\pi(1)),...$ så får vi en cykel $2,4,1,2,4,1,...$ Börjar vi med det minsta tal som inte är med i denna cykeln får vi cykeln $3,5,3,5,...$. Det är konventionellt att skriva permutationen av $\pi$ på cykelformen
+$$
+\pi=(124)(35) \ .
+$$
+Permutationerna $\alpha$ och $\beta$ ovan bildar cykler som har storleken av mängden själv
+$$
+\alpha=(15243), \quad \beta=(12345) \ .
+$$
+(Cykeln är opåverkad av vilket tal i cykeln vi börjar med).\\ \\ 
+\textbf{Exempel 7.4.1:} Låt 12 kort ur en kortlek vara utlagda på följande sätt
+\begin{center}
+\begin{tabular}{l*{6}{c}r}
+$1$ & $2$ & $3$\\
+$4$ & $5$ & $6$\\
+$7$ & $8$ & $9$\\
+$10$ & $11$ & $12$
+\end{tabular}
+\end{center}
+(Siffrorna kan representera vilka kort som helst). Ta nu upp korten baklänges radvis (12,11,10,...,2,1) och lägg sedan ut dem kolumnvis uppifrån som
+\begin{center}
+\begin{tabular}{l*{6}{c}r}
+$1$ & $5$ & $9$\\
+$2$ & $6$ & $10$\\
+$3$ & $7$ & $11$\\
+$4$ & $8$ & $12$
+\end{tabular}
+\end{center}
+Hur många gånger måste denna procedur upprepas för att korten ska hamna i sin ursprungliga ordning?\\ \\ 
+\textbf{Lösning}\\ 
+Vi kan enkelt hitta permutationen $\pi$ genom att se hur korten hamnade efter första vändningen:
+$$
+\pi(1)=1, \ \pi(2)=5, \ \pi(3)=9, \ \pi(4)=2, \ \pi(5)=6, \ \pi(6)=10,
+$$
+$$
+\pi(7)=3, \ \pi(8)=7, \ \pi(9)=11, \ \pi(10)=4, \ \pi(11)=8, \ \pi(12)=12.
+$$
+Vi bestämmer cyklerna:
+$$
+\pi=(1)(2 \ 5 \ 6 \ 10 \ 4)(3 \ 9 \ 11 \ 8 \ 7)(12) \ .
+$$
+Vi ser att 1 alltid blir 1 och att 12 alltid blir 12 så dessa har ingen inverkan. De två mittersta cyklerna upprepas båda efter 5 drag, alltså är ordningen återställd efter 5 drag (inklusive det första som finns tabulerat ovan).
+\begin{flushright}
+$\Box$
+\end{flushright}
+Ett annat sätt att uttrycka en upprepad permutation $\pi$ fem gånger är $\pi^5$. I detta fall blev $\pi^5=$ id.
+
+\section{Delrum och uppbyggand}
+\subsection{Oordnat urval utan repetition}
+I sektion 7.3 visades det att ett urval av $m$ element ur $Y$, $|Y|=n$, kan göras på $n!/(n-m)!$ olika sätt om man inte får repetera val, ex om det endast finns en av varje $y\in Y$. Observera dock att man här skiljer på mängderna $\{a,b,c\},\{b,c,a\}\in Y^3$.  \\
+
+Det är många gånger intressant att veta hur många urval som kan göras om ordningen är oviktig. (\textit{Oviktig ordning innebär att man inte skiljer på ex. $\{a,b,c\}$ och $\{b,c,a\}$}).\\ \\
+\textbf{Exempel 8.1.1:} Antag att vi i Exempel 7.3.1 istället ska bestämma antalet kombinationer möjliga där de tre finalisterna delar lika på en prissumma. (Nu spelar uppenbarligen ordningen ingen roll då de tre får samma pris.)\\ \\
+\textbf{Lösning}\\
+Vi vet att det finns $1320$ kombinationer där ordning spelar roll, så vi vill bli av med alla upprepningar. Varje mängd $\{a,b,c\}$ kan upprepas på $3!=6$ olika sätt, alltså är allt vi behöver göra att dela $1320/6=220$. (Betydligt färre kombinationer).\\
+
+Det kan nu postuleras att i allmänhet så gäller formeln
+$$
+Kombinationer=\frac{n!}{m!(n-m)!}
+$$
+för ett urval av $m$ element ur en mängd med $n$ element, utan upprepning, där ordningen inte spelar roll. Detta bevisas ordentligt i nästa sektion.
+
+\subsection{Binomialtal}
+Kalla \textit{ett urval av k element utan upprepning oberoende av ordning} ur $Y$, $|Y|=n$, med matematisk notation för
+$$
+{n \choose k} \ .
+$$
+Detta uttalas $"$n över k$"$ och själva antalet kallas för ett binomialtal.\\ \\
+\textbf{Exempel 8.2.1:} Visa att
+$$
+{n \choose k}={n \choose n-k}, \quad 0\leq k\leq n \ .
+$$
+\textbf{Lösninig}\\
+Vi har ännu inte fastställt formeln för $"$n över k$"$, så vi måste därför utgå från definitionen. Vad som ska visas är alltså:
+
+$"$Att välja $k$ element bland $n$ möjliga är samma sak som att välja $n-k$ element bland $n$ möjliga$"$. Följande inses: Att \textit{välja ut} $n-k$ element är samma sak som att \textit{välja bort} $k$ element. Men att \textit{välja bort} $k$ element är (matematiskt) samma sak som att \textit{välja ut} $k$ element. Alltså stämmer relationen.
+\begin{flushright}
+$\Box$
+\end{flushright}
+\textbf{Sats 8.2.1:} Om $n,k\in\mathbb{N}, 1\leq k\leq n$, så 
+$$
+{n \choose k}={n-1 \choose k-1}+{n-1 \choose k} \ .
+$$
+\textbf{Bevis}\\
+Låt $Y$ vara en mängd där $|Y|=n$ och låt $y$ vara ett element i $Y$. Betrakta nu mängden av alla $"$n över k$"$-mängder $\mathcal{A}$ och dela in den i två, $\mathcal{U}$ och $\mathcal{V}$, sådana att om $y\in A, \ A\in\mathcal{A}\implies A\in\mathcal{U}$ och $y\notin A\implies A\in \mathcal{V}$. Nu finns ingen mängd $A\in\mathcal{A}$ som ligger både i $\mathcal{U}$ och i $\mathcal{V}$ så dessa är disjunkta. Samt, eftersom $y$ antingen är eller inte är med i $A\in\mathcal{A}$, så gäller det att $|\mathcal{U}|+|\mathcal{V}|=|\mathcal{A}|$. 
+
+Storleken på $\mathcal{V}$ fås enkelt som $"$antalet sätt att välja ut $k$ element ur $n-1$ st.$"$, d v s
+$$
+|\mathcal{V}|={n-1 \choose k} \ .
+$$
+För att bestämma storleken av $\mathcal{U}$ krävs lite mer eftertanke. Vi har ett givet element i varje mängd $A\in\mathcal{U}$. Då detta element är konstant så bidrar det inte till antalet $|\mathcal{U}|$. Vi får då samma slags antal som vi hade fått om vi väljer $(k-1)$ element ur $(n-1)$ möjliga. D v s
+$$
+|\mathcal{U}|={n-1 \choose k-1} \ .
+$$
+$$
+\therefore \quad {n \choose k}={n-1 \choose k-1}+{n-1 \choose k} \ .
+$$
+\begin{flushright}
+$\Box$
+\end{flushright}
+Observera att Sats 8.2.1 ger en rekursiv metod för att bestämma binomialtal. Jämför Pascals triangel med de två snett överliggande talen.
+
+\noindent
+\textbf{Sats 8.2.2:} Om $n,k\in\mathbb{N}, \ 1\leq k\leq n$, så ges det explicita uttrycket för binomialtalen av
+$$
+{n \choose k}=\frac{n!}{k!(n-k)!}
+$$
+\textbf{Bevis (Induktion)}\\
+Bassteget är att bekräfta ${1 \choose 1}=1$ vilket görs lätt. Antag nu att uttrycket håller för $n=r$, d v s
+$$
+{r \choose k}=\frac{r!}{r!(n-r)!} \ .
+$$
+Induktionssteget och Sats 8.2.1 ger
+$$
+{r+1 \choose k}={r \choose k-1}+{r \choose k}=
+$$
+$$
+=\frac{r!}{(k-1)!(r-k+1)!}+\frac{r!}{k!(r-k)!}=\frac{r!}{(k-1)!(r-k)!}\Big(\frac{1}{r-k+1}+\frac{1}{k}\Big)=
+$$
+$$
+=\frac{r!}{(k-1)!(r-k)!}\Big(\frac{r+1}{k(r-k+1)}\Big)=\frac{(r+1)!}{k!(r+1-k)!} \ .
+$$
+\begin{flushright}
+$\Box$
+\end{flushright}
+\subsection{Oordnat urval med repetition}
+Vill vi välja element med repetition utan ordning ur någon mängd, t ex $\{a,b,c,...,\alpha_{end}\}$ , så finns det en insikt som gör att det går att ge en generell matematisk formel även här.
+
+Eftersom att ordning inte spelar roll så sätter vi en ordning på elementen vi alltid placerar ut dom i. I fallet $\{a,b,c,...,\alpha_{end}\}$ är ordningen självklar. Tekniken är att para elementen med alfabetet $\{0,1\}$ så att $a,b,c$ representeras av ettor och nollan skiljer elementen åt.\\ \\
+\textbf{Exempel 8.3.1:}
+$$
+abc\equiv 10101, \quad aaa\equiv 11100, \quad aabc\equiv 110101 \quad abbccd \equiv 101101101, \ osv. 
+$$
+
+För urval av tre element bland tre element ska vi placera ut två nollor på fem platser, det finns alltså ${5 \choose 2}=10$ kombinationer.
+
+För urval av fyra element bland tre ska vi placera två nollor på någon av sex platser, d v s ${6 \choose 2}=15$ kombinationer.
+
+Sista exemplet väljer ut sex element bland fyra. Där placeras tre nollor ut bland nio platser, d v s ${9 \choose 3}=84$ kombinationer.\\ \\
+Följande sats bevisas inte men det är lätt att generalisera exemplen ovan:\\ \\
+\textbf{Sats 8.3.1:} Antalet oordnade urval med upprepning av $k$ element ur en mängd med $n$ element ges av
+$$
+{n+k-1 \choose n-1}={n+k-1 \choose k} \ .
+$$
+\\ \\
+Vi sammanställer alla resultat av olika urval.\\ \\
+\begin{tabular}{l*{6}{c}r}
+
+              & Ordnat & Oordnat \\
+\hline
+Utan repetition & ${n \choose k}k!$ & ${n \choose k}$ \\ \\
+Med repetition  & $n^k$ & ${n+k-1 \choose k}$ \\
+\hline
+\end{tabular}
+\vspace{1 cm}
+\subsection{Binomialsatsen}
+\textbf{Sats 8.4.1:}
+$$
+(a+b)^n=\sum_{k=0}^n{n\choose k}a^{n-k}b^{k} \ .
+$$
+\textbf{Bevis}\\
+Då man multiplicerar $n$ st faktorer $(a+b)$ så blir någon term ett utfall av att välja antingen $a$ eller $b$ från varje faktor. Antalet av specifikt termen $a^{n-k}b^k$ är lika med antalet sätt att välja $k$ st $b$ och därför även $n-k$ st $a$, vilket per definition är ${n\choose k}$ st.
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+\subsection{Inklusion/exklusion}
+Mängderna nämnda är ändliga.
+$$
+|A\cup B|=|A|+|B|-|A\cap B| \ .
+$$
+$$
+|A\cup B\cup C|=|A|+|B|+|C|-|A\cap B|-|A\cap C|-|B\cap C|+|A\cap B\cap C| \ .
+$$
+\textbf{Exempel 8.5.1:} 73 studenter läser första året på humanitära linjen vid Strutsuniveritetet. Bland dem spelar 52 piano, 25 violin, 20 flöjt; 17 spelar piano \textbf{och} violin, 12 spelar piano och flöjt, 7 spelar violin och flöjt; endast Martin Mallig spelar alla tre instrument. Hur många i klassen spelar inget av instrumenten?\\ \\
+\textbf{Lösning}\\
+Låt $A$ vara mängden studenter som spelar piano, $B$ violin och $C$ flöjt. Informationen är:
+$$
+|A|+|B|+|C|=52+25+20=97 \ ,
+$$
+$$
+|A\cap B|=17 \ , \quad |A\cap C|=12 \ , \quad |B\cap C|=7 \ ,
+$$
+$$
+|A\cap B\cap C|=1 \ ,
+$$
+$$
+\implies |A\cup B\cup C|=97-17-12-7+1=62 \ .
+$$
+Antalet elever som inte spelar något av instrumenten är alltså $73-62=11$ stycken.
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+\section{Partition, klassifikation och distribution}
+\subsection{Partitioner av mängder}
+Låt $I$ vara en icke tom mängd, ändlig eller oändlig. Antag att för varje $i\in I$ finns en mäng $X_i$. Vi säger då att vi har en familj av mängder
+$$
+\mathcal{X}=\{X_i \ | \ i\in I\} \ .
+$$
+Det finns inget som säger att mängderna $X_i$ måste vara unika, det är däremot en förutsättning i vissa tillämpningar.\\ \\
+\textbf{Definition 9.1.2:} En partition av en mängd $X$ är en familj av icke tomma delmängder av $X$, $\{X_i \ | \ i\in I\}$, sådana att\\
+
+(i): $X$ är unionen av mängderna $X_i$.
+
+(ii): Varje par av mängder $X_i,X_j; \ i\neq j,$ är disjunkta.\\ \\
+Vidare kallas $X_i$ för \textbf{delar} av partitionen.\\
+
+Ett annat sätt att uttrycka definitionen på är att säga: Varje element i $X$ tillhör en och endast en del av partitionen.\\ \\
+Antag att vi har en ändlig mängd $X$, $|X|=n$, som vi vill dela upp i $k, \ 1\leq k\leq n,$ partitioner. Följande sats ger en metod för att bestämma antalet olika sätt att göra detta på.\\ \\
+\textbf{Sats 9.1.1:} Låt $S(n,k)$ vara antalet sätt att dela upp en mängd $X$ bestående av $n$ element i $k, \ 1\leq k\leq n,$ partitioner. Då gäller det att
+$$
+S(n,1)=1, \quad S(n,n)=1 \ .
+$$
+$$
+S(n,k)=S(n-1,k-1)+kS(n-1,k) \ , \quad  2\leq k\leq n-1 \ .
+$$
+\textbf{Bevis}\\
+Att dela in elementen i \textit{en} partition går såklart endast att göra på ett sätt (ordning är oviktig). Vid indelning i $n$ partitioner får man bara singeltonmängderna $\{x_i\}$, vilket endast kan göras på ett sätt.
+
+Den sista identiteten fås genom betraktelse av två fall. Ett element $z\in X$ kan antingen vara en singelpartition $\{z\}$ eller vara en del av en större partition $\{x_i,...,z,...,x_j\}$. 
+
+För fallet med singelpartitionen får vi, om vi bortser från $\{z\}$, situationen $X\setminus\{z\}$ och därför antalet $S(n-1,k-1)$ partitioner. Observera nu att vi inte får fler sätt att partitionera $X$ på då $\{z\}$ läggs till, då det är en egen partition.
+
+För fallet då $z$ tillhör en partition av ett flertal element inses att $z$ ligger i någon av partitionerna $X_1,X_2,...,X_k$. Det inses att det finns $k$ olika partitionsdelar och $n-1$ element dessa kan innehålla ($z$ antags ligga i en specifik partition). Det finns nu alltså $kS(n-1,k)$ partitioner.
+
+Nu ger summan $s(n-1,k-1)+kS(n-1,k)$  antalet partitioner i $k$ delar av $n$ element. 
+\begin{flushright}
+$\Box$
+\end{flushright}
+Observera att den rekursiva formeln för antalet bildar en triangel av tal precis som för Pascals triangel. Det är dock här inte samma tal som i Pascals.
+
+\subsection{Klassifikation och ekvivalensrelation}
+Sektion 5.2 och specifikt Sats 5.2.1 ger en metod för att definiera partitioner. Nämligen genom att ge varje partitionsdel en ekvivalensrelation. Vi definierar om Sats 5.2.1 här:\\ \\
+\textbf{Sats 9.2.1:} Om $R$ är en ekvivalensrelation på en mängd $X$ så bildar ekvivalensklasserna tillhörande $R$ en partition av $X$.\\ \\
+\textbf{Anmärkning.} Ekvivalensrelationer är ofta svåra begrepp i matematik. Vad som är vanligt är att först definiera en relation och sedan visa att den uppfyller \textit{reflexiv, symmetrisk} och \textit{transitiv}.
+\subsection{Distributioner och multinomiala tal}
+Ytterligare ett sätt att se på en partition $\{X_i \ | \ i\in I\}$ är att betrakta funktionen $p$ från $X$ till $I$ sådan att 
+$$
+p(x)=i \quad om \ x\in X_i \ .
+$$
+Vi kan se detta som att, istället för att partitionera en mängd, distribuera elementen till lådor döpta efter indexmängderna.
+
+Eftersom varje låda innehåller åtminstone ett element så är $p$ en surjektion, d v s för varje låda $i$ finns åtminstone ett $x$ så att $p(x)=i$.
+
+Sättet att relatera partitioner till surjektioner fungerar åt andra hållet.\\ \\
+\textbf{Definition 9.3.1:} Givet en surjektion $p:X\rightarrow Y$ så bildar delmängderna till $X$ sådana att $\forall y\in Y$
+$$
+X_y=\{x\in X \ | \ p(x)=y \} 
+$$
+en partition av $X$.\\
+
+Definitionen är grunden till en metod för att räkna surjektioner.\\ \\
+\textbf{Sats 9.3.1:} Låt $J$ vara mängden surjektioner från en $n-$mängd $X$ till en $k-$mängd $Y$. Nu är $|J|=k!S(n,k)$.\\ \\
+\textbf{Bevis}\\
+Varje surjektion $p:X\rightarrow Y$ definierar en unik partition av $X$ i $k$ delar. Vidare, för varje partition finns det $k!$ surjektioner (urval utan upprepning). Alltså finns det lika många surjektioner som antalet surjektioner per partition ggr antalet partitioner. 
+\begin{flushright}
+$\Box$
+\end{flushright}
+Det finns många praktiska problem som kan analyseras m h a $"$objekt till lådor$"$-bilden av en surjektion.
+
+Generellt så frågar man hur många surjektioner det finns från en $n-$mängd till en $k-$mängd $\{y_1,y_2,...,y_k\}$, så att $n_1$ objekt går till låda $y_1$ o s v. Detta antal beskrivs som
+$$
+{n \choose n_1,n_2,...,n_k} 
+$$
+och kallas ett \textbf{multinomialt} tal. (Notera att $n_1+n_2+...+n_k=n$). Detta är speciellt en generalisering av binomialtalen. Det inses att
+$$
+{n \choose n_1,n_2}={n \choose n_1}
+$$
+då man väljer ut $n_1$ objekt till en låda bland $n$ och placerar resten ($n_2$) i nästa låda. Det går att hitta en rekursiv formel för multinomiala tal, här presenteras dock den explicita formeln direkt.\\ \\
+\textbf{Sats 9.3.2:} Givet heltal $n,n_1,n_2,...,n_k$ som uppfyller $n_1+n_2+...+n_k=n$ gäller det att
+$$
+{n \choose n_1,n_2,...,n_k}=\frac{n!}{n_1!n_2!\cdot\cdot\cdot n_k!} \ .
+$$
+\textit{Beviset utelämnas}.\\ \\
+\textbf{Exempel 9.3.1:} Hur många 11 bokstäver långa ord kan skapas från bokstäverna i ordet ABRACADABRA?\\ \\
+\textbf{Lösning}\\
+Observera att om ordet hade bestått av 11 likadana bokstäver skulle detta endast kunna göras på ett sätt. Vi har nu en situation där vi ska bilda en surjektion från $"$ordet$"$ $x_1x_2...x_{11}$ till bokstäverna $\{A,B,R,C,D\}$, så att fem element går till $A$ o s v. Speciellt eftersöks antalet sätt att göra detta på. Detta är ekvivalent med att placera fem $x$ i $"$låda$"$ $A$, 2 $x$ i $"$låda$"$ $B$ o s v. Svaret ges alltså av Sats 9.3.2 till
+$$
+{11 \choose 5,2,2,1,1}=\frac{11!}{5!2!2!1!1!}=...=83160 \ .
+$$
+\textbf{Anmärkning:} Sats 9.3.2 håller även då man tillåter en låda att tilldelas noll medlemmar. Detta kräver definitionen $0!=1$.
+
+Binomialsatsen går även att generalisera till \textit{multinomialsatsen}. \\ \\
+\textbf{Sats 9.3.3:} För heltal $n$ och $k$ gäller
+$$
+(x_1+x_2+...+x_k)^n=\sum{n\choose n_1,n_2,...,n_k}x_1^{n_1}x_2^{n_2}\cdot\cdot\cdot x_k^{n_k} \ .
+$$
+där summan tas över alla $k-$tuplar $(n_1,n_2,...,n_k)$ sådana att $n_1+n_2+...+n_k=n$.\\ \\
+\textbf{Bevis}\\
+Då de $n$ faktorerna multipliceras så tar varje term formen av $n_1$ st $x_1$, $n_2$ st $x_2$, o s v. Detta är ekvivalent med att placera $n$ objelt i $k$ lådor och därav koefficienterna.
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+\subsection{Partitioner av ett positivt heltal}
+Givet en partition i $k$ delar av en $n-$mängd $X$, så att
+$$
+X=X_1\cup X_2\cup...\cup X_k \ ,
+$$
+finns det en relaterad ekvation
+$$
+n=n_1+n_2+...+n_k \ ,
+$$
+där $n_i$ är storleken av $X_i, \ 1\leq i \leq k.$
+Denna ekvation kallas för partitionen av ett tal $n$ i $k$ $delar.$ I detta fall gäller att $n_i\neq 0$ då varje del $X_i$ är icke tom. Samt är ordningen av delarna oviktig. Partitionerna av talet $6$ är:
+$$
+6=6 \ , \quad 6=5+1 \ , \quad 6=4+2 \ , \quad 6=4+1+1 \ , \quad 6=3+3 \ ,
+$$
+$$
+6=3+2+1 \ , \quad 6=3+1+1+1 \ \quad 6=2+2+2 \ , \quad 6=2+2+1+1 \ ,
+$$
+$$
+6=2+1+1+1+1 \ , \quad 6=1+1+1+1+1+1 \ .
+$$
+Konventionen för att skriva ut en partition av ett tal görs genom att räkna antalet av varje del, så om det finns $\alpha_i$ st av del $i$ så skrivs en partition ut som
+$$
+[1^{\alpha_1}2^{\alpha_2}...n^{\alpha_n}]
+$$
+Med denna notation blir partitionerna av talet $6$ ovan $[6], \ [15], \ [24], \ [1^24], \ [3^2] \ ...$ o s v, med konventionen att man skriver ut de minsta talen i ordning till vänster. Vidare är det obekvämt att denna notation , som beskriver additiva egenskaper, skrivs på samma sätt som multiplikativa. Det är alltså viktigt att se på klamrarna som ett tecken på något annorluna.
+
+Att räkna partitioner är ett historiskt intressant problem. Vi har ännu inte verktygen för att göra detta ordentligt, om inte annat finns mer om detta i Biggs, kap. 26 .
+
+\subsection{Klassifikation av permutationer}
+I sektion 7.4 visades hur en permutation kan skrivas i form av cyklerna den ger upphov till. Det kan visas att cyklerna ger upphov till en partition av mängden permutationen verkar på i form av ekvivalensklasser.
+\\ \\
+\textbf{Exempel 9.5.1:} Låt $\pi$ vara en permutation av en ändlig mängd $X$. Visa att för varje $x\in X$ finns det ett tal $k\in\mathbb{N}$ sådant att $\pi^k(x)=x$, där $\pi^k$ är en upprepning av permutationen $k$ ggr och $\pi^0=id$.
+\\ \\
+\textbf{Lösning}
+\\
+Permutationen $\pi$ är som känt en injektion $\pi:X\rightarrow X$, Alltså finns det ett specifikt $y_1\in X$ sådant att $\pi(x)=y_1$. Om $y_1=x$ är vi klara, med $k=1$. Om $x\neq y_1$ så kan vi börja med att notera att det inte finns något annat $x'\in X, \ x'\neq x$, sådant att $\pi(x')=y_1$ (detta följer från definitionen av injektion). Alltså måste $\pi^2(x)=\pi(y_1)=y_2$ för ett specifikt $y_2\in X\setminus\{y_1\}$. Om $y_2=x$ är vi klara med $k=2$, annars upprepas proceduren så att $\pi^3(x)=\pi^2(y_1)=\pi(y_2)=y_3$ för ett specifikt $y_3\in X\setminus\{y_1,y_2\}$. Det är alltså uppenbart att det finns ett $k, \ 1\leq k \leq |X|$ sådant att $\pi^k(x)=x$. Detta bekräftar vidare att $\forall x\in X$ ger upprepad applikation av $\pi$ på $x$ upphov till en cykel eftersom att proceduren upprepas då vi kommer tillbaka till $x$. 
+\begin{flushright}
+$\Box$
+\end{flushright}
+\textbf{Definition 9.5.1:} Låt $\pi$ vara en permutation av en ändlig mängd $X$. Definiera relationen $R$ på $X$ sådan att
+$$
+xRx' \implies x'=\pi^r(x) \ , \quad r\geq 0 \ .
+$$
+\textit{Då detta visas vara en ekvivalensrelation så betyder det att för någon permutation bildar dess cykler en partition av} $X$.
+\\ \\
+\textbf{Exempel 9.5.2:} Visa att relationen i Definition 9.5.1 är en ekvivalensrelation.
+\\ \\
+\textbf{Lösning}
+\\
+Reflexiv:
+\\
+Vi vill undersöka om $\exists r\geq0$ så att $\pi^r(x)=x$. Eftersom $\pi^0=id$ så uppfyller $r=0$ trivialt detta.
+\\ \\
+Symmetrisk:
+\\
+Vi vill visa att om $xRy$ så $yRx$. Vi får att $xRy\implies \ \exists r\geq0, \ \pi^r(x)=y.$ Vidare så har vi visat i Exempel 9.5.1 att $\exists k>0$ sådant att $\pi^k(x)=x$, detta bekräftar på en gång att om $y$ ligger i samma cykel som $x$ så kommer upprepad användning av $\pi$ på $y$ till slut ge $x$.
+\\ \\
+Transitiv:
+\\
+Vi vill visa att om $xRy$ och $yRz$ så $xRz$. Vi vet alltså att $\exists r_1,r_2$ så att $\pi^{r_1}(x)=y$ och $\pi^{r_2}(y)=z.$ Definitionen av sammansättning av permutationer ger att $\pi^{r_2}(y)=\pi^{r_2}(\pi^{r_1}(x))=\pi^{r_1+r_2}(x)=z.$ Vilket visar att egenskapen håller.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Vi har nu formellt visat att en permutation på en ändlig mängd $X$ ger upphov till cykler, vilka i sin tur definierar en uppdelning av $X$ i ekvivalensklasser.
+
+Nu kan vi gå vidare i detta kapitel med att undersöka klassifikationer av permutationer m a p deras cykelstruktur. Vi minns att $S_n$ betecknar alla permutationer av en mängd $\mathbb{N}_n$. Associerat med varje permutation $\pi$ i $S_n$ finns den partitionen av $\mathbb{N}_n$ vars delar är cykler av $\pi$. Dessa cykler bildar i sin tur en partition av talet $n$. Partitionen av talet $n$ ska vidare hänvisas till som \textit{typen} av $\pi$.
+
+Med andra ord innebär detta att om $\pi$ har $\alpha_i$ cykler av längd $i, \ 1\leq i\leq n$, så är typen av $\pi$ partitionen $[1^{\alpha_1}2^{\alpha_2}...n^{\alpha_n}]$ av $n$ ($\alpha_1$ st adderade ettor, $\alpha_2$ st adderade tvåor, o s v). Exempelvis, om en permutation delar upp en mängd $X$ av ordning $6$ i två cykler av längd $1$ och en cykel av längd $4$ så har $\pi$ typen $[1^24]$.
+\\ \\
+Säg nu att vi vill veta hur många permutationer det finns i $S_{14}$ av en viss typ, säg $[2^23^24]$ (typen är såklart giltig eftersom $2+2+3+3+4=14$). Vi börjar med att ta reda på hur många cykler det finns på formen
+$$
+(**)(**)(***)(***)(****) \ .
+$$
+Detta är enkelt att svara på, då detta är en fråga om ordnat urval utan upprepning (ordningen spelar såklart roll då cykler skiljer sig åt) av $14$ element från en mängd med $14$ element. Sats 7.3.1 ger svaret till $14!$ olika cykler av detta slag.
+
+För en permutation $\pi$ gäller dock att varje cykel endast definieras av ett enda element (oavsett vilket element vi börjar med i en cykel så får vi ut samma cykel). Det finns alltså ovan $2$ sätt att erhålla $2-$cyklerna, $3$ sätt att erhålla $3-$cyklerna och $4$ för $4-$cykeln. Alltså kan den interna strukturen av cykelnotationen ovan erhållas på $2^23^24$ olika sätt för varje $\pi$ av den typen. Allmänt gäller för en permutation av typ $[1^{\alpha_1}2^{\alpha_2}...n^{\alpha_n}]$ att dess interna struktur i cyklerna kan ordnas på $1^{\alpha_1}2^{\alpha_2}...n^{\alpha_n}$ olika sätt. Samt gäller det att cykler av samma längd kan ordnas godtyckligt (det spelar ingen roll vilken som står först av ex $2-$cyklerna). Allmänt gäller alltså att cyklerna kan placeras på $\alpha_1!\alpha_2!\cdot\cdot\cdot\alpha_n!$ olika sätt.
+
+I exemplet där vi söker permutationer av typen $[2^23^34]$ finns det alltså
+$$
+\frac{14!}{(2^23^24)(2!2!)}
+$$
+\textit{distinkta} sådana och för permutationen av typen $[1^{\alpha_1}2^{\alpha_2}...n^{\alpha_n}]$ så är antalet distinkta sådana
+\begin{equation}
+    \frac{n!}{(1^{\alpha_1}2^{\alpha_2}...n^{\alpha_n})(\alpha_1!\alpha_2!...\alpha_n!)} \ .
+\end{equation}
+Nyttan i metoden att klassificera permutationer i typer är tvåfaldig. Detta eftersom att det finns en alternativ beskrivning av klasserna som har en användbar konsekvens i den algebraiska teorin av permutationer: låt $\alpha$ och $\beta$ vara permutationer i $S_n$, om det nu finns en permutation $\sigma$ i $S_n$ så att $\sigma\alpha\sigma^{-1}=\beta$ så säges $\alpha$ och $\beta$ vara \textbf{konjugerade}.
+\\ \\
+\textbf{Sats 9.5.2:} Två permutationer är konjugerade omm de har samma typ.
+\\ \\
+Beviset utelämnas då algebraisk representation av permutationer ej ingår i denna kurs. Se bevis i Biggs s.137.
+
+\subsection{Jämna och udda permutationer}
+Vi börjar med att tabulera permutationerna för $S_5$ på ett belysande sätt. Vi använder Relationen (1) för att räkna antalet permutationer av en viss typ:
+\begin{center}
+\begin{tabular}{c | r}
+Typ & Antal
+\\ \hline
+$[1^5]$ & 1
+\\
+$[1^23]$ & 20
+\\
+$[12^2]$ & 15
+\\
+$[5]$ & 24
+\\ \hline
+Tot & 60
+\end{tabular}
+\hspace{1 cm}
+\begin{tabular}{c | r}
+Typ & Antal
+\\
+\hline
+$[1^32]$ & 10
+\\
+$[14]$ & 30
+\\
+$[23]$ & 20
+\\
+ &
+\\ \hline
+Tot & 60
+\end{tabular}
+\end{center}
+Vi ser att $S_5$ går att partitionera i två delar av lika storlek med $60$ permutationer i varje. Vi ska här gå igenom en enkel metod för att dela upp en mängd $S_n \ ,n\geq 2,$ i två lika stora delar. Observationen som ger insikt till detta är att en omordning (permutation) av en sträng siffror kan erhållas genom att successivt byta plats på par av tal. Exempelvis, om vi vill permutera $12345\rightarrow35142$:
+$$
+12345 \quad \rightarrow \quad (1\leftrightarrow3) \ (2\leftrightarrow5) \quad \rightarrow \quad 35142 \ .
+$$
+I termer av permutationer kan vi enkelt hitta respektive cykler: $(13)(25)(4)$. Det är tydligt att cyklerna motsvarar de byten som gjordes ovan. Generellt kanske det inte är uppenbart att permutationer kan uttryckas i form av $2-$cykler och vi börjar med att visa detta rigoröst.
+\\ \\
+Det officiella namnet på en permutation som byter plats på två objekt och lämnar resten oberörda kallas för en \textbf{transposition}. Alltså är en permutation i $S_n$ en transposition om dess typ är $[1^{n-2}2]$, d v s den enda cykeln är en $2-$cykel.
+
+Betraktar vi nu istället vilken cykel som helst $(x_1x_2...x_{r-1}x_r)$ så kommer den i första steget att ta
+$$
+(x_1x_2...x_{r-1}x_r) \quad \rightarrow \quad (x_2x_3...x_rx_1) \ .
+$$
+Detta kan även göras genom att bryta ned permutationen i transpositioner på följande vis
+$$
+(x_1x_2...x_{r-1}x_r)=(x_1x_r)(x_1x_{r-1})...(x_1x_3)(x_1x_2) \ .
+$$
+Några saker angående detta måste påpekas. HL är \textit{inte} ett annat sätt att skriva cykeln på, det är ett sätt att \textit{utföra} cykeln på m h a transpositioner. Transpositionerna bör ses som en sammansättning av permutationer, och med sammansättningsregeln ska alltså transpositionen till höger göras först. Vidare så är inte uppdelningen i transpositioner unik. Följande exempel illustrerar detta. 
+$$
+(136)(2457)=(16)(13)(27)(25)(24) \ .
+$$
+$$
+(136)(2457)=(15)(35)(36)(57)(14)(27)(12) \ .
+$$
+Detta kan verka något förvirrande men målet är nu att visa, trots flertalet sätt att dela upp i transpositioner, att alla olika sätt att göra detta på har en gemensam egenskap.
+
+Låt $c(\pi)$ vara antalet cykler för en permutation $\pi$, så att om $\pi$ har typen $[1^{\alpha_1}2^{\alpha_2}...n^{\alpha_n}]$ så är $c(\pi)=\alpha_1+\alpha_2+...+\alpha_n$. Antag nu att vi kombinerar $\pi$ med en transposition $\tau$ som ger upphov till en ny permutation $\tau\pi$. Vad är relationen mellan $c(\tau\pi)$ och $c(\pi)$?
+
+Eftersom $\tau$ är en transposition så byter den enbart plats på två element, säg $\tau(a)=b, \ \tau(b)=a$ för specifika $a,b$ och för resten av elementen $k$ är $\tau(k)=k$. Om $a,b$ är i samma cykel av $\pi$ så kan vi skriva (kom ihåg att cykeln inte ändras beroende på vilket element som står först) 
+$$
+\pi=(ax...yb...z)... \  \textrm{och några andra cykler} \ . 
+$$
+Tar vi nu sammansättningen $\tau\pi$, kom ihåg $\pi$ först, så inses det kanske efter lite begrundan (det hjälper att rita upp en cykel som en ring med elementen jämnt utspridda och pilar emellan) att cykeln har blivit
+$$
+\tau\pi=(ax...y)(b...z)... \ \textrm{och samma andra cykler} \ .
+$$
+Vi ser att vi har fått en extra cykel och därmed är $c(\tau\pi)=c(\pi)+1$.
+
+Om istället $a,b$ ligger i olika cykler till $\pi$ så har cyklerna utseendet
+$$
+(ax...y)(b...z)... \ \textrm{och några andra cykler} \ .
+$$
+Med lite begrundan här också så inses att sammansättningen blir
+$$
+\tau\pi=(ax...yb...z)... \ \textrm{och samma andra cykler} \ .
+$$
+Här gäller, eftersom två cykler blev till en, att $c(\tau\pi)=c(\pi)-1$. Att följa upp en permutation med en transposition ändrar alltså antalet cykler med ett, detta faktum leder till följande sats.
+\\ \\
+\textbf{Sats 9.6.1:} Antag att permutationen $\pi$ i $S_n$ kan skrivas som sammansättningen av $r$ transpositioner, samt som sammansättningen av $r'$ transpositioner. Då är antingen både $r$ och $r'$ udda eller både $r$ och $r'$ jämna.
+\\ \\
+\textbf{Bevis}
+\\
+Låt $\pi$ vara de $r$ transpositionerna $\pi=\tau_r\tau_{r-1}...\tau_2\tau_1$. Eftersom $\tau_1$ har en transposition och $n-2$ $1$-cykler så är
+$$
+c(\tau_1)=1+(n-2)=n-1 \ .
+$$
+När resterande transpositioner tillämpas så kommer som vi har sett antalet cykler antingen att öka eller minska med ett. Antag att cyklerna ökar med ett $g$ ggr och minskar med ett $h$ ggr. Vi får då efter alla transpositioner att
+$$
+c(\pi)=n-1+g-h \ .
+$$
+Vidare observerar vi att $g+h$ är antalet transpositioner efter $\tau_1$: $g+h=r-1$. Vi uttrycker $r$ i form av $g$:
+$$
+r=1+g+h=1+g+(n-1+g-c(\pi))=n+2g-c(\pi) \ .
+$$
+Samma argument ger att om $\pi$ skrivs som en sammansättning av $r'$ transpositioner så
+$$
+r'=n+2g'-c(\pi)
+$$
+Subtrahera uttrycken för $r$ och $r'$ så att
+$$
+r-r'=n+2g-c(\pi)-(n+2g'-c(\pi))=2(g-g') \ .
+$$
+Eftersom skillnaden är jämns så måste antingen båda tal vara jämna eller båda udda
+\begin{flushright}
+$\Box$
+\end{flushright}
+En följd av satsen är att en permutation kan betraktas som \textbf{jämn} eller \textbf{udda}, beroende på om antalet transpositioner i någon sammansättning som ger permutationen är jämnt eller udda.
+
+Man brukar definiera detta som \textbf{tecknet} av en permutation $\pi$, sgn $\pi$, som $+1$ om $\pi$ är jämn och $-1$ om $\pi$ är udda. Alltså
+$$
+\textrm{sgn} \ \pi=(-1)^r \ ,
+$$
+där $r$ är antalet transpositioner i vilken sammansättning som helst av $\pi$. Speciellt gäller sgn id$=(-1)^0=+1$.
+
+Om en permutation $\pi$ kan sammansättas av $r$ transpositioner och en permutation $\sigma$ kan sammansättas av $s$ transpositioner så är det klart att $\sigma\pi$ kan sammansättas av $r+s$ transpositioner, vi får då en enkel formel för tecknet av en sammansättning.
+$$
+\textrm{sgn} \ \pi\sigma=(-1)^{r+s}=(-1)^r(-1)^s=\textrm{sgn} \ \pi \ \textrm{sgn} \ \sigma \ .
+$$
+Samma argument ger för någon permutation $\pi$ att
+$$
+\textrm{sgn} \ \pi \ \textrm{sgn} \ \pi^{-1}=\textrm{sgn} \ \pi\pi^{-1}=\textrm{sgn id}=+1 \
+$$
+vilket endast håller generellt om sgn $\pi^{-1}=$ sgn $\pi$.
+\\ \\
+Vi är nu redo att visa generellt det som i början av sektionen visades för $S_5$.
+\\ \\
+\textbf{Sats 9.6.2:} För ett heltal $n\geq2$ så är precis hälften av permutationerna i $S_n$ jämna och hälften udda.
+\\ \\
+\textbf{Bevis}
+\\
+Låt $\pi_1,\pi_2,...,\pi_k$ vara alla jämna permutationer i $S_n$ (det finns åtminstone en eftersom id är en av dom). Låt $\tau$ vara någon transposition i $S_n$, säg $\tau=(12)(3)(4)...(n)$. Nu är alla sammansättningar $\tau\pi_1,\tau\pi_2,...,\tau\pi_k$ distinkta, eftersom om $\tau\pi_i=\tau\pi_j$ så blir
+$$
+\pi_i=(\tau^{-1}\tau)\pi_i=\tau^{-1}(\tau\pi_i)=\tau^{-1}(\tau\pi_j)=(\tau^{-1}\tau)\pi_j=\pi_j \ .
+$$
+Vidare så är alla permutationer $\tau\pi_1,\tau\pi_2,...,\tau\pi_k$ udda eftersom 
+$$
+\textrm{sgn} \ \tau\pi_i=\textrm{sgn} \ \tau \ \textrm{sgn} \ \pi_i=(-1)\cdot(+1)=-1 \ .
+$$
+Det återstår att visa att en udda permutation $\rho\in S_n$ måste vara någon av $\tau\pi_1,\tau\pi_2,...,\tau\pi_k$. Eftersom 
+$$
+\textrm{sgn} \ \tau^{-1}\rho=\textrm{sgn} \ \tau^{-1} \ \textrm{sgn} \ \rho=(-1)\cdot(-1)=+1  
+$$
+så måste $\tau^{-1}\rho$ vara någon av de jämna permutationerna $\pi_i$. Detta ger
+$$
+\rho=(\tau\tau^{-1})\rho=\tau(\tau^{-1}\rho)=\tau\pi_i \ ,
+$$
+vilket alltså är en udda permutation och satsen är visad.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Följande lek som de flesta bör vara bekant med kan visas vara lösbar eller icke lösbar m h a begreppet udda och jämna permutationer.
+\\ \\
+\textbf{Exempel 9.6.1:} Åtta block är placerade i en kvadrad som följande
+\begin{center}
+\begin{tabular}{| c | c | r |}
+\hline
+A & E & I
+\\ \hline
+O & U & Y
+\\ \hline
+R & T &
+\\ \hline
+\end{tabular}
+\end{center}
+Ett giltigt drag görs genom att dra över ett block till den tomma rutan. Går det att få konfigurationen
+\begin{center}
+\begin{tabular}{| c | c | r |}
+\hline
+Y & O & U
+\\ \hline
+A & R & E
+\\ \hline
+I & T &
+\\ \hline
+\end{tabular}
+\end{center}
+endast genom att göra giltiga drag?
+\\ \\
+\textbf{Lösning}
+\\
+Varje giltigt drag där man drar ett tecken $X$ till den tomma rutan $\Box$ kan representeras med en $2$-cykel $(X\Box)$. Vi kan enkelt bestämma cyklerna som behövs för att få det önskade resultatet (jämför exemplet med spelkorten i sektion 7.4) med följande betraktelse av kvadraterna:
+$$
+A\rightarrow Y \ , \ E\rightarrow O \ , \ I\rightarrow U \ , \ O\rightarrow A \ , \ U\rightarrow R \ , \ Y\rightarrow E \ , \ R\rightarrow I \ , \ T\rightarrow T \ , \ \Box\rightarrow\Box \ .  
+$$
+Detta ger cyklerna
+$$
+(AYEO)(IUR)(T)(\Box) \ .
+$$
+Nu kan vi bestämma om permutationen är jämn eller udda. $4$-cykeln kan göras med $3$ transpositioner och $3$-cykeln av $2$, vi har alltså en udda permutation vilket innebär att om det finns en lösning så ska den erhållas efter ett udda antal giltiga drag.
+
+Men vi vet att lösningen har den tomma rutan på sin ursprungliga position, den måste alltså ha flyttats upp lika många gånger som ned, samt till höger lika många gånger som till vänster. Detta måste resultera i ett jämnt antal drag och vi kan alltså inte erhålla den önskade konfigurationen.
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+
+\section{Modulär aritmetik}
+\subsection{Kongruens}
+Följande två definitioner är ekvivalenta:\\ \\
+\textbf{Definition 9.4.1:} Låt $x_1,x_2\in\mathbb{Z}$ och $m\in\mathbb{N}$. Man säger att $x_1$ och $x_2$ är \textit{kongruenta modulo} $m$, eller matematiskt
+$$
+x_1\equiv_m x_2 \ ,
+$$
+om $m|(x_1-x_2)$.\\ \\
+\textbf{Definition 9.4.2:} Låt $x_1,x_2\in\mathbb{Z}$ och $m\in\mathbb{N}$. Man säger att $x_1$ och $x_2$ är \textit{kongruenta modulo} $m$, eller matematiskt
+$$
+x_1\equiv_m x_2 \ ,
+$$
+om de ger samma rest vid division med $m$:
+$$
+x_1=q_1m+r \ , \quad x_2=q_2m+r \ .
+$$
+
+Detta inses genom
+$$
+x_1-x_2=m(q_1-q_2) \ .
+$$
+Vi kan verifiera att kongruens modulo $m$ är en ekvivalensrelation (vi kan använda båda definitionerna, här används Definition 9.4.2):\\ \\
+\underline{reflexiv $xRx$:}\\
+Ja, $x$ ger samma rest som $x$.\\
+\underline{Symmetrisk $xRy\implies yRx$:}\\
+Ja, om $x$ ger samma rest som $y$ så ger $y$ samma rest som $x$.\\
+\underline{Transitiv $xRy, \ yRz\implies xRz$:}\\
+Ja, alla ger samma rest.
+
+(Ekvivalensklasserna är alltså de heltal $y$ som ger samma rest vid division med $m$ som något heltal $x$).\\ \\
+Användbarheten med kongruensrelationer är att de följer de vanliga aritmetiska relationerna.\\ \\
+\textbf{Sats 9.4.1:} Låt $m\in\mathbb{N}$ och $x_1,x_2,y_1,y_2\in\mathbb{Z}$ så att
+$$
+x_1\equiv_mx_2 \quad och \quad y_1\equiv_m y_2 \ .
+$$
+Nu gäller det att
+$$
+x_1+y_1\equiv_m x_2+y_2 \quad och \quad x_1y_1\equiv x_2y_2 \ .
+$$
+\textbf{Bevis}\\
+Beviset är väldigt enkelt och utelämnas. Man utgår bara från definitionen.
+\subsection{$\mathbb{Z}_m$ och dess aritmetik}
+Vi ska här studera ekvivalensklasserna för tal kongruenta något tal $x$ m a p $m$. 
+
+Låt $[x]_m$ vara ekvivalensklassen sådan att $x'\in[x]_m$ om $m|(x'-x)$. Exempelvis så
+$$
+[5]_3=\{...,-4,-1,2,5,...\} \ .
+$$
+Observera att
+$$
+[-4]_3=[-1]_3=[2]_3=[5]_3=... \ o \ s \ v \ .
+$$
+Teorin för ekvivalensrelationer garanterar att för något specifikt $m$ så är $\mathbb{Z}$ partitionerat i givna ekvivalensklasser för kongruens modulo $m$. Exempelvis så är 
+$$
+\mathbb{Z}=[0]_3\cup[1]_3\cup[2]_3 \ .
+$$
+$$
+[0]_3=\{...,-6,-3,0,3,6,...\} \ ,
+$$
+$$
+[1]_3=\{...,-5,-2,1,4,7,...\} \ ,
+$$
+$$
+[2]_3=\{...,-4,-1,2,5,8,...\} \ .
+$$
+Generellt gäller för varje $m$ att $\mathbb{Z}$ partitioneras i $m$ olika ekvivalensklasser $[0]_m,[1]_m,...,[m-1]_m$. Detta följer från faktumet att ett heltal $x$ kan uttryckas unikt som $x=qm+r, \ 0\leq r \leq m-1$.\\ \\
+\textbf{Definition 9.5.1:} Mängden av heltal modulo $m$, tecknat $\mathbb{Z}_m$, är mängden distinkta ekvivalensklasser m a p relationen kongruens modulo $m$ i $\mathbb{Z}$.\\
+
+$\mathbb{Z}_m$ är nu mängden $\{[0]_m,[1]_m,...,[m-1]_m\}$ som  är en \textit{delmängd} till $\mathbb{Z}$. Det är vidare praktiskt att betrakta $\mathbb{Z}_m$ som mängden $\{0,1,...,m-1\}$ med en modifierad aritmetisk struktur. Vi definierar operationerna addition och multiplikation enligt
+$$
+[x]_m\oplus[y]_m = [x+y]_m \ , \quad [x]_m\otimes[y]_m=[xy]_m \ .
+$$
+
+Operationerna $\oplus$ och $\otimes$ måste vidare uppfylla en viktig egenskap för att vara användbara. Om $x'\in[x]_m$ och $y'\in[y]_m$ så måste
+$$
+[x]_m\oplus[y]_m=[x']_m\oplus[y']_m \quad och \quad [x]_m\otimes[y]_m=[x']_m\otimes[y']_m \ .
+$$
+Dessa egenskaper visas enkelt m h a Sats 9.4.1. Nu är det möjligt att lista alla aritmetiska förhållanden i $\mathbb{Z}_m$. \\ \\
+\textbf{Sats 9.5.1:} För $a,b,c\in\mathbb{Z}_m$ och speciellt $0\equiv[0]_m, \ 1\equiv[1]_m$ gäller det att\\
+
+\textbf{M1.}\hspace{0.5 cm} $a\oplus b\quad$ och $\quad a\otimes b\quad$ är element i $\mathbb{Z}_m$.
+
+\textbf{M2.}\hspace{0.5 cm} $a\oplus b=b\oplus a\quad$ och $\quad a\otimes b=b\otimes a$.
+
+\textbf{M3.}\hspace{0.5 cm} $\big(a\oplus b\big)\oplus c=a\oplus\big(b\oplus c\big)\quad$ och $\quad\big(a\otimes b\big)\otimes c=a\otimes\big(b\otimes c\big)$.
+
+\textbf{M4.}\hspace{0.5 cm} $a\oplus0=a\quad$ och $\quad a\otimes 1=a$.
+
+\textbf{M5.}\hspace{0.5 cm} $a\otimes\big(b\oplus c\big)=\big(a\otimes b\big)\oplus \big(a\otimes c\big)$
+
+\textbf{M6.}\hspace{0.5 cm} $\forall a\in\mathbb{Z}_m \ \exists (-a)\in\mathbb{Z}_m$ så att $a\oplus(-a)=0$. Vidare är $-a$ unikt för $a$.\\ \\
+\textbf{Bevis}\\
+Detta visas enkelt m h a definitionera av modulär räkning.\\
+
+Betrakta nu följande ekvivalenta påståenden.\\
+
+$[7]_3\oplus[5]_3=[0]_3$,
+
+$7+5=0$ (i $\mathbb{Z}_3$),
+
+$7+5=12$ ger rest $0$ vid division med $3$.
+\\ \\
+Teorin i denna sektion gör det möjligt (nästan) att jobba på som vanligt med aritmetik i $\mathbb{Z}_m$. Det finns dock en skillnad: $[x]_m\otimes[a]_m=[x]_m\otimes[a']_m$ betyder inte nödvändigtvis att $[a]_m=[a']_m$. Exempelvis så gäller
+$$
+3\cdot1=3\cdot5 \ (i \ \mathbb{Z}_{12}), \quad [1]_{12}\neq[5]_{12} \ .
+$$
+Denna egenskap är nödvändig för att $\mathbb{Z}_m$ ska kunna betraktas som en kropp. Det visas i nästa sektion att om $m$ är ett primtal så gäller även $[x]_m\otimes[a]_m=[x]_m\otimes[a']_m\implies [a]_m=[a']_m$.
+
+Slutligen så påpekas att relationen $"\leq"$ inte gäller i $\mathbb{Z}_m$. D v s det finns ingen ordning på samma sätt som i $\mathbb{Z}$. Detta kan visualiseras genom att tänka på $\mathbb{Z}_m$ som en ring med jämnt utspridda element, snarare än en tallinje som för $\mathbb{Z}$.
+
+\subsection{Inverterbara element i $\mathbb{Z}_m$}
+\vspace{0.5 cm}
+\textbf{Definition 9.6.1:} Ett element $r\in\mathbb{Z}_m$ säges vara \textit{inverterbart} om det finns ett element $x\in\mathbb{Z}_m$ så att $rx=1$ i $\mathbb{Z}_m$. Man kallar $x$ för $r:$s multiplikativa invers och man skriver ofta $x=r^{-1}$.\\
+
+Eftersom $xr=rx=1$ så gäller det även att $r=x^{-1}$.\\ \\
+\textbf{Sats 9.6.1:} Ett element $r\in\mathbb{Z}_m$ är inverterbart omm $r$ och $m$ är relativt prima ($SGD(r,m)=1$). Speciellt är alla element i $\mathbb{Z}_p\setminus0$ inverterbara om $p$ är ett primtal.\\ \\
+\textbf{Bevis}\\
+($\Rightarrow$)\\
+Antag att $r$ är ett inverterbart element i $\mathbb{Z}_m$ så att $rx=1$ i $\mathbb{Z}_m$. Det följer att $rx-1=km$ i $\mathbb{Z}$ för något heltal $k$. Alltså gäller $rx-km=1$ och $SGD(r,m)$ måste dela $1$. D v s om $r$ är inverterbart i $\mathbb{Z}_m$ så är $SGD(r,m)=1$.\\
+($\Leftarrow$)\\
+Om $SGD(r,m)=1$ så finns det enligt Sats 6.2.1 heltal $k,x$ sådana att $rx+km=1$. Skrivs detta om till $rx=1-km\implies rx\equiv_m1$ vilket var det sökta resultatet.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Ytterligare ett bevis nämns snabbt här. Det bygger på Eulers funktion ($\phi(m)=$ heltalen i intervallet $1\leq r\leq m$ som är relativt prima med $m$) och är en klassisk sats i nummerteori.
+
+Direkt från definitionen av Eulers funktion inses att antalet inverterbara element i $\mathbb{Z}_m$ är $\phi(m)$. Satsen (som inte bevisas) lyder\\ \\
+\textbf{Sats 9.6.2:} Om $x$ är ett inverterbart tal i $\mathbb{Z}_m$ så
+$$
+x^{\phi(m)}=1 \quad i \ \mathbb{Z}_m \ .
+$$
+
+\section{Grafer}
+\subsection{Representation av grafer}
+\textbf{Definition 10.1.1:} En graf $G$ består av en ändlig mängd $V$ vars medlemmar kallas noder (vertices), samt en mängd $E$ av $"$2-delmngder$"$ av $V$ vars medlemmar kallas kanter (edges). Man brukar skriva $G=(V,E)$ och säger att $V$ är nodmängden och $E$ kantmängden.
+
+($G$ behöver inte nödvändigtvis vara ändlig för att betraktas som en graf men denna kurs behandlar endast ändliga grafer).\\ \\
+Ett typiskt exempel på en graf är
+$$
+V=\{a,b,c,d,z\} \ , \quad G=\big\{\{a,b\},\{a,d\},\{b,z\},\{c,d\},\{d,z\}\big\} \ .
+$$
+
+Rita noderna som punkter i ett plan och dra kanterna som streck för visuell representation. Det är hjälpsamt för intuitionen att rita på detta sätt då man behandlar midre grafer.\\ \\
+Även om en visuell graf är användbar för människor så behövs en annan representation då man arbetar med en dator. Man önskar representera en graf med en tabell: kalla två noder bundna av en kant för \textit{angränsande} och gör en lista med alla angränsande noder för varje nod. Exemplet ovan blir i en tabell\\ \\
+\begin{center}
+\begin{tabular}{l*{5}{c}r}
+a & b & c & d & z\\
+\hline
+b & a & d & a & b \\
+d & z & & c & d\\
+ & & & z
+\end{tabular}
+\end{center}
+\textbf{Definition 10.1.2:} För varje $n\in\mathbb{N}$ definieras en \textit{komplett} graf $K_n$ som en graf med $n$ noder vilka alla är angrändsande.\\ 
+
+Hur många kanter har $K_n$? Varje par av noder delar en kant, alltså ger varje par $\{n_i,n_j\}$ en kant. Frågan kan därför formuleras som $"$på hur många sätt kan man dela in $n$ element i par, där ordning inte spelar roll?$"$ Vilket är känt som ${n \choose 2}$.\\ (n över 2 på svenska. Eller n choose 2 på engelska).
+\\
+
+Ytterligare en intressant fråga är vilka grafer $K_n$ som kan ritas utan att två kanter måste korsa varandra. Se sektion 11.9 för detta.
+
+\subsection{Isomorfism av grafer}
+En graf är en abstrakt matematiskt identitet. Det är alltså viktigt att bestämma vissa egenskaper, bl a vad som menas med att två grafer är $"$lika$"$. Vad som utgör en specifik graf är inte vad noderna representerar eller hur grafen kan visualiseras. Vad som definierar en graf är hur dess noder är bundna med dess kanter. Följande definition ger en klar bild av detta. \\ \\
+\textbf{Definition 10.2.1:} Två grafer $G_1$ och $G_2$ säges vara \textit{isomorfa} om det finns en bijektion $\alpha$ från $G_1$:s noder till $G_2$:s noder sådan att $\{\alpha(x),\alpha(y)\}$ är en kant till $G_2$ om $\{x,y\}$ är en kant till $G_1$. Bijektionen $\alpha$ kallas vidare för en \textit{isomorfism}.
+\\ \\
+Då två grafer är isomorfa kan man säga att de är $"$samma$"$ graf. För att visa att två grafer inte är isomorfa behöver man visa att det inte finns en bijektion mellan deras nodmängder som parar kanter till kanter. Alltså kan inte två grafer vara isomorfa om de inte har samma antal noder eller samma antal kanter. 
+
+Däremot gäller inte nödvändigtvis det omvända. D.v.s. det finns grafer som har samma antal noder och samma antal kanter, men de är ändå inte isomorfa.
+\\
+
+Följande exempel visar två grafer som inte är isomorfa men som har samma antal noder och kanter (rita upp).
+$$
+G_1: \quad V_1=\{a,b,c,d,e\} \ , \quad E_1=\big\{\{a,b\},\{a,d\},\{a,e\},\{b,c\},\{b,d\},\{b,e\},\{d,e\}\big\} \ .
+$$
+\begin{center}
+\begin{tabular}{l*{5}{c}r}
+a & b & c & d & e\\
+\hline
+b & a & b & a & a \\
+d & c & & b & b\\
+e & d & & e & d\\
+& e
+\end{tabular}
+\end{center}
+$$
+G_2: \quad V_2=\{1,2,3,4,5\} \ , \quad E_2=\big\{\{1,2\},\{1,5\},\{2,3\},\{2,5\},\{3,4\},\{3,5\},\{4,5\}\big\} \ .
+$$
+\begin{center}
+\begin{tabular}{l*{5}{c}r}
+1 & 2 & 3 & 4 & 5\\
+\hline
+2 & 1 & 2 & 3 & 1\\
+5 & 3 & 4 & 5 & 2\\
+ & 5 & 5 & & 3\\
+ & & & & 4
+\end{tabular}
+\end{center}
+En metod för att visa att $G_1,G_2$ inte är isomorfa är att notera att fyra noder i $V_1$ formar en \textit{komplett} delgraf ($a,b,d,e$ är alla angränsande gentemot varandra), medan $V_2$ inte har en komplett delgraf av fyra noder.
+
+\subsection{Gradtal}
+\textit{Gradtalet} av en nod $v$ i en graf $G=(V,E)$ är antalet kanter $e$ i $E$ som innehåller $v$.
+
+($E$ består av element $e_1=\{v_i,v_j\}$ o s v).\\
+Använd notationen $\delta(v)$ för gradtalet (degree) av $v$ så blir formellt
+$$
+\delta(v)=|D_v| \ , \quad D_v=\{e\in E \ | \ v\in e\} \ .
+$$
+Begreppet gradtal är kopplat till kanter på ett sätt som kallas för $"$The firts theorem of graph theory$"$.\\ \\
+\textbf{Sats 10.3.1:} Summan av alla noders gradtal $\delta(v)$ i en graf $G=(V,E)$ är lika med dubbla antalet kanter:
+$$
+\sum_{v\in V}\delta(v)=2|E| \ .
+$$
+\textbf{Bevis}\\
+Detta är enkelt att resonera sig fram till (för varje kant finns två noder som kanten pekar på, varje kant $"$representerar$"$ därför två gradtal). 
+
+Det är dock intressant och nyttigt att visa detta rigoröst, vilket görs genom betraktelse av produktmängden $V\times E$ av ordnade par $(v,e)$. Låt $S\subset V\times E$ vara paren $S_{ij}=(v_i,e_j)$ sådana att $v\in e$. Nu får man för varje $v_k, \ 1\leq k\leq|V|,$ $"$radtotalen$"$ $r_{v_k}(S)$ till alla $e_j$ sådana att $v_k\in e_j$, d v s alla kanter som pekar på noden $v_k$ vilket per definition är $\delta(v_k)$.
+
+Samt, för varje $e_k, \ 1\leq k\leq|E|,$ fås $"$kolumntotalen$"$ $k_{e_k}(S)$ till alla $v_i\in e_k$ som måste vara $2$. Enligt Sats 7.1.1 är nu
+$$
+|S|=\sum_{v\in V}r_v(S)=\sum_{e\in E}k_e(S)\implies \sum_{v\in V}\delta(v)=\sum_{e\in E}2=2|E| \ .
+$$
+\begin{flushright}
+$\Box$
+\end{flushright}
+Det finns en direkt följd av Sats 10.3.1. Om man definierar en nod med udda gradtal som udda och en nod med jämnt gradtal som jämn, samt låter $V_e$ vara alla jämna noder och $V_o$ vara alla udda noder så fås följande resultat.\\ \\
+\textbf{Lemma 10.3.1:} För alla grafer gäller det att antalet udda noder är jämnt.\\ \\
+\textbf{Bevis}\\
+Följande är en direkt konsekvens av Sats 10.3.1.
+$$
+\sum_{v\in V_e}\delta(v)+\sum_{v\in V_o}\delta(v)=\sum_{v\in V}\delta(v)=2|E| \ .
+$$
+HL är ett jämnt tal, samt är summan av jämna gradtal jämn. Detta innebär att summan av udda gradtal måste vara jämn, d v s det måste vara ett jämnt antal noder med udda gradtal, som per definition är ett jämnt antal udda noder.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Ytterligare en följd av Sats 10.3.1 gäller grafer som kallas $"$regelbundna$"$. En regelbunden graf är en graf där alla noder har samma gradtal. Det följer direkt att om gradtalet är $r$ så blir
+$$
+r|V|=2|E| \ .
+$$
+Ett vanligt exempel på regelbundna grafer är kompletta grafer $K_n$ som har gradtal $r=n-1$.
+
+Ytterligare ett känt exempel är regelbundna polygoner (från elementär geometri) som i grafteori kallas för \textit{cykelgrafer} $C_n$. Det är uppenbart att $r$ här är $2$, vidare säger man att för $C_n$ är $V\equiv\mathbb{Z}_n$, där två noder $i,j$ knyts samman av en kant om $j=i+1$ eller $j=i-1$ i $\mathbb{Z}_n$.\\ \\
+En viktig tillämpning av begreppet gradtal är i situationer då man vill testa om två grafer är isomorfa. Om en graf $G_1$ har en nod $x$ sådan att $\delta(x)=\delta_0$ och en graf $G_2$ inte har någon nod med gradtal $\delta_0$ så kan inte $G_1$ och $G_2$ vara isomorfa.
+
+\subsection{Vägar och cykler}
+Man låter ofta grafer representera möjliga rutter, där exempelvis noder kan vara städer och kanter vägar.\\ \\
+\textbf{Definition 10.4.1:} En \textit{vandring} i en graf är en sekvens av noder $v_1,v_2,...,v_k$ sådana att $v_i,v_{i+1}$ är angränsande. Om alla noder är distinkta så kallas vandringen för en \textit{path}.\\
+
+Nu är en vandring vilken mängd av angränsande noder som helst. Exempelvis kan en vandring göras från noden $x$ till noden $y$ och sedan direkt tillbaka till $x$ om de är angränsande. En \textit{gång} däremot kan endast besöka en nod som mest \textit{en} gång.\\ \\ 
+Låt $x,y$ vara noder i en graf $G$ och definiera uttrycket $x\sim y$ som att det finns en vandring $v_1,v_2,...,v_n$ sådan att $x=v_1$ och $y=v_n$. D v s det går att rita en väg från $x$ till $y$. Verifiera nu att $x\sim y$ är en ekvivalensrelation på mängden $V$ i $G=(V,E)$.\\ \\
+\underline{Reflexiv:}\\
+Vi vill visa $x\sim x$, detta är uppfyllt då vi kan gå till en angränsande nod och tillbaka. (OK).\\
+\underline{Symmetrisk:}\\
+Vi vill visa $x\sim y\implies y\sim x$. Detta är uppfyllt då samma väg från $x$ till $y$ kan följas tillbaka till $x$. (OK).\\
+\underline{Transitiv:}\\
+Vi vill visa att om $x\sim y$ och $y\sim z$ så $x\sim z$. Detta uppfylls bl a genom att följa vägen från $x$ till $y$ och sedan till $z$. (OK).\\ \\
+Nu kan vi vara säkra på att det finns en partition av $V$ i ekvivalensklasser: två noder är i samma ekvivalensklass om de kan länkas samman med en vandring och i olika ekvivalensklasser om ingen sådan vandring är möjlig. Nu ska vi bygga vidare på konceptet länkade. Följande deinition skiljer på kopplade grafer och komposita grafer.\\ \\
+\textbf{Definition 10.4.2:} Låt $G=(V,E)$ vara en graf där partitionen av $V$ m a p relationen $\sim$ är $V_1\cup V_2\cup...\cup V_r$. Låt nu $E_i, \ 1\leq i\leq r,$ vara kanterna vars noder båda ligger i $V_i$. Nu säges graferna $G_i=(V_i,E_i)$ vara komponenterna av $G$. Om det bara finns en komponent säges $G$ vara \textit{kopplad}.\\ \\
+Många egenskaper hos grafer kan undersökas genom att betrakta en grafs komponenter separat. Därför bevisas ofta satser gällande grafer endast för mängden av kopplade grafer.\\ \\
+\textbf{Definition 10.4.3:} En vandring $v_1,v_2,...,v_{r+1}$ vars alla noder är distinkta utom $v_1=v_{r+1}$ kallas för en \textit{cykel}. Vidare har den $r$ distinkta noder och $r$ kanter.\\ \\
+\textbf{Exempel 10.4.1:} I grafen nedan önskas en väg finnas sådan att den besöker alla noder endast en gång, förutom den första som vägen avslutas på och därmed besöks 2 ggr (jämför en turist som inte vill besöka samma stad två gånger).
+
+Samt önskas en väg finnas sådan att den följer alla kanter precis en gång. Här spelar det ingen roll om start och slutpunkten är olika (jämför ett vägbygge).
+\begin{center}
+\begin{tabular}{l*{6}{c}r}
+ & p & q & r & s & t & u\\
+\hline
+ & q & p & p & p & p & r\\
+ & r & r & q & q & q & s\\
+ & s & s & s & r & r & t\\
+ & t & t & t & t & s \\
+ &  &   & u & u & u\\
+\hline
+$\delta:$ & 4 & 4 & 5 & 5 & 5 & 3
+\end{tabular}
+\end{center}
+\textit{Observera bl a att $\{p,q,r,s,t\}$ bildar en komplett delgraf}.\\ \\ 
+\textbf{Lösning}\\ 
+Första frågan löses enklast genom att rita grafen och testa tills en väg hittas, exempelvis $p,q,t,u,s,r,p$.
+
+Den andra frågan är knepigare. Vi kan se vad en allmän graf har för egenskaper som uppfyller att det finns start och slutpunkter från vilka/vilken det finns en vandring som går längs varje kant en gång: 
+
+Låt $x,y$ vara \textit{skilda} noder så att $x$ är start och $y$ är slutnod. Gradtalet av $x$ börjar med kanten som är utväg, är gradtalet större än ett så måste det för varje inväg finnas en ny utväg, d v s $\delta(x)$ är udda. Samma resonemang ger att $\delta(y)$ är udda (det finns en inväg, samt för varje utväg finns en inväg). Vidare så måste övriga noder ha lika många utvägar som invägar. Denna graf har alltså två udda och resten jämna noder vilket inte stämmer med vår graf $G$. 
+
+Om start och slutnoden är samma så är alla noder jämna vilket inte heller stämmer. Alltså går ingen sådan vandring att finna i $G$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Exemplet ovan är en bra illustration för två fall av egenskaper som ofta sökes i grafer, det är dock ett missledande exempel då det generellt inte är så lätt att hitta en cykel som innesluter grafens alla noder. Denna typ av cykler studerades av W.R. Hamilton och kallas Hamiltoncykler.
+
+Det andra problemet är dock generellt enkelt. Lösningen visade att om start och slutnod är skilda så ska dessa vara udda och resten jämna, samt om start och slutnod är samma så är alla noder jämna. Detta villkor kan visas vara nödvändigt \textit{och} tillräckligt för en sådan vandring. (Denna typ av vandring kallas för en Eulervandring).
+
+\subsection{Träd}
+\textbf{Definition 10.5.1:} En graf $T$ säges vara ett träd om den uppfyller två egenskaper:
+
+(T1): $T$ är kopplad (Definition 10.4.2).
+
+(T2): Det finns inga cykler i $T$ (Det finns ingen nod $x$ så att man kan hitta en path tillbaka till $x$).\\ \\
+Grafer med trädstruktur används i flera tillämpningar i matematik, bl a optimeringslära och datalogi. Vi börjar med att betrakta några enkla egenskaper.\\ \\
+\textbf{Sats 10.5.1:} Låt $T=(V,E)$ vara ett träd med åtminstone två noder. Nu gäller det att:
+
+(T3): För varje par av noder $x,y$ så finns det en unik \textit{path} i $T$ från $x$ till $y$.
+
+(T4): Grafen som erhålls genom att ta bort en kant i $T$ har två komponenter som båda är träd.
+
+(T5): $|E|=|V|-1$.\\ \\
+\textbf{Bevis}
+
+(T3): Det finns garanterat en path från $x$ till $y$ eftersom $T$ är kopplad. Kalla denna för $x=v_1,v_2,...,v_r=y$. Antag nu att det finns en annan path, kalla den för $x=u_1,u_2,...,u_r=y$. Låt $i$ vara det minsta subskript sådant att $v_{i+1}\neq u_{i+1}$. Nu finns det, eftersom att path $v$ och path $u$ måste mötas, ett minsta subskript $j$ sådant att $j>i$ och $v_j=u_k$ för något $k$. Men nu är $v_i,v_{i+1},...,v_j,u_{k-1},...,u_{i+1},v_i$ en cykel som ej är tillåten per definition. Alltså finns bara en path mellan två noder.
+
+(T4): Ointressant och fult bevis.
+
+(T5), Induktion: Om $|V|=1$ så är $|E|=1-1=0$ vilket måste stämma då inga kanter finns.\\
+Antag att (T5) håller för alla träd där $|V|=k$ och låt $T$ vara ett träd sådant att $|V|=k+1$. Låt $uv$ vara en kant i $T$ och $T_1=(V_1,E_1), \ T_2=(V_2,E_2)$ vara träden erhållna då $uv$ tas bort (följer från T4). Nu gäller det att
+$$
+|V_1|+|V_2|=|V|, \quad |E_1|+|E_2|=|E|-1 \ .
+$$
+Enligt induktionsprincipen så håller (T5) för de två delträden och därmed är
+$|E_1|=|V_1|-1$ och $|E_2|=|V_2|-1$. Vi får från allt detta att
+$$
+|E|=|E_1|+|E_2|+1=|V_1|-1+|V_2|-1+1=|V|-1 \ .
+$$
+\begin{flushright}
+$\Box$
+\end{flushright}
+Observera att (T3) är en konsekvens av (T1) och (T2). Det går att visa motsatsen, d v s att (T1) och (T2) följer ur (T3). Detta innebär att definitionen av ett träd endast behöver göras som (T3) om man så vill.
+
+\subsection{Färgläggning av noder}
+Grafteori kan användas i problemet som uppstår då man vill schemalägga utan att tider överlappar.\\ \\
+\textbf{Exempel 10.6.1:} Antag att vi vill schemalägga sex entimmarslektioner $v_1,v_2,...,v_6$. I publiken finns folk som vill se paren $\{v_1,v_2\}$, $\{v_1,v_4\}$, $\{v_3,v_5\}$, $\{v_2,v_6\}$, $\{v_4,v_5\}$, $\{v_5,v_6\}$ och $\{v_1,v_6\}$. Hur många timmar är nödvändiga så att lektionerna kan ges utan överlapp?\\ \\
+\textbf{Lösning}\\
+Vi får följande graf
+\begin{center}
+\begin{tabular}{l*{6}{c}r}
+ & $v_1$ & $v_2$ & $v_3$ & $v_4$ & $v_5$ & $v_6$\\
+\hline
+ & $v_2$ & $v_1$ & $v_5$ & $v_1$ & $v_3$ & $v_1$\\
+ & $v_4$ & $v_6$ &  & $v_5$ & $v_4$ & $v_2$\\
+ & $v_6$ &  &  &  & $v_6$ & $v_5$ \\
+\hline
+$\delta:$ & 3 & 2 & 1 & 2 & 3 & 3
+\end{tabular}
+\end{center}
+Nu kan kanterna representera möjliga överlapp. Vi vill skapa en partition av grafen sådan att ingen delmängd innehåller två noder som är angränsande. Detta kan såklart göras genom att låta varje nod vara en partition, men vi söker den minsta möjliga partitionen. Två sätt att göra detta på är\\
+
+Timme 1: $\{v_2,v_3\}$. Timme 2: $\{v_4,v_6\}$. Timme 3: $\{v_5,v_1\}$.\\
+
+Timme 1: $\{v_2,v_3,v_4\}$. Timme 2: $\{v_5,v_1\}$. Timme 3: $\{v_6\}$.\\ \\
+D v s vi fick ett tretimmars schema. Detta kan inses vara det minsta antalet timmar ($v_1,v_2,v_6$ är en komplett delgraf och måste alltså ha olika timmar).
+\begin{flushright}
+$\Box$
+\end{flushright}
+Detta kan matematiskt betraktas som en funktion
+$$
+f: \{v_1,v_2,...,v_6\} \longrightarrow \{1,2,3\}
+$$
+som tilldelar en lektion sin timma.
+
+Det är vanligast att tilldela noderna färger, men timmar fungerar lika bra, huvudsaken är att man har en konkret uppdelning $1,2,3,...$\\ \\
+\textbf{Definition 10.6.1:} En färgläggning av noderna i grafen $G=(V,E)$ är en funktion $c:V\longrightarrow\mathbb{N}$ sådan att $c(x)\neq c(y)$ om $\{x,y\}\in E$.\\ \\
+\textbf{Definition 10.6.2:} Det \textit{kromatiska talet} för en graf $G$, skrivet som $\chi(G)$, är det minsta heltalet $k$ sådant att det finns en färgläggning av noderna i $G$ med $k$ färger. (Vi visade att $\chi(G)=3$ i Exempel 10.6.1).\\ \\
+Allmänt (och ganska uppenbart) följer man två steg för att visa att $\chi(G)=k$ för en graf $G$:
+
+(i): Hitta en färgläggning av noderna med $k$ färger.
+
+(ii): Visa att ingen annan färgläggning använder färre än $k$ färger.\\ \\
+Denna medtod har komplexitet $n!$ för grafer med $n$ noder. Det är ett öppet problem att hitta en effektivare metod.
+
+\subsection{Girig algoritm för nodfärgläggning}
+Problemet att hitta det kromatiska talet för en allmän graf är svårt. Det finns speciellt ingen känd metod som hittar detta i polynomialtid (NP-problem) och de flesta tror att det inte finns en sådan metod. Det finns dock en enkel metod för att hitta en färgläggning av noderna med ett $"$rimligt$"$ antal färger och är en s.k girig algoritm eftersom man i varje steg endast bryr sig om en nods grannar och inte hela grafen.\\ \\
+\textbf{Girig algoritm för nodfärgläggning:}\\
+Vi vill färglägga noderna i $G=(V,E)$. Låt $S$ vara en mängd färger som från början är tom. Arrangera noderna i $V$ på något sätt $v_1,v_2,...,v_n$ och tilldela $v_1$ färg $1$. 
+
+För varje $v_i \ (2\leq i\leq n)$ skapar vi nu mängden $S$ som tilldelas nya färger för noderna $v_j \ (1\leq j<i)$ som är angränsande med $v_i$. Tilldela sedan $v_i$ första färgen som inte finns i $S$.\\ \\ 
+\textbf{Sats 10.7.1:} Om $G$ är en graf med största gradtal $k$ så:
+
+(i): $\chi(G)\leq k+1$.
+
+(ii): Om $G$ är kopplad och inte regelbunden så $\chi(G)\leq k.$\\ \\
+\textbf{Sats 10.7.2:} Låt $G$ vara en graf sådan att $\chi(G)=2$. Nu bildar mängderna $V_1$ och $V_2$, med färgerna $1$ och $2$ respektive, en partition av $V$ med egenskapen att varje kant i $G$ har en nod i $V_1$ och en nod i $V_2$. En graf sådan att $\chi(G)=2$ kallas därför \textit{bipartit}.\\ \\ 
+\textbf{Sats 10.7.3:} En graf $G$ är bipartit omm den inte har cykler med udda längd.\\ \\ 
+Dessa satser bevisas m h a algoritmen beskriven ovan. För att bevisen ska vara betydelsefulla så bör en noggran genomgång av algoritmen göras först.
+
+\subsection{Sammanfattning av begrepp}
+En graf utgörs visuellt av noder (punkter) och kanter (linjer) i ett plan. Två noder säges vara \textbf{angränsande} om de binds samman av en kant.\\ \\ 
+En graf $G$ består av en mängd noder $V$ och en mängd kanter $E$, $G=(V,E)$, där $E$ är 2-delmängder till $V$ beskrivande vilka noder som är angränsande: $E=\big\{\{x,y\} \ | \ x,y\in V, \ $ och $x,y$ är angränsande$\big\}$.\\ \\ 
+En \textbf{komplett graf} är en graf med $n$ noder sådan att alla noder är angränsande med varandra. En sådan graf betecknas $K_n$.\\ \\ 
+En \textbf{isomorfism} mellan två grafer $G_1, \ G_2$ innebär att det finns en bijektion $\alpha$ mellan grafernas noder sådan att om $\{\alpha(x),\alpha(y)\}$ är en kant till $G_2$ så är $\{x,y\}$ en kant till $G_1$. Man säger att två sådana grafer är $"$lika$"$.\\ \\ 
+Grafer kan ha samma antal noder och samma antal kanter men inte vara isomorfa.\\ \\ 
+En metod för att visa att två grafer \textbf{inte} är isomorfa är att hitta en komplett delgraf i $G_1$ som inte finns i $G_2$.\\ \\ 
+\textbf{Gradtalet} av en nod $v$, $\delta(v)$, är antalet kanter $e\in E$ som innehåller $v$. D v s $\delta(v)=|D_v|, \ D_v=\{e\in E \ | \ v\in e\}$. Man kallar en nod med udda gradtal för \textbf{udda} och med jämnt för \textbf{jämn}.\\ \\ 
+Summan av alla noders gradtal i en graf $G=(V,E)$ är lika med dubbla antalet kanter: $\sum\delta(v)=2|E|$.\\ \\ 
+För alla grafer gäller det att antalet udda noder är \textbf{jämnt}.\\ \\ 
+En graf kallas \textbf{regelbunden} om alla noder har samma gradtal $r$ (man säger då att \textbf{grafen har gradtal $r$}). I detta fall gäller det att $r|V|=2|E|$. (Exempel på regelbundna grafer är kompletta grafer och regelbundna polygoner).\\ \\ 
+Ett sätt att testa om två grafer \textbf{inte} är isomorfa är att leta efter ett gradtal som finns i ena grafen men inte i den andra.\\ \\ 
+En \textbf{vandring} i en graf är en sekvens av noder $v_1,v_2,...,v_k$ sådan att $v_i,v_{i+1}$ är angränsande. Om alla noder i en vandring är distinkta kallas vandringen för en \textbf{path}.\\ \\ 
+En partition av mängden noder $V$ kan göras i ekvivalensklasser sådana att två noder är i samma ekvivalensklass om det finns en vandring mellan dem. Dessa ekvivalentklasser $V_i$ skapar \textbf{komponenter} av grafen $G_i=(V_i,E_i)$. En graf av endast en komponent kallas \textbf{kopplad}.\\ \\ 
+En vandring $v_1,v_2,...,v_{r+1}$ kallas för en \textbf{cykel} om alla noder är distinkta utom $v_i=v_{i+1}$.\\ \\ 
+En cykel som innesluter alla grafens noder är svår att hitta och kallas för en Hamiltoncykel.\\ \\ 
+En vandring i en graf som börjar och slutar på olika noder, med egenskapen att den går över varje kant endast en gång, har det nödvändiga och tillräckliga vilkoret att start och slutnoderna är udda och resten är jämna.
+
+Samma typ av vandring som börjar och slutar på samma nod har det nödvändiga och tillräckliga villkoret att alla noder är jämna.
+
+Dessa typer av vandringar kallas för Eulervandringar.\\ \\ 
+En graf $T$ kallas för ett \textbf{träd} om det för varje par av noder $x,y$ finns en unik path i $T$ från $x$ till $y$ (T3).\\ \\
+Tas en kant bort i ett träd så bildas en graf bestående av två separata träd (T4). För ett träd gäller $|E|=|V|-1$ (T5).\\ \\ \textbf{Färgläggning} av mängden noder $V$ i en graf $G=(V,E)$ är en funktion $c:V\longrightarrow \mathbb{N}$ sådan att $c(x)\neq c(y)$ om $\{x,y\}\in E$.\\ \\ 
+Det \textbf{kromatiska talet} $\chi(G)$ för en graf $G$ är det minsta heltal $k$ sådant att det finns en färgläggning av $G$ i $k$ färger.\\ \\ 
+Att hitta det kromatiska talet är allmänt svårt med en komplexitet $n!$ där $n$ är antalet noder.\\ \\ 
+Man kan färglägga en graf med en s.k \textbf{girig algoritm} som inte tar grafens struktur i betraktelse utan färglägger grafen successivt utgående från någon förutbestämd indelning av grafens noder.\\ \\ 
+Om en graf $G$ har största gradtal $k$ så $\chi(G)\leq k+1$. Om $G$ är kopplad men inte regelbunden så $\chi(G)\leq k$.\\ \\ 
+Om $\chi(G)=2$ så kallas $G$ för \textbf{bipartit} och partitionen $V_1,V_2$ med respektive färger 1,2 har egenskapen att varje kant i $G$ har en nod i $V_1$ och en i $V_2$.\\ \\ 
+En graf är bipartit omm den inte har cykler med udda längd.
+
+\subsection{Eulers formel}
+\textbf{Sats 10.9.1:} För en graf $G$ som är kopplad och sådan att inga kanter korsar varandra så gäller det att $|V|-|E|+|F|=2$, där $F$ är ytor inneslutna av kanter.\\ \\ 
+\textbf{Motivering} (Induktion)\\
+Formeln är sann för en nod ($1-0+1=2$), samt för två noder eftersom dessa måste vara angränsande ($2-1+1=2$) vilket är bassteget. 
+
+Antag att formeln är sann för en graf med $k$ noder så att $k-|E|+|F|=2$. Lägg till en nod $v_{k+1}$ och angränsa den med en befintlig nod $v_a$. Angränsningen kan inte korsa någon kant och bildar därför ingen ny yta, formeln blir nu $(k+1)-(|E|+1)+|F|=k-|E|+|F|=2$ som alltså håller. Om det går att göra ytterligare en angränsning från $v_{k+1}$ utan att korsa en kant så gäller: 
+
+Angränsa $v_{k+1}$ med en möjlig nod $v_b$, eftersom grafen var kopplad så bildas en ny vandring $v_a,v_{k+1},v_b,...,v_a$. Detta innebär vidare att en ny yta har bildats (endast en då inga kanter korsades). Formeln blir nu $(k+1)-(|E|+2)+(|F|+1)=k-|E|+|F|=2$ som alltså stämmer. Denna procedur kan upprepas för fler tillåtna angränsningar mellan $v_{k+1}$ och befintliga noder $v_1,v_2,...,v_k$ så att $(k+1)-(|E|+i)+(|F|+i-1)=2$ där $i$ är antalet tillåtna angränsningar.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Motiveringen behöver tydligare motivera bildandet av en yta för att vara ett bevis, samt ta upp fallet då en nod läggs till \textit{på} en kant. Detta är dock en övning i formalia då bevisets teknik redan finns.
+
+\section{Bipartita grafer och matchning}
+
+\subsection{Relationer och bipartita grafer}
+Vi har gått igenom relationer $xRy$ i sektion 5 och delmängder till produktmängder $S\subset X\times Y$ i sektion 7. Faktum är att en relation $R$ mellan $X$ och $Y$ är en delmängd $R\subset X\times Y$. Följande påståenden är alltså ekvivalenta\\
+
+(i): $x\in X$ och $y\in Y$ är $R$-relaterade.
+
+(ii): Paret $(x,y)$ ligger i $R$\\ \\ 
+I denna sektion ska vi studera disjunkta mängder $X$ och $Y$, men i allmänhet kan $X=Y$.\\
+Vi ska basera representationen av denna typ av relation m h a bipartita grafer:
+
+När $R$ är en relation mellan disjunkta mängder $X$ och $Y$ (när $R\subset X\times Y$) definieras en bipartit graf $G$ representerande $R$ som följande. Låt $G=(V,E)$ där $V$ är $X\cup Y$. Låt vidare $E$ vara kanter $xy$ sådana att paren $(x,y)\in R$. Nu har varje kant en nod i $X$ och en i $Y$, (dessa kan om man vill ses som en färgning i två färger) alltså gäller $\chi(G)=2$ och vi har såklart en bipartit graf.\\
+\textit{Det är hjälpsamt att visualisera sig grafen genom att rita upp mängderna X och Y i rader brevid varandra och dra kanterna som linjer mellan elementen.}\\
+För att understryka att vi arbetar med bipartita grafer tecknas nu dessa som $G=(X\cup Y, E)$.\\ \\ 
+Sats 7.1.1 om att räkna delmängder till produktmängder har en enkel grafisk tolkning.\\ \\ 
+\textbf{Sats 11.1.1:} Låt $G=(X\cup Y,E)$ vara en bipartit graf och låt $\delta(v)$ vara graden av en nod $v$ i $G$. Nu är
+$$
+\sum_{x\in X}\delta(x)=\sum_{y\in Y}\delta(y)=|E| \ .
+$$
+(Detta är alltså samma sak som Sats 7.1.1).\\ \\ 
+\textbf{Bevis}\\
+Eftersom varje kant $e\in E$ har precis $1$ nod i $X$ så måste antalet grader $\delta(x)$ vara lika med antalet kanter som går till $X$, vilket är alla. Precis samma resonemang gäller för $Y$. 
+\begin{flushright}
+$\Box$
+\end{flushright}
+\textbf{Anmärkning}\\
+Vi har konstaterat att delmängden $R\subset X\times Y$, relationen $xRy$ och grafen $G=(X\cup Y, E)$ alla representerar samma sak. Vi ska härefter endast betrakta grafrepresentationen. Detta kan senare översättas till en relation, om man så vill.\\ \\ 
+\textbf{Definition 11.1.1:} En komplett bipartit graf $K_{r,s}=(X\cup Y, E)$ är en bipartit graf sådan att $|X|=r, \ |Y|=s$ och $E=\big\{\{x,y\} \ | \ \forall x\in X, \ \forall y\in Y\big\}$ (alla element i $X$ pekar på alla element i $Y$).\\ \\ 
+\textbf{Exempel 11.1.1:} Besvara följande gällande $K_{r,s}=(X\cup Y,E), \ |X|=r, \ |Y|=s$: 
+
+(i) Vad är graden av varje nod i $X$ respektive $Y$? 
+
+(ii) Vad är $|E|$?
+
+(iii) Beskriv med ord vad $K_{r,s}$ skulle kunna representera.
+
+(iv) Visa att för varje $s\geq 1$ så är $K_{1,s}$ ett träd.
+
+(v) Visa att $K_{r,s}$ inte är ett träd om $r\geq s\geq2$.\\ \\ 
+\textbf{Lösning}\\
+(i)\\ 
+Varje $x\in X$ pekar på $s$ element i $Y$ och varje $y\in Y$ pekar på $r$ element i $X$. D v s $\delta(x)=s \ \forall x\in X$ och $\delta(y)=r \ \forall y\in Y$.\\
+(ii)\\
+Sats 11.1.1 ger direkt att $|X|s=|Y|r=rs=|E|.$\\ 
+(iii)\\ 
+Alla element i $X$ är $R$-relaterade till alla element i $Y$ och vice versa. $R$ kan vara någon godtycklig relation och element $x,y$ kan representera godtyckliga saker. Exempelvis kan $X$ och $Y$ vara två grupperingar av studenter och $xRy$ betyda att $x$ är kär i $y$ (rolig fest).\\ 
+(iv)\\ 
+Detta görs enklast visuellt. Men det finns bara ett element i $X$ och $s$ i $Y$. Använder vi (T3) från sektion 10.5 som definition av ett träd så är det enkelt att verifiera att det endast finns \textit{en} path från en nod till en annan ($y_i,x,y_j \ \forall y_i,y_j$ och $x,y \ \forall y$).\\ 
+(v)\\ 
+Här har vi alltid minst två sätt att ta oss från en nod till en annan (rita upp).
+
+\section{Grupper}
+\subsection{Axiom för en grupp}
+Den grundläggande idén bakom definitionen av en alegebraisk struktur är en binär operation på någon mängd. Antag att vi har en mängd av $n$ objekt med egenskapen att varje par av dem, $x$ och $y$, kan kombineras på något sätt för att bilda ett objekt $z$. Denna kombinationsregel kan skrivas som
+$$
+x*y=z \ .
+$$
+Symbolen $*$ representerar en binär operation där $"$binär$"$ innebär att två objekt är inblandade. Mest känt är operationerna $+$ och $\times$ verkande på heltalen $\mathbb{Z}$.\\ \\ 
+\textbf{Definition 12.1.1:} En \textbf{grupp} är en mängd $G$ tillsamans med en binär operation $*$ definierad på $G$ som uppfyller följande axiom.\\ 
+
+\textbf{G1} \textit{(Slutenhet)}.\hspace{0.5 cm} $\forall x,y\in G$
+$$
+x*y\in G \ .
+$$
+
+\textbf{G2} \textit{(Associativitet)}.\hspace{0.5 cm} $\forall x,y,z\in G$
+$$
+(x*y)*z=x*(y*z) \ .
+$$
+
+\textbf{G3} \textit{(Identitet)}.\hspace{0.5 cm} $\exists e\in G$ så att
+$$
+e*x=x*e=x, \quad x\in G \ .
+$$
+
+\textbf{G3} \textit{(Invers)}.\hspace{0.5 cm} $\forall x\in G \ \exists x'\in G$ så att
+$$
+x*x'=x'*x=e \ .
+$$\\ 
+Vidare är elementet $e$ i \textbf{G3} känt som identiteten för operationen $*$ på $G$.
+
+Om $G$ är en grupp och $|G|$ är ändligt så sägs $G$ ha \textit{ordning} $|G|$; en oändlig grupp sägs ha oändlig ordning.
+
+\subsection{Exempel på grupper}
+Permutationerna som gicks igenom i sektion 7.4 är ett exempel på en grupp: Mängden permutationer $S_n$ av mängden $\mathbb{N}_n$ med sammansättningsoperatorn $\circ$ bildar en grupp. Denna grupp kallas för den \textbf{symmetriska gruppen} vilket förklarar beteckningen $S_n$, samt är dess ordning $n!$.
+
+Även är $\mathbb{Z}$ med additionsoperatorn en grupp med oändlig ordning.\\ \\ 
+Dessa är dock inte de enda grupperna som har betydelse. Faktum är att det finns extremt många exempel på grupper och konceptet återfinns överallt i högre matematik. Exempel finns överallt i geometrin, t ex då man roterar en likbent triangen och håller reda på vilka hörn som hamnar var. Samt är området mycket tillämpbart på matriser som alltid har någon slags symmetri. (Observera att symmetri är ett nyckelord).
+
+\subsection{Grundläggande algebra i grupper}
+Här är det viktigt att komma ihåg att de algebraiska manipulationer man är van vid då man arbetar med $"$vanliga tal$"$ inte nödvändigtvis håller. Detta är abstrakt algebra och det är då noga att veta vilka axiom man arbetar med. Med detta i tanken ändrar vi notationen i axiomen till den vanliga:\\ 
+
+$x*y\longrightarrow xy$,
+
+$e\longrightarrow 1$,
+
+$x'\longrightarrow x^{-1}$.\\
+Denna notation har värde i sparsamhet men kan vara förvirrande om man tänker på det som $"$vanliga operationer$"$.
+
+Det står exempelvis ingenstans i axiomen att $x*y=y*x$. Även om detta kan vara sant så är det inte allmänt så. En grupp som har denna egenskap kallas för en \textit{kommutativ} grupp eftersom $xy=yx$ är en kommutativ egenskap. (Alternativt abelsk grupp).\\ \\ 
+\textbf{Sats 12.3.1:} Låt $x,y,z,a,b$ vara godtyckliga element i en grupp $G$. Nu gäller det att\\ 
+
+$xy=xz\implies y=z \quad$ (vänsterkancellation).\\ 
+
+$ax=bx\implies a=b \quad$ (högerkancellation).\\ \\ 
+\textbf{Bevis}\\ 
+Axiomen säger att $x$ har en invers $x^{-1}$. Multiplicera denna till vänster i vänsterkancellationen och utveckla så erhålls implikationen. Motsvarande gäller för den högra.
+\begin{flushright}
+$\Box$
+\end{flushright}
+\textbf{Sats 12.3.2:} Om $a,b$ är element i en grupp $G$ så har ekvationen $ax=b$ en unik lösning i $G$.\\ \\ 
+\textbf{Bevis}\\ 
+Antag att det finns en annan lösning $\bar{x}$ så att $ax=a\bar{x}=b$. Vi får med vänsterkancellation och \textbf{G2} att $a^{-1}(ax)=a^{-1}(a\bar{x})\implies(a^{-1}a)x=(a^{-1}a)\bar{x}\implies x=\bar{x}$. Alltså finns det \textit{som mest en} lösning. Vidare är det tydligt att $a^{-1}b$ är en lösning och vi kan alltså vara säkra på att den är unik.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Vi kan med Sats 12.3.2 garantera att gruppen $G$ har en \textit{unik} identitet (1):
+
+Betraktar vi fallet då $a=b$ så har $ax=a$ en unik lösning $x$. $x$ uppfyller per definition kravet för identiteten och vi är klara.\\ \\ 
+På liknande sätt kan vi garantera att varje element i $G$ har en unik invers. Låt $b=1$ så är $x$ enligt Sats 12.3.2 en unik lösning till ekvationen $ax=1$. D v s alla element $a$ har en unik invers.
+
+\subsection{Odrning av ett gruppelement}
+Vi kan definiera positiva och negativa potenser av ett gruppelement $x$ i $G$ rekursivt som följande
+$$
+x^1=x \ , \quad x^r=xx^{r-1} \ , \ r\geq2 \ ,
+$$
+$$
+x^{-1}=x^{-1} \ , \quad x^{-s}=x^{-1}x^{-(s-1)} \ , \ s\geq2 \ .
+$$
+
+\noindent
+Vidare vet vi att $xx^{-1}=1$ så i vanlig ordning är $x^0=1$ och vi har potenser definierade för alla heltal och de familjärna reglerna för potensräkning håller:
+$$
+x^mx^n=x^{m+n} \ , \quad (x^m)^n=x^{mn} \ , \ m,n\in\mathbb{Z} \ .
+$$
+Vi kan nu göra en observation gällande potenser i ändliga grupper $G$. Eftersom potenser är definierade för ett oändligt antal heltal, samt eftersom alla potenser av ett tal i $G$ ligger i $G$ enligt \textbf{G1}, så måste det finnas heltal $a,b$ så att $x^a=x^b, \ x\in G$. Låt $a>b\geq0$ och  multiplicera $(x^a)x^{-b}=(x^b)x^{-b}\implies x^{a-b}=1$. Vi kan alltså vara säkra på att det finns ett positivt heltal $n$ sådant att $x^n=1$.
+
+Betrakta nu mängden $X=\{n\in\mathbb{N} \ | \ x^n=1\}$. Eftersom $\mathbb{N}$ har en minsta medlem så har även $X$ det. Alltså finns det ett minsta positivt heltal sådant att $x^n=1$ där alltså $x$ tillhör en grupp $G$.\\ \\
+\textbf{Definition 12.4.1:} Om $x$ är ett element i en ändlig grupp $G$ så kallas det minsta heltalet $m$ sådant att $x^m=1$ för \textit{ordningen} av $x$ i $G$. Detta gäller på samma sätt i en oändlig grupp förutsatt att ett sådant tal $m$ existerar, annars säges $x$ ha oändlig ordning.\\ \\
+I praktiken bestäms ordningen av ett gruppelement genom att upprepa multiplikation med talet självt tills identiteten erhålls.
+
+Den mest användbara egenskapen av ordningar av gruppelement presenteras i följande sats.\\ \\ 
+\textbf{Sats 12.4.1:} Låt $x$ vara ett element av ordning $m$ i en ändlig grupp $G$ och låt $s\in\mathbb{N}$. Då är
+$$
+x^s=1 \quad i \ G
+$$
+omm $s$ är en multipel av $m$.\\ \\ 
+\textbf{Bevis}\\ 
+Vi vet att $x^m=1$. Vi vet även (Sats 6.1) att alla heltal $s$ kan uttryckas på formen $s=qm+r, \ 0\leq r<0$. Vi får av potensreglerna att
+$$
+x^s=x^{qm+r}=(x^m)^qx^r=x^r \ .
+$$
+Eftersom $r<m$ och $m$ var det minsta heltal sådant att $x^m=1$ så kan inte $x^r=1$ om $r>0$. Alltså är $r=0$ och $s=qm$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+\subsection{Isomorfi av grupper}
+\textbf{Definition 12.5.1:} Låt $G_1$ vara en grupp m a p operatorn $*$ och $G_2$ en grupp m a p operatorn $\#$. Nu säges en bijektion $\beta: G_1\rightarrow G_2$ vara isomorf om det för alla $g,g'\in G_1$ gäller att
+$$
+\beta(g*g')=\beta(g)\#\beta(g') \ .
+$$
+D v s att alla element i $G_1$ kan paras $1:1$ på något sätt till elementen i $G_2$, samt att en operation mellan två element i $G_1$ pekar på det elementet som respektive element i $G_2$ gör i sin grupp. $G_1$ och $G_2$ säges vara isomorfa och man skriver $G_1\approx G_2$.
+
+\subsection{Cykliska grupper}
+Eftersom två isomorfa grupper är desamma ur ett abstrakt perspektiv så kan man vid studie av någon grupp $G$, istället för att bestämma alla dess egenskaper, försöka visa att $G$ är isomorf med någon standardgrupp $H$. Då gäller samma gruppegenskaper för $G$ som för $H$. Eftersom cykliska grupper är väldigt vanliga är dessa bra att känna till i detta avseende.\\ \\ 
+\textbf{Definition 12.6.1:} En grupp $G$ säges vara cyklisk om den innehåller ett element $x$ sådant att varje medlem i $G$ är en potens av $x$. Man säger att $x$ genererar $G$ och skriver $G=\langle x\rangle$.\\ \\ 
+Om $x$ genererar $G$ och alla potenser av $x$ är \textit{distinkta} så
+$$
+G=\{...,x^{-2},x^{-1},1,x,x^2,...\} \ .
+$$
+I detta fall säges $G$ vara en \textit{oändlig cyklisk grupp} och betecknas $C_{\infty}$. Att grupper är isomorfa till $C_{\infty}$ är väldigt vanligt och kan dyka upp i massa olika former.\\ \\ 
+\textbf{Exempel 12.6.1:} Visa att mängden $\mathbb{Z}$ med den vanliga additionsoperatorn bildar en cyklisk grupp av oändlig ordning.\\ \\ 
+\textbf{Lösning}\\ 
+Vi söker en isomorfi $\beta:\mathbb{Z}\rightarrow C_{\infty}$.
+
+Låt $x$ vara det genererande elementet i $C_{\infty}$. Låt vidare $n\in\mathbb{Z}$ och definiera $\beta(n)=x^n\in C_{\infty}$. Det är enkelt att se att denna funktion både är injektiv och surjektiv, d v s den är bijektiv. Vi måste även uppfylla Definition 12.5.1. Ett test ger
+$$
+\beta(n_1+n_2)=x^{n_1+n_2}=x^{n_1}x^{n_2}\implies \beta(n_1+n_2)=\beta(n_1)\beta(n_2) \ .
+$$
+\begin{flushright}
+$\Box$
+\end{flushright}
+Det finns också cykliska grupper med en generator $x$ som har ändlig ordning $m$. D v s $x$ har inte endast distinkta potenser utan upprepas cykliskt, så att för $s\in\mathbb{Z}$ gäller $x^s=x^{qm+r}=(x^m)^qx^r=x^r, \ 0\leq r< m \ .$ Alltså är i detta fall
+$$
+G=\{1,x,x^2,...,x^{m-1}\}
+$$
+vilket skrivs som $C_m$. Man kan vidare visa att för $x^i,x^j\in C_m, \ i\neq j$, så gäller $x^i\neq x^j$:
+
+Antag $x^i=x^j$, där $0\leq i<j\leq m$, så blir $x^{j-i}=1$ där $0<j-i<m$ vilket i sig är en motsägelse. $G$ säges vara en \textit{grupp av ändlig ordning m} och det mest kända exemplet av en sådan grupp är $\mathbb{Z}_m$ med additionsoperatorn. Detta visas på precis samma sätt som i Exempel 12.6.1.\\ \\ 
+Ett knep för att utvidga listan med standardgrupper är att kombinera redan kända grupper på något sätt. 
+
+Låt två mängder $A$ och $B$ båda vara grupper m a p multiplikationsoperatorn (fungerar även om de två har olika operatorer). Man kan bilda den \textbf{direkta produkten} $A\times B$ som följande. Elementen av $A\times B$ är de ordnade paren 
+$$
+(a,b) \ , \quad a\in A, \ b\in B \ .
+$$
+Dessa element kombineras vidare under gruppoperationen
+$$
+(a_1,b_1)(a_2,b_2)=(a_1a_2,b_1b_2) \ .
+$$
+Viktigt är att elementet $a_1a_2$ är en produkt av operationen definierad på $A$ och $b_1b_2$ definierad av operationen på $B$. 
+
+Det är nu enkelt att verifiera att $A\times B$ är en grupp under denna operation:\\ \\ 
+\textbf{(G1):} Eftersom $a_1a_2\in A$ och $b_1b_2\in B$ så $(a_1a_2,b_1b_2)\in A\times B$.\\ \\ 
+\textbf{(G2):} $\big((a_1,b_1)(a_2,b_2)\big)(a_3,b_3)=(a_1,b_1)\big((a_2,b_2)(a_3,b_3)\big)$ är uppenbart men verifieras enkelt med vänster resp högerutveckling.\\ \\ 
+\textbf{(G3):} $(1,1)(a,b)=(a,b)(1,1)=(a,b)$ eftersom båda grupper har sina identiteter.\\ \\ 
+\textbf{(G4):} $(a^{-1},b^{-1})(a,b)=(a,b)(a^{-1},b^{-1})=(1,1)$ eftersom alla element har inverser.\\ \\ 
+\textbf{Exempel 12.6.2:} Lista elementen för $C_2\times C_3$ och $C_2\times C_4$. Visa vidare att $C_2\times C_3$ är isomorf med $C_6$ samt att $C_2\times C_4$ \textit{inte} är isomorf med $C_8$.\\ \\
+\textbf{Lösning}\\ 
+Låt $C_1=\{1,x\}$, $C_2=\{1,y,y^2\}$ och $C_4=\{1,u,u^2,u^3\}$. Nu blir
+$$
+C_2\times C_3=\big\{(1,1),(1,y),(1,y^2),(x,1),(x,y),(x,y^2)\big\} \ ,
+$$
+$$
+C_2\times C_4=\big\{(1,1),(1,u),(1,u^2),(1,u^3),(x,1),(x,u),(x,u^2),(x,u^3)\big\} \ .
+$$
+För att visa en isomorfi mellan $C_2\times C_3$ och $C_6$ behöver vi hitta ett element $z$ i $C_2\times C_3$ så att $\langle z\rangle=C_2\times C_3$, om ett sådant element hittas så måste det ha ordning 6 samt identiteten $(1,1)$ vilket är allt som behövs för isomorfin. Det inses att $z=(x,y)$ är detta genererande element eftersom
+$$
+z=(x,y), \ z^2=(1,y^2), \ z^3=(x,1), \ z^4=(1,y), \ z^5=(x,y^2), \ z^6=(1,1).
+$$
+Det är uppenbart att $z^6=1$ och man kan alltså med denna definition skriva $C_2\times C_3=\{1,z,z^2,z^3,z^4,z^5\}$ vilket är en cyklisk grupp av ordning 6.
+
+Vad gäller förhållandet mellan $C_2\times C_4$ och $C_8$ så kan vi, istället för att leta genererande element, studera ordningen av elementen i $C_2\times C_4$. Definition 12.4.1 säger att ordningen av ett gruppelement $(x,u)$ är det minsta talet $m$ sådant att $(x,u)^m=1$. Listar vi ordningen för elementen får vi ordningarna
+\begin{center}
+\begin{tabular}{c | r r r r r r r r}
+$C_2\times C_4$ & $(1,1)$ & $(1,u)$ & $(1,u^2)$ & $(1,u^3)$ & $(x,1)$ & $(x,u)$ & $(x,u^2)$ & $(x,u^3)$\\
+\hline
+Ordn & 1 & 4 & 2 & 4 & 2 & 4 & 2 & 4
+\end{tabular}
+\end{center}
+Eftersom inget element av ordning $8$ finns så kan ingen isomorfi finnas till $C_8$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Att $C_2\times C_3$ var isomorf med $C_6$ är ett specialfall av följande sats.\\ \\
+\textbf{Sats 12.6.1:} Om $m,n\in\mathbb{N}$ är koprima så
+$$
+C_m\times C_n\approx C_{m\cdot n} \ .
+$$
+\textbf{Bevis}\\ 
+Låt $\langle x\rangle=C_m$ och $\langle y\rangle=C_n$. Låt vidare $z=(x,y)\in C_m\times C_n$. Vi vet att $x$ har ordning $m$ och att $y$ har ordning $n$. (Vi ska visa att om $z$ har ordning $r$ så $r=mn$, vilket alltså visar satsen samtidigt som det bestämmer det genererande elementet för $C_m\times C_n.$)
+
+Låt $z$ ha ordning $r$ så får vi att $z^r=1\implies (x^r,y^r)=(1,1).$ Detta säger direkt att $r$ är en multipel av både $m$ och $n$. Vidare, eftersom $r$ är det minsta heltalet sådant att $z^r=1$ så måste $r$ vara den minsta gemensamma multipeln av $m$ och $n$ (annars hade en faktor kunnat brytas ut ur $r$ och fortfarande uppfylla de önskade egensaperna). Men $m$ och $n$ är koprima, så den minsta möjliga multipeln är $mn$.
+
+Eftersom $C_m\times C_n$ har $mn$ element och innehåller ett element $z$ av ordning $mn$ måste det vara en cyklisk grupp.
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+\subsection{Undergrupper}
+En delmängd $H$ till gruppen $G$ är en \textit{undergrupp} om den med operatorn på $G$ formar en egen grupp. Följande sats ger ett tillräckligt villkor för att en delmängd ska vara en undergrupp.\\ \\ 
+\textbf{Sats 12.7.1:} Låt $G$ vara en grupp och antag att $H$ är en icke tom delmängd av $G$ sådan att\\
+
+\textbf{S1:} $x,y\in H \implies xy\in H$,\\
+
+\textbf{S2:} $x\in H\implies x^{-1}\in H$.\\ \\
+Nu är $H$ en undergrupp till $G$. Om speciellt $G$ är ändlig så är \textbf{S1} ett tillräckligt villkor.\\ \\
+\textbf{Bevis}\\
+Egenskaperna innebär att $H$ uppfyller slutenhet och att alla element har en invers. Associativitet följer från att det gäller i $G$. Vi behöver då bara visa att existens av identiteten $1$ följer av \textbf{S1} och \textbf{S2}: Vi får givet att $x$ och dess invers $x^{-1}$ finns i $H$. Även att $xx^{-1}\in H$. Men $xx^{-1}=1$ vilket garanterar att identiteten från $G$ även finns i $H$.
+
+I fallet då $G$ är ändlig ska vi visa att \textbf{S1}$\implies$\textbf{S2}: Om $H$ endast innehåller $1$ så är detta uppenbart sant. Antag att det finns fler element i $H$ och att $x$ är ett av dessa, låt vidare ordningen av $x$ vara $m$. \textbf{S1} säger att varje positiv potens av $x$ finns i $H$. Utan att förmoda att $x^{-1},1\in H$, multiplicera båda led i ekvationen $x^m=1$ med $x^{-1}$. Vi får $x^{m-1}=x^{-1}$ och eftersom $m>1$ så måste $x^{-1}$ vara en positiv potens av $x$. D v s $x^{-1}\in H$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+\textbf{Exempel 12.7.1:} Givet någon grupp $G$, låt $Z(G)$ beteckna delmängden bestående av elementen i $G$ som kommuterar med alla element i $G$. D v s
+$$
+Z(G)=\{z\in G \ | \ zg=gz, \ \forall g\in G\} \ .
+$$
+Visa att $Z(G)$ är en undergrupp till $G$ (denna grupp kallas för \textit{centrum av} $G$).\\ \\ 
+\textbf{Lösning}\\ 
+Det är inte specificerat om $G$ är ändlig så vi behöver verifiera \textbf{S1} och \textbf{S2}. 
+
+Antag att $x$ och $y$ ligger i $Z(G)$ så att $xg=gx$ och $yg=gy$ för alla $g\in G$. Vi vet att $xy\in G$ men för att $xy$ även ska ligga i $Z(G)$ behöver vi visa att $(xy)g=g(xy)$: 
+$$
+(xy)g=x(yg)=x(gy)=(xg)y=(gx)y=g(xy) \ ,
+$$
+vilket verifierar \textbf{S1}. 
+
+För att $x^{-1}$ ska ligga i $Z(G)$ behöver identiteten $x^{-1}g=gx^{-1}$ hålla. Vi verifierar dett genom att multiplicera $xg=gx$ med $x^{-1}$ på båda sidor
+$$
+x^{-1}(xg)x^{-1}=x^{-1}(gx)x^{-1}\implies (x^{-1}x)gx^{-1}=(x^{-1}g)x^{-1}x\implies gx^{-1}=x^{-1}g \ .
+$$
+Alltså är även \textbf{S2} verifierat.
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+Låt $G$ vara någon grupp med ett element $x$ av ordning $m$. Det är nu klart att potenserna $1,x,x^2,...,x^{m-1}$ formar en cyklisk undergrupp $\langle x\rangle$. Vidare är det klart att ordningen av undergruppen $\langle x\rangle$ är lika med ordningen av $x$.\\ \\
+Låt exempelvis $U$ vara gruppen $\mathbb{Z}_7\setminus\{0\}$  m a p multiplikationsoperatorn (verifiera att detta är en grupp om du vill). Nu bildar alltså potenserna av alla element cykliska undergrupper till $U$:
+
+$1$ är ointressant eftersom den bildar en singeltongrupp. $2$ har potenser 
+$$
+2^1=2, \ 2^2=4, \ 2^3=1, \ ...
+$$ 
+Alltså har $2$ här ordning $3$ och därför även $\langle2\rangle$ med elementen $1,2,4$.
+
+$3$ är mer intressant då vi får potenserna
+$$
+3^1=3, \ 3^2=2, \ 3^3=6, \ 3^4=4, \ 3^5=5, \ 3^6=1, ...
+$$
+vilket innebär att i $U$ har $3$ ordning $6$ och $\langle 3\rangle$ är alltså hela gruppen ($\langle3\rangle=U$).
+\subsection{Bimängder och Lagranges Sats}
+Här ska det första verkligt intressanta bevis rörande grupper presenteras och bevisas. 
+
+Satsen säger att om $H$ är en undergrupp till en ändlig grupp $G$ så är $|H|$ en delare till $|G|$. Detta innebär t ex att om ordningen av $G$ är $20$ så kan $H$ endast ha någon av ordningar $1,2,4,5,10,20$. Beviset för detta görs genom att partitionera $G$ så att varje del har storlek $|H|$. Om det finns $k$ sådana delar så är $|G|=k|H|$ och satsen följer.\\ \\
+\textbf{Definition 12.8.1:} Låt $H$ vara en undergrupp till en (inte nödvändigtvis ändlig) grupp $G$. Nu definieras den \textit{vänstra bimängden} $gH$ av $H$ m a p något $g\in G$ som
+$$
+gH=\{x\in G \ | \ x=gh \ \textrm{för något} \ h\in H\} \ .
+$$
+Den \textit{högra bimängden} m a p något $g\in G$ blir p s s
+$$
+Hg=\{x\in G \ | \ x=hg \ \textrm{för något} \ h\in H \} \ .
+$$
+Speciellt gäller det för en ändlig undergrupp $H=\{h_1,h_2,...,h_n\}$ att $gH=\{gh_1,gh_2,...,gh_n\}.$\\ \\
+Det är enkelt att verifiera att alla element i en vänster och höger bimängd är distinkta: om $gh_i=gh_j, \ i\neq j,$ så ger kancellation att $h_i=h_j$. Vi har alltså egenskapen att
+$$
+|gH|=|H| \ , \quad g\in G \ .
+$$
+Det är viktigt att notera att en vänster (på samma sätt med höger) bimängd $gH$ generellt inte är unik. Alltså kan $gH$ vara samma bimängd som $yH$ för något annat element $y\in G$. Detta inses lätt då bimängderna listas upp.\\ \\ 
+\textbf{Sats 12.8.1:} Låt $H$ vara en undergrupp till $G$. Om $g_1$ och $g_2$ är vilka element i $G$ som helst så är de vänstra bimängderna $g_1H$ och $g_2H$ antingen identiska eller har inga gemensamma element.\\ \\
+\textbf{Bevis}\\
+Vi ska visa att om $g_1H$ och $g_2H$ har \textit{ett} gemensamt element så är de identiska. 
+
+Antag att $g_1H$ och $g_2H$ delar ett element $x$ så att $x=g_1h_1, \ h_1\in H$ och $x=g_2h_2, \ h_2\in H$. Man kan nu visa att $g_1H\subset g_2H$ på följande vis: låt $y$ vara vilket element i $g_1H$ som helst så kan vi skriva $y=g_1h, \ h\in H$. Av detta följer att
+$$
+y=g_1h=(xh_1^{-1})h=x(h_1^{-1}h)=g_2h_2(h_1^{-1}h)=g_2(h_2h_1^{-1}h) \ .
+$$
+Eftersom uttrycket i parentesen i sista ledet är ett element i $H$ så måste $y\in g_2H$ vilket visar att $g_1H\subset g_2H$. På samma sätt visar man att $g_2H\subset g_1H$ vilket innebär att $g_1H=g_2H$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Ett annat sätt för att bevisa Sats 12.8.1 är att visa att relationen $R$ på $G$ sådan att
+$$
+xRy \implies x^{-1}y\in H
+$$
+bildar en ekvivalensrelation och därmed partitionerar $G$ i ekvivalensklasser.\\ \\ 
+Vad vi hitintills har kommit fram till kan användas för att bevisa den fundamentala satsen i denna sektion vilken är känd som Lagranges sats. \\ \\
+\textbf{Sats 12.8.2:} Om $G$ är en ändlig grupp av ordning $n$ och $H$ en undergrupp av ordning $m$, så är $m$ en delare till $n$.\\ \\
+\textbf{Bevis}\\
+Vi har visat att de vänstra bimängderna $gH$ bildar en partition av $G$, samt att $|gH|=|H|$. Om partitionen består av $k$ delar så måste relationen $k|H|=|G|\implies km=n$ gälla, vilket betyder att $m|n$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Antalet distinkta vänstra bimängder av en grupp $G$ kallas för indexet $H$ i $G$ och skrivs som $|G:H|;$ eller $|G|/|H|$.\\ \\
+Man hade i ovanstående resonemang kunnat använda högra bimängder överallt och fått samma följder. Det ska dock anmärkas att högra bimängder inte nödvändigtvis ger samma partition av en grupp som de vänstra.
+
+Många användbara satser följer direkt ur Lagranges sats. Här ges två exempel.\\ \\
+\textbf{Sats 12.8.3:} Låt $g$ vara ett element i en ändlig grupp $G$ där $|G|=n$. Nu gäller det att
+
+(i) Ordningen av $g$ är en delare till $n$.
+
+(ii) $g^n=1$.\\ \\
+\textbf{Bevis}\\
+(i)\\ 
+Ordningen av $g$ är samma som ordningen av den cykliska undergruppen $\langle g\rangle$. Enligt Lagranges sats är då ordningen av $g$ en delare till $n$.\\
+(ii)\\ 
+Vi har etablerat att $|\langle g\rangle|k=n$ för något positivt heltal $k$. Vi får alltså $x^n=x^{|\langle g\rangle|k}=(x^{|\langle g\rangle|})^k=1^k=1$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+\textbf{Sats 12.8.4:} Om $G$ är en grupp vars ordning är ett primtal $p$ så är $G$ isomorf med den cykliska gruppen $C_p$.\\ \\
+\textbf{Bevis}\\
+Eftersom $p>1$ så innehåller $G$ åtminstone ett element $x$ utöver identiteten , d v s $x\neq1$. Vidare är ordningen av den cykliska undergruppen $\langle x\rangle$ större än $1$ och enligt Lagranges sats är den även en delare till $p$. Detta innebär att ordningen av $\langle x\rangle$
+är $p$ och därför är $\langle x\rangle$ hela $G$ självt. Alltså är $G$ en cyklisk grupp av ordning $p$.
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+
+\section{Grupper av permutationer}
+\subsection{Definitioner och exempel}
+Låt $G$ vara en mängd permutationer av en ändlig mängd $X$. Om $G$ är en grupp m a p sammansättningen av permutationer så kallas $G$ för en \textbf{grupp av permutationer av} $X$. Om speciellt $X=\mathbb{N}_n$ så är $G$ en \textit{undergrupp} till $S_n$ (observera att vi ej sagt att $G$ var \textit{alla möjliga} permutationer av mängden $X$).
+
+Exempelvis listas här under alla undergrupper $H_i$ till $S_3$
+$$
+H_1=\{\textrm{id}\} \ , \ H_2=\{\textrm{id},(12)\} \ , \ H_3=\{\textrm{id},(13)\} \ , \ H_4=\{\textrm{id},(23)\} \ , \ H_5=\{\textrm{id},(123),(132)\} \ , \ H_6=S_3 \ .
+$$
+För att verifiera att en delmängd till $S_n$ faktiskt är en undergrupp så bör Sats 12.7.1 användas, där endast S1 (slutenhet) behöver verifieras då $S_n$ är ändlig.
+
+En enkel undergrupp att verifiera är undergruppen till $S_n$ bestående av alla jämna permutationer. I sektion 9.6 visades det att sammansättningen av jämna permutationer är jämna, vilket verifierar slutenhet. Även visades det i Sats 9.6.2 att precis hälften av permutationerna i $S_n$ är jämna, alltså har denna undergrupp storlek $(1/2)n!$. Undergruppen av jämna permutationer till $S_n$ kallas för den \textbf{alternerande gruppen} $A_n$. Alltså är $|A_n|=(1/2)n!$.
+\\ \\
+Ett känt exempel på grupper av permutationer uppstår i grafteori. Man säger att en graf är symmetrisk m a p permutationer som transformerar noder till noder enligt följande: 
+
+Om $v$ och $w$ är noder i en graf $\Gamma$ och det finns en permutation $\alpha$ sådan att $\alpha(v)=w$ omm $v$ och $w$ har samma egenskaper i grafen $\Gamma$ så kallas permutationen $\alpha$ för en \textbf{automorfism} av $\Gamma$. Exempelvis så gäller det att varje kant innehållande $v$ transformeras av $\alpha$ till en kant som innehåller $w$, vilket innebär att graden av $w$ är samma som graden av $v$. Även gäller det att varje cykel som passerar $v$ transformeras till en cykel av samma längd passerande $w$. I enkla grafer kan dessa faktum användas för att helt bestämma en automorfism av en graf. (Se Biggs s.282 för exempel).
+
+
+\subsection{Banor och stabilisatorer}
+Antag att $G$ är en grupp permutationer av en mängd $X$. Vi ska nu visa att gruppstrukturen av $G$ naturligt leder till en partition av $X$. 
+
+Definiera en relation $R$ på $X$ sådan att
+$$
+xRy \implies g(x)=y \ \textrm{för något} \ g\in G \ .
+$$
+Vi bekräftar att $R$ är en ekvivalensrelation:
+\\ \\
+\textbf{Reflexiv:}
+\\
+Eftersom id tillhör alla grupper och id$(x)=x$ för alla $x\in X$ så gäller $xRx$.
+\\
+\textbf{Symmetrisk:}
+\\
+Givet $xRy$ så att $g(x)=y$ för något $g\in G$ kan vi använda faktumet att även $g^{-1}$ måste finnas i $G$. Detta ger direkt $g^{-1}(y)=x$ så att $yRx$ är uppfyllt.
+\\
+\textbf{Transitiv:}
+\\
+Givet $xRy$ och $yRz$ så vet vi att det finns $g_1,g_2\in G$ så att $g_1(x)=y$ och $g_2(y)=z$. Sammansättningen av permutationer ger direkt att $z=g_2g_1(x)$. Och eftersom $g_2g_1$ måste vara ett element i $G$ så är även transitivitet uppfyllt ($xRy$ och $yRz$ innebär att $xRz$).
+\\ \\
+Vi ser nu direkt hur $X$ kan delas upp i ekvivalensklasser: $x$ och $y$ är i samma ekvivalensklass omm $\exists g\in G$ så att $g(x)=y$. Dessa ekvivalensklasser (delar) av $X$ kallas för \textbf{banor} av $G$ på $X$. Dessa banor brukar betecknas som $Gx$ och definieras explicit som
+$$
+Gx=\{y\in X \ | \ y=g(x) \ \textrm{för något} \ g\in G\} \ .
+$$
+Vi ska bestämma två specifika egenskaper av banor $Gx$. Hur bestämmer man storleken $|Gx|$ av banor och hur bestämmer man hur många banor $Gx$ som en mängd $X$ består av?
+\\ \\
+Då $G$ är en grupp permutationer av en mängd $X$ ska vi låta $G(x\rightarrow y)$ beteckna permutationerna i  $G$ som tar  $x$ till $y$, d v s 
+$$
+G(x\rightarrow y)=\{g\in G \ | \ g(x)=y\} \ .
+$$
+Speciellt så ser vi att om $y=x$ så får vi mängden $G(x\rightarrow x)$ som betecknar alla permutationer $\gamma\in G$ sådana att $\gamma(x)=x$. Mängden $G(x\rightarrow x)$ kallas för \textbf{stabilisatorn} av $x$ och betecknas $G_x$. Notera att om $\gamma_1,\gamma_2\in G_x$ så
+$$
+\gamma_2\gamma_1(x)=\gamma_2(x)=x \ ,
+$$
+vilket innebär att egenskapen slutenhet gäller för $G_x$ vilket innebär att då $G$ är ändlig så är $G_x$ en undergrupp till $G$.
+\\ \\
+\textbf{Sats 14.2.1:} Låt $G$ vara en grupp permutationer av $X$ och antag att $h\in G(x\rightarrow y)$. Nu gäller det att
+$$
+G(x\rightarrow y)=hG_x \ ,
+$$
+som alltså är den vänstra bimängden av $G$ m a p $h$ (bimängder gicks igenom i sektion 12.8).
+\\ \\
+\textbf{Bevis}
+\\
+$(\Leftarrow)$
+\\
+Om $\alpha\in hG_x$ så måste $\alpha=h\beta$ för något $\beta\in G_x$. Per definition är $\beta(x)=x$ så vi får
+$$
+\alpha(x)=h\beta(x)=h(x)=y \ .
+$$
+$(\Rightarrow)$
+\\
+Det gäller att $h^{-1}(y)=x$. Låt nu $\gamma\in G(x\rightarrow y)$ så
+$$
+h^{-1}\gamma(x)=h^{-1}(y)=x \ .
+$$
+Låter vi $h^{-1}\gamma=\delta$ så får vi $\gamma=h\delta$. Samt att $\gamma\in hG_x$ vilket vi skulle visa.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Vi har nu en metod för att bestämma storleken av $G(x\rightarrow y)$. Vi visade i sektion 12.8 att $|hG_x|=|G_x|$ vilket alltså innebär att $|G(x\rightarrow y)|=|G_x|$. Detta håller såklart endast då det finns något $h\in G$ sådant att $h(x)=y$, eller med andra ord när $y\in Gx$. Formellt får vi alltså
+$$
+|G(x\rightarrow y)|=|G_x| \ , \quad y\in Gx \ .
+$$
+Om det är så att $y$ inte tillhör banan $Gx$ så finns det ingen permutation som tar $x$ till $y$ och
+$$
+|G(x\rightarrow y)|=0 \ , \quad y\notin Gx \ .
+$$
+\subsection{Storleken av en bana}
+Vi ska i denna sektion bestämma ett förhållande mellan storleken av en bana $Gx$ och stabilisatorn $G_x$.
+
+Låt $G$ vara en grupp permutationer av en mängd $X$ och välj ett element $x\in X$. Mängden $S$ av par $(g,y)$ sådana att $g(x)=y$ kan beskrivas i form av en tabell (sådan som den beskriven i sektion 7.1 då delmängder till en produktmängd $X\times Y$ betraktades).
+
+Vi ska använda metoden för att räkna radtotaler $r_g(S)$ och kolumntotaler $c_y(S)$ (vi har alltså tabulerat så att $g\in G$ beskriver rader och $y\in G$ beskriver kolumner) för att bevisa huvudsatsen i denna sektion.
+\\ \\
+\textbf{Sats 14.3.1:} Låt $G$ vara en grupp permutationer av en mängd $X$ och låt $x$ vara något specifikt element i $X$. Nu gäller relationen 
+$$
+|Gx|\cdot|G_x|=|G| \ .
+$$
+\textbf{Bevis}
+\\
+Definiera
+$$
+S=\{(g,y) \ | \ g(x)=y\} \ .
+$$
+Eftersom $g$ är en permutation så finns det för varje $g\in G$ endast \textit{ett} $y\in X$ sådant att $g(x)=y$. Alltså måste varje radtotal $r_{g}(S)=1$.
+
+Kolumntotalen $c_y(S)$ är antalet permutationer i $G$ som tar $x$ till detta specifika $y$ vilket per definition är $|G(x\rightarrow y)|$. Så om $y\in Gx$ får vi
+$$
+c_y(S)=|G(x\rightarrow y)|=|G_x| \ .
+$$
+Om däremot $y\notin Gx$ så blir $c_y(S)=0$. Vi vet att summan av rad och kolumntotalerna är storleken av $S$ så vi får relationen
+$$
+\sum_{g\in G}r_g(S)=\sum_{y\in X}c_y(S) \ .
+$$
+I VL har vi alltså $|G|$ st termer av storlek $1$ medan vi i HL har $|Gx|$ termer av storlek $|G_x|$, samt $|X|-|Gx|$ termer av storlek $0$. D v s
+$$
+|G|=|Gx|\cdot|G_x|
+$$
+\begin{flushright}
+$\Box$
+\end{flushright}
+Resultatet kan användas för att räkna ut ordningen av en grupp permutationer, givet att storleken av \textit{en} bana och dess korresponderande stabilisator kan bestämmas.
+\\ \\
+\textbf{Exempel 14.3.1:} Låt $T$ vara en reguljär tetraeder i ett tredimensionellt rum. Bestäm ordningen av gruppen rotationssymmetrier av $T$.
+\\ \\
+\textbf{Lösning}
+\\
+Låt $G$ vara gruppen permutationer av hörnen till $T$ motsvarande rotationssymmetrier och låt $z$ vara något hörn. Nu gäller det att för varje annat hörn $y\neq z$ så finns det en kant $yz$ i $T$, samt så finns två ytor som är bundna till $yz$. Låt $c$ vara centrumpunkten i en av ytorna och $v$ vara det motstående hörnet. Nu tar en rotation av $T$ $120^{\circ}$ kring axeln $cv$ i rätt riktning hörnan $z$ till $y$ (rita en bild). Denna procedur kan göras på samma sätt för att ta $z$ till alla de andra hörnen och alltså innehåller banan $Gz$ alla fyra hörn, d v s $|Gz|=4$.
+
+Vi inser också att de enda symmetriska operationerna som behåller $z$ är rotationer kring axeln som passerar genom $z$ och måtstående yta. Dessa rotationer är $0^{\circ},120^{\circ}$ och $240^{\circ}$, d v s tre stycken. Alltså är $|G_z|=3$ och vi får
+$$
+|G|=3\cdot4=12 \ .
+$$
+\begin{flushright}
+$\Box$
+\end{flushright}
+
+\subsection{Antalet banor}
+Vi ska nu bestämma hur många banor av $G$ det finns på en mängd $X$. Varje bana är en delmängd av $X$ vars medlemmar är $"$samma$"$ under inverkan av $G$, så banorna bestämmer antalet distinkta typer av element i $X$ (m a p $G$).
+\\ \\
+Givet en grupp permutationer av en mängd $X$ definierar vi, för varje $g\in G$, mängden
+$$
+F(g)=\{x\in X \ | \ g(x)=x\} \ .
+$$
+D v s, för någon permutation $g\in G$, mängden element som $g$ håller fixa. Följande sats säger att altalet banor är lika med medelstorleken av mängder $F(g)$:
+\\ \\
+\textbf{Sats 14.4.1:} Antalet banor av $G$ på $X$ är
+$$
+\frac{1}{|G|}\sum_{g\in G}|F(g)| \ .
+$$
+\textit{Beviset utförs på ungefär samma sätt som beviset av sats 14.3.1. Då metoden är vad som är intressant i denna sammanfattning så utesluts beviset (se Biggs s.288}).
+
+
+\subsection{Representation av grupper i form av permutationer}
+Låt $G$ vara en grupp, inte nödvändigtvis av permutationer, och $X$ vara någon mängd. En \textbf{representation} av $G$ i form av permutationer av $X$ tilldelar varje element $g\in G$ en permutation $\hat{g}$ av $X$ på ett sådant sätt att kompositioner av gruppelement motsvarar kompositionen av permutationer. D v s 
+$$
+\widehat{g_1g_2}=\hat{g}_1\hat{g}_2 \quad \forall g_1,g_2\in G \ .
+$$
+Detta villkor är som känt tillräckligt ($X$ måste vara ändligt såklart) för att vi ska kunna säga att mängden $\hat{G}$ av permutationer $\hat{g}$ är en grupp permutationer av mängden $X$.
+
+Vi kan notera att vi inte har ställt villkor på vilka typer av permutationer elementen $g\in G$ ska ge upphov till. Alltså kan två skilda element $g_i,g_j$ ge samma $\hat{g}\in\hat{G}$ och vi har ingen isomorfi mellan $G$ och $\hat{G}$.
+
+Om det däremot skulle vara så, d v s att
+$$
+\hat{g}_1=\hat{g}_2 \  \Leftrightarrow \ g_1=g_2 \,
+$$
+så säges permutationsrepresentationen vara \textbf{trogen}; annars är den \textbf{otrogen}. I det trogna fallet så är funktionen $f:g\rightarrow \hat{g}$ en bijektion, och med kompositionsregeln är vi garanterade en isomorfism från $G\rightarrow\hat{G}$.
+\\ \\
+\textbf{Exempel 14.5.1:} Låt $G$ vara en grupp symmetriska transformationer av en kvadrat. Visa att representationen där varje symmetri representeras av den motsvarande permutationen av hörnorna av kvadraten är trogen.
+\\ \\
+\textbf{Lösning}
+\\
+Döp hörnorna till $1,2,3,4$ i cyklisk ordning och kalla elementen av $G$ för $\{i\}$ (den triviala symmetrin då ingenting görs), $\{\rho_1\},\{\rho_2\},\{\rho_3\}$ (rotation kring centrum med $90^{\circ},180^{\circ},270^{\circ}$), $\{\mu_1\},\{\mu_2\},$ (reflektion i diagonalerna) samt $\{\mu_3\},\{\mu_4\}$ (reflektion i lodrät och vågrät centrumlinje). Håller vi koll på hörnen då vi utför transformationerna så får vi de motsvarande permutationerna:
+$$
+\widehat{i}=\textrm{id}, \ \widehat{\rho_1}=(1234), \ \widehat{\rho_2}=(13)(24), \ \widehat{\rho_3}=(1432),
+$$
+$$
+\widehat{\mu_1}=(1)(24)(3), \ \widehat{\mu_2}=(13)(2)(4), \ \widehat{\mu_3}=(12)(34), \  \widehat{\mu_4}=(14)(23).
+$$
+Eftersom alla permutationer är olika så har vi en trogen representation.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Tekniken att representera grupper i form av permutationer är användbar eftersom det är enklare att räkna med permutationer än med abstrakta gruppelement. Tekniken är såklart bäst då representationen är trogen. Följande sats säger att varje ändlig grupp har en trogen representation.
+\\ \\
+\textbf{Sats 14.5.1:} Låt $G$ vara en ändlig grupp och låt $X$ vara mängden element av $G$ (med andra ord är $X$ samma mängd som $G$ men utan gruppegenskaper). Definiera nu för varje $g\in G$ en permutation $\hat{g}$ av $X$ som följer regeln
+$$
+\hat{g}(h)=gh \ , \quad h\in X \ ,
+$$
+där $gh$ är sammansättningen av $g$ och $h$ i $G$. Denna regel definierar en trogen representation av $G$ i form av permutationer av $X$.
+\\ \\
+\textbf{Bevis}
+\\
+Givet $g_1,g_2\in G$ och något $h\in X$ så är 
+$$
+\widehat{g_1g_2}(h)=(g_1g_2)h=g_1(g_2h)=\hat{g}_1(\hat{g}_2(h)),
+$$
+vilket innebär att $\widehat{g_1g_2}=\hat{g}_1\hat{g}_2$ och vi har en representation. Vidare så
+$$
+\hat{g}_1=\hat{g}_2 \ \Leftrightarrow \ g_1(h)=g_2(h) \ , \quad h\in X
+$$
+$$
+\Leftrightarrow \ g_1h=g_2h \ \Leftrightarrow \ g_1=g_2 \ .
+$$
+Detta visar alltså att representationen är trogen.
+\begin{flushright}
+$\Box$
+\end{flushright}
+Det följer från satsen att varje ändlig grupp är isomorf med en grupp av permutationer. 
+
+\subsection{Applikationer till gruppteori}
+I denna sektion ska vi komma fram till några viktiga resultat i gruppteori genom att studera en \textit{otrogen} representation av en ändlig grupp i form av permutationer av sig själv.
+
+Vi börjar med att visa hur relationen mellan storleken av en bana och den korresponderande stabilisatorn (Sats 14.3.1) även håller då $G$ har en otrogen representation av $X$.
+\\ \\
+Givet någon representation av $G$ i permutationer (trogen eller inte), så kan vi definiera banan $Gx$ som
+$$
+Gx=\{y\in X \ | \ y=\hat{g}(x) \ \textrm{för något} \ g\in G \} \ .
+$$
+Det är tydligt att detta är samma som banan $\hat{G}x$. Däremot, för stabilisatorn
+$$
+G_x=\{g\in G \ | \ \hat{g}(x)=x \} \ ,
+$$
+gäller det inte generellt att denna är samma sak som $\hat{G}_x$ då fler element $g$ kan ge upphov till samma permutation $\hat{g}$. Däremot gäller det dock på samma sätt som i Sats 14.3.1 att vi även här erhåller relationen 
+$$
+|Gx|\cdot|G_x|=|G| \ .
+$$
+\\ \\
+Låt $A$ vara en ändlig grupp och definiera för varje element $a\in A$ en permutation $\hat{a}$ enligt regeln
+$$
+\hat{a}(x)=axa^{-1} \quad x\in A \ .
+$$
+Elementet $axa^{-1}$ är känt som \textbf{konjugatet} på $x$ av $a$. Avbildningen $a\rightarrow\hat{a}$ uppfyller slutenhet:
+$$
+\widehat{a_1a_2}(x)=(a_1a_2)x(a_1a_2)^{-1}=a_1(a_2xa_2^{-1})a_1=\hat{a}_1\hat{a}_2(x) \ .
+$$
+Vi har alltså en representation av $A$ i permutationer av sig själv. Denna representation är inte nödvändigtvis trogen, om $a$ komuterar med $x$ så blir nämligen $\hat{a}(x)=axa^{-1}=xaa^{-1}=x$.
+\\ \\
+Vi såg i Exempel 12.7.1 att delmängden $Z(G)$ bestående av element i $G$ som kommuterar med alla element i $G$ är en undergrupp som kallas för centrum av $G$. Från definitionen av $A$ ovan följer det att om $a\in Z(A)$ så $\hat{a}=$ id, så när centrum innehåller element andra än id så är representationen otrogen. Speciellt, om $A$ är en kommuterande grupp, så $A=Z(A)$ och vi har den triviala representationen $\hat{a}=$ id för alla $a\in A$.
+
+I det allmänna fallet så är stabilisatorn av $x$, i denna representation, undergruppen bestående av de element $a$ sådana att $\hat{a}(x)=x$, d v s $axa^{-1}=x$, eller ekvivalent $ax=xa$. Med andra ord är stabilisatorn den undergruppen av element som kommuterar med $x$. Denna grupp kallas för $"$the \textbf{centralizer}$"$. Banan av $x$ är alla mängden av alla konjugat av $x$, så vi får m h a Sats 14.3.1
+$$
+|C(x)|\cdot(\textrm{antal konjugat av} \ x)=|A| \ .
+$$
+Detta innebär speciellt att storleken av en klass av konjugat är en delare till $|A|$. Då $A$ är den symmetriska gruppen $S_n$ kan vi påminna oss om att två permutationer är konjugat omm de har samma typ (typer av permutationer togs upp i sektion 9.5). Så klassen konjugat av $x$ består av permutationerna som har samma typ som $x$. Om $x$ har $\alpha_i$ cykler av längd $i$ så är det totala antalet permutationer av denna typ
+$$
+\frac{n!}{1^{\alpha_1}2^{\alpha_2}...n^{\alpha_n}\alpha_1!\alpha_2!...\alpha_n!} \ .
+$$
+Då $|S_n|=n!$ är det enkelt att inse att antalet permutationer i $S_n$ som kommuterar med $x$ är 
+$$
+|C(x)|=1^{\alpha_1}2^{\alpha_2}...n^{\alpha_n}\alpha_1!\alpha_2!...\alpha_n!
+$$
+stycken.
+\newpage
+
+\section{RSA-kryptering}
+Med ett \textbf{kryptosystem}
+$$
+\mathcal{M}\xtofrom[\text{D}]{\text{E}}\mathcal{C}
+$$
+avses två ändliga mängder $\mathcal{M}$ (de möjliga meddelandena, klartexterna) och $\mathcal{C}$ (motsvarande möjliga chiffertexter). Samt avses två funktioner: $E:\mathcal{M}\rightarrow\mathcal{C}$ för kryptering och $D:\mathcal{C}\rightarrow{M}$ för avkryptering, sådana att
+$$
+D(E(m))=m \ \forall m\in\mathcal{M}.
+$$
+Vi antar att $\mathcal{M}=\mathcal{C}=\mathbb{Z}_n=\{0,1,2,...,n\}$ för något stort $n\in\mathbb{N}$. Om meddelandena som ska krypteras har någon annan form, såsom vanlig text, så kan de omvandlas till stora tal exempelvis m h a ASCII (långa meddelanden kan brytas upp i mindre bitar).
+\\ \\
+I ett klassiskt kryptosystem såsom substitutionschiffer innebär kunskap om $E$ att man känner $D$ ($"$byt varje a till b$"$ o s v är lätt att göra baklänges). I detta fall måste båda hållas hemliga.
+\\ \\
+1976 föreslogs en annan typ av kryptosystem, nu kända som \textbf{kryptosystem med offentlig nyckel}, av W. Diffie och M. Hellman. I ett sådant system har varje användare, $A$, sin egen krypteringsfunktion $E_A$ och sin egen avkrypteringsfunktion $D_A$. Dessa är så pass komplicerade att även om man känner $E_A$ så är det mycket svårt att finna $D_A$. Alla $E_A$:n kan offentliggöras och alla $D_A$:n hålles hemliga. Nu kan vem som helst producera en chiffertext till $A$, men bara någon som har tillgång till $D_A$ (endast $A$ själv) kan läsa den.
+
+Ett av de första sådana systemen är RSA-systemet (uppkallat efter Ron Rivest, Adi Shamir och Leonard Aldeman). Detta bygger på primtal och dess matematik och tas därför upp i denna kurs.
+
+\subsection{RSA-systemet}
+
+\textbf{Inledande}
+\\ \\
+\textit{Eulers funktion} för ett tal $n$ betecknas $\phi(n)$ och definierar antalet tal $k<n$ sådana att $k$ är relativt primt med $n$. Exempelvis är $\phi(8)=4$ eftersom $1,3,5,7$ är relativt prima med $n$.
+
+
+
+
+
+
+\end{document}

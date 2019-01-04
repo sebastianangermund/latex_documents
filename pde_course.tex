@@ -1,0 +1,1350 @@
+\documentclass{article} 
+
+\usepackage[utf8]{inputenc}            % Teckenkodning
+\usepackage[T1]{fontenc}               % Fixa kopiering av texten
+\usepackage[swedish]{babel} 
+\usepackage{graphicx,epstopdf,float}   % Bilder
+\usepackage{amsmath,amssymb,amsfonts}  % Matematik
+\usepackage{enumerate}                 % Fler typer av listor
+\usepackage{fancyhdr}                  % Sidhuvud/sidfot
+\usepackage{geometry}                  % Sidlayout m.m.
+\usepackage{hyperref}                  % HyperlÃ€nkar
+\usepackage{ amssymb }
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{sidecap}
+%\pagestyle{fancy}
+%\lhead{Sebastian Angermund}
+%\rhead{1989 10 29 - 0132}
+\pagenumbering{roman} % Start roman numbering
+
+\begin{document}
+
+\tableofcontents
+\newpage
+
+\section{Inledande}
+\subsection{Fourierserier}
+Låt ett intervall $I$ ha längd $T$ och sätt $\Omega=2\pi/T$. Låt vidare funktionen $u\in L_2(I)$ ha perioden $T$, d v s
+\begin{equation}
+    u(x)=u(x+T) \quad \forall x\in\mathbb{R}.
+\end{equation}
+Det gäller nu att $u$ kan uttryckas i en fourierserie enligt:
+\begin{equation}\label{eq:ek2}
+    u(x)=\sum_{n\in\mathbb{Z}}c_ne^{in\Omega x}, \quad c_n=\frac{1}{T}\int_Iu(x)e^{-in\Omega x}dx.
+\end{equation}
+Detta blir en reell serie med trigonometriska uttryck:
+\begin{equation}
+    \begin{cases}
+       u(x)=\frac{a_0}{2}+\sum_{n\in\mathbb{Z}_+}(a_n\cos(n\Omega x)+b_n\sin(n\Omega x)),\\
+       a_n=\frac{2}{T}\int_Iu(x)\cos(n\Omega x)dx, \ b_n=\frac{2}{T}\int_Iu(x)\sin(n\Omega x)dx.
+    \end{cases}
+\end{equation}
+Om funktionen $u$ är jämn eller udda över intervallet $I=(-a,a)$ så fås specialfallen:
+\begin{equation}
+    \begin{cases}
+        u \ $jämn$ \ \implies b_n=0, \ a_n=\frac{4}{T}\int_0^au(x)cos(n\Omega x)dx,\\
+        u \ $udda$ \ \implies a_n=0, \ b_n=\frac{4}{T}\int_0^au(x)sin(n\Omega x)dx,
+    \end{cases}
+\end{equation}
+\subsection{Transformer}
+\subsubsection*{Fouriertransformer}
+
+\[
+ \mathcal F f(\omega) = \hat f(\omega) = \int_{-\infty}^\infty e^{-i\omega t} f(t)\, dt
+\]
+\[
+(\mathcal F^{-1}\hat f) (t) = f(t) = \frac 1{2\pi} \int_{-\infty}^\infty e^{i\omega t} \hat f(\omega)\, d\omega
+\]
+\[
+\mbox{Parsevals formel:}\ \int_{-\infty}^\infty \overline{f(t)} g(t)\, dt = \frac{1}{2\pi} \int_{-\infty}^\infty \overline{\hat f(\omega)} \hat g(\omega)\, d\omega
+\]
+\newpage
+\begin{center}
+{\Large $\stackrel{\mathcal F}{\longmapsto}$}\\
+\begin{tabular}{l|l}
+\hline
+$\lambda f(t) + \mu g(t)$ & $\lambda \hat f(\omega) + \mu \hat g(\omega)$ \\
+$f(at)$ & $\frac 1{|a|} \hat f\left(\frac\omega a\right)$ \\
+$f(t-t_0)$ & $e^{-it_0\omega} \hat f(\omega)$ \\
+$e^{i\omega_0 t} f(t)$ & $\hat f (\omega - \omega_0)$ \\
+$f'(t)$ & $i\omega \hat f(\omega)$ \\
+$t\, f(t)$ & $i \frac{d}{d\omega}\hat f(\omega)$ \\
+$f*g(t)$ & $\hat f(\omega) \hat g(\omega) $ \\
+\hline
+$\delta(t)$ & 1 \\
+1 & $2\pi \delta(\omega)$ \\
+$e^{-t} \theta(t)$ & $\frac{1}{1+i\omega}$ \\
+$e^{-|t|}$ & $\frac{2}{1+\omega^2}$ \\
+$\frac 1{1+t^2}$ & $\pi e^{-|\omega|}$ \\
+$e^{-t^2}$ & $\sqrt\pi e^{-\omega^2/4}$ \\
+$\theta(t+1) - \theta(t-1)$ & $2\frac{\sin\omega}\omega$ \\
+$\theta(t)$ & $\frac 1i \mathcal P \frac 1\omega + \pi \delta$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{Laplacetransformer}
+
+\[
+ \mathcal L f(s) = \mathcal L_{II} f(s) = \int_{-\infty}^\infty e^{-st} f(t)\, dt, \qquad \alpha < {\rm Re}\, s < \beta,\, s = \sigma + i\omega
+\]
+\[
+ f(t) \frac{1}{2\pi i} \int_{\sigma- i\infty}^{\sigma + i\infty} e^{st} F(s)\, ds, \qquad \alpha < \sigma < \beta
+\]
+\[
+ \mathcal F f(\omega) = \mathcal L_{II} f(i\omega), \qquad \mathcal L_I f = \mathcal L_{II}(\theta f)
+\]
+\newpage
+\begin{center}
+{\Large $\stackrel{\mathcal L_{II}}{\longmapsto}$}\\
+\begin{tabular}{l|l}
+\hline
+$\lambda f(t) + \mu g(t)$ & $\lambda F(s) + \mu G(s)$ \\
+$f(at)$ & $\frac 1{|a|} F \left(\frac s a\right)$ \\
+$f(t-t_0)$ & $e^{-t_0 s} F(s)$ \\
+$e^{a t} f(t)$ & $F (s - a)$ \\
+$f'(t)$ & $s F(s)$ \\
+$t\, f(t)$ & $- \frac{d}{ds} F(s)$ \\
+$f*g(t)$ & $F(s) G(s) $ \\
+\hline
+$\delta(t)$ & 1 \\
+1 & $2\pi \delta(\omega)$ \\
+$\theta(t)$ & $\frac 1s,\ \sigma > 0$ \\
+$\theta(t) - 1$ & $\frac 1s,\ \sigma < 0$ \\
+$t^k e^{at} \theta(t)$ & $\frac{k!}{(s-a)^{k+1}},\ \sigma > {\rm Re} a$ \\
+$\sin(bt)\theta(t)$ & $\frac{b}{s^2 + b^2},\ \sigma > 0$ \\
+$\cos(bt)\theta(t)$ & $\frac{s}{s^2+b^2},\ \sigma > 0$ \\
+$e^{-t^2}$ & $\sqrt\pi e^{s^2/4}$ \\
+$t^{\alpha-1} \theta(t)$ & $\frac{\Gamma(\alpha)}{s^\alpha},\ {\rm Re}\, \alpha >0,\ {\rm Re} s > 0$ \\
+$\frac{|a|}{\sqrt{4\pi}} \frac{e^{-a^2/4t}}{t^{3/2}} \theta(t)$ & $e^{-|a|\sqrt s}$ \\
+$\frac{1}{\sqrt{\pi t}} e^{-a^2/4t} \theta(t)$ & $\frac{e^{-|a|\sqrt s}}{\sqrt s}$ \\
+\hline
+\end{tabular}
+\end{center}
+\subsection{Gammafunktionen}
+Definitionen av gammafunktionen $\Gamma(z)$ för $Re \ z>0$ är som följer
+$$
+\Gamma(z)=\int_0^{\infty}t^{z-1}e^{-t}dt.
+$$
+Med partialbråksuppdelning får man följadne relation
+$$
+\Gamma(z+1)=\int_0^{\infty}t^{z}e^{-t}dt=[-e^{-t}t^z]_0^{\infty}+\int_0^{\infty}zt^{z-1}e^{-t}dt=z\Gamma(z).
+$$
+Eftersom att $\Gamma(1)=1$ så är gammafunktionen en generalisering av fakultetfunktionen
+$$
+\Gamma(n+1)=n\Gamma(n)=...=n(n-1)\hdots 1=n!
+$$
+Vidare så kan det visas att gammafunktionen är definierad för hela $\mathbb{C}\setminus\{0,-1,-2,...\}$.
+\subsection{Övrigt}
+\textbf{\textsc{Definition 1:}} Definiera den inre produkten i ett funktionsrum $L_2(w,I)$ för två funktioner $u,v$ som
+\begin{equation}
+    (u|v)=\int_{I}\overline{u(x)}v(x)w(x)dx
+\end{equation}
+där $w(x)$ är någon viktfunktion som typiskt uppfyller normalisering.\\ \\
+\textbf{\textsc{Definition 2:}} Med mängden $L_2(w,I)$ menas alla funktioner $u$ definierade på $I$ sådana att 
+\begin{equation}
+    ||u||=\int_{I}\Big(|f(x)|^2w(x)dx\Big)^{1/2}<\infty.
+\end{equation}\\ \\
+\textbf{\textsc{Definition 3:}} Låt $I$ vara ett intervall av längd $T$ på $\mathbb{R}$. Då gäller
+\begin{enumerate}[label=(\roman*)]
+\item $\{e^{ik\Omega x}\}_{-\infty}^{\infty}$ är en ortogonal bas i $L_2(I)$, där $\Omega= 2\pi/T$.\\
+\item Låt $\{p_k\}_0^{\infty}$ vara parvis ortogonala polynom i $L_2(w,I)$ så att grad($p_k$)$=k, \ k=0,1,...$ Då är $\{p_k\}_0^{\infty}$ en ortogonal bas i $L_2(w,I)$.
+\end{enumerate}
+\vspace{0.5 cm}
+\textbf{\textsc{Definition 4:}} $\mathcal{A}$ säges vara en symmetrisk operator på $L_2(w,I)$ om
+\begin{equation}
+    (u|\mathcal{A}v)=(\mathcal{A}u|v)=\overline{(u|\mathcal{A}v)}, \  \forall u,v \in D_{\mathcal{A}}.
+\end{equation}
+D v s: $(u|\mathcal{A}u)=\overline{(u|\mathcal{A}u)}\in\mathbb{R}$. Om dessutom $(u|\mathcal{A}u)\geq 0 \ \forall u\in D_{\mathcal{A}}$ säges $\mathcal{A}$ vara en positivt semidefinit operator. ($> \implies$ definit).\\ \\
+\textbf{\textsc{Sats 1:}} Låt $\mathcal{A}$ vara en symmetrisk och positivt semidefinit operator på $L_2(w,I)$ så gäller det att: 
+\begin{enumerate}[label=(\roman*)]
+\item Alla $\mathcal{A}$:s egenvärden är reella.\\
+\item Om $\lambda_1,\lambda_2$ är olika egenvärden så är motsvarande egenfunktioner ortogonala.\\
+\item $\lambda \geq 0 \ \forall$ egenvärden till $\mathcal{A}$. 
+\end{enumerate}
+En Sturm-Liouvilleoperator (SL för kort) som presenteras strax uppfyller dessa villkor.
+\newpage
+\section{Sturm-Liouville i en dimension}
+\textbf{\textsc{Definition 5:}} Låt $I=[x_0,x_1]\subset\mathbb{R}$. Operatorn $\mathcal{A}$ kallas för en SL-operator om
+\begin{equation}
+    \mathcal{A}u=\frac{1}{w(x)}\Big[-\frac{d}{dx}\Big(p(x)\frac{d}{dx}\Big)+q(x)\Big]u\equiv \frac{1}{w}\Big(-(pu')'+qu\Big),
+\end{equation}
+där definitionsmängden för $\mathcal{A}$ är
+\begin{equation}
+    D_{\mathcal{A}}=\{u\in \mathcal{C}^2(I)|\alpha_ku(x_k)+\beta_k(-1)^ku'(x_k)=0, \ k=0,1\}
+\end{equation}
+där $\alpha_k,\beta_k\geq 0,$ ej båda $=0$.\\ \\ 
+
+Vidare, om $\alpha\neq 0, \ \beta=0$ så kallas randvillkoren för Dirishletvillkor. Om istället $\alpha=0, \ \beta\neq0$ så kallas dem Neumannvillkor. (Blandat för Robinvillkor). Observera att $w(x)$ är viktfunktionen i $L_2$.\\ \\
+Det gäller att:
+\begin{enumerate}[label=(\roman*)]
+\item SL-operatorn är symmetrisk och positivt semidefinit på $L_2(w,I)$.\\
+\item SL-operatorn har reella egenvärden $0\leq\lambda_1\leq\lambda_2\leq...$ med motsvarande egenfunktioner $\{\varphi_k\}_{k=1}^{\infty}$ som utgör en ortogonal bas i $L_2(w,I)$.\\
+\item För varje $u\in L_2(w,I)$ gäller, med konvergens i $L_2(w,I)$-norm, att
+\begin{equation}
+    u=\sum_{k=1}^{\infty}u_k\varphi_k, \quad u_k=\frac{(\varphi_k|u)}{||\varphi_k||^2}.
+\end{equation}
+\item Om $u\in D_{\mathcal{A}}$ så $\mathcal{A}u=\sum_{k=1}^{\infty}\lambda_ku_k\varphi_k$.
+\end{enumerate}
+\vspace{0.5 cm}
+\textsc{\textbf{Vanliga SL-operatorer:}}\\ \\
+\textbf{Bessels:}
+\begin{equation}
+    \mathcal{A}u=-u''-\frac{1}{r}u', \quad I=(0,a], \quad D_{\mathcal{A}}=\{u\in\mathcal{C}^2(I)\big| \ |u|<\infty \  vid \ 0, \ \alpha u(a)+\beta u'(a)=0\}
+\end{equation}
+\textbf{Sfärisk:}
+\begin{equation}
+    \mathcal{A}u=-u''-\frac{2}{r}u', \quad I=(0,a], \quad D_{\mathcal{A}}=\{u\in\mathcal{C}^2(I)\big| \ |u|<\infty \  vid \ 0, \ \alpha u(a)+\beta u'(a)=0\}
+\end{equation}
+\textbf{Legendres:}
+\begin{equation}
+    \mathcal{A}u=-(1-x^2)u''+2xu', \quad I=(-1,1), \quad D_{\mathcal{A}}=\{u\in\mathcal{C}^2(I)\big| \ |u|<\infty \in I \}
+\end{equation}
+\textbf{Hermites:}
+\begin{equation}
+    \mathcal{A}u=-e^{x^2}(e^{-x^2}u')'=-u''+2xu', \quad I=\mathbb{R}, \quad D_{\mathcal{A}}=\{u\in\mathcal{C}^2(I)\big| \ e^{-x^2}u\rightarrow0, \ x\rightarrow \pm \infty \}
+\end{equation}\\ \\
+\textbf{\textsc{Periodisk SL-operator}}\\
+Det finns SL-operatorer där randvillkoren ej är uppfyllda men där funktionen istället är periodisk. Detta visas med ett exempel.\\ \\
+\textbf{Exempel 1:}\\
+Låt $\mathcal{A}=-\partial_x^2$ och $D_{\mathcal{A}}=\{u\in\mathcal{C}^2(I)| \ u(-\pi)=u(\pi), \ u'(-\pi)=u'(\pi)\}.$\\ \\
+Nu är $\mathcal{A}$ en periodisk SL-operator. Vi söker egenvärden och egenfunktioner till $\mathcal{A}$ genom att lösa:
+$$
+-\partial_x^2u=\lambda u
+$$
+Det blir två fall för egenvärden (observera att en sturm liouvilleoperator inte har negativa egenvärden):\\ \\
+$\lambda=0$:
+\begin{equation}
+    u=Ax+B \implies A\pi+B=-A\pi+B \implies A=0.
+\end{equation}
+
+D v s, egenvärdet $\lambda_0=0$ är ett egenfunvärde med konstant egenfunktion $\varphi_0=1$. (ok att sätta till 1 direkt).\\ \\
+$\lambda>0$:\\
+Den kända diffekvationen $\partial_x^2u+\lambda u=0$ har allmänna lösningar
+$$
+u=A\cos(\sqrt{\lambda}x)+B\sin(\sqrt{\lambda}x),
+$$
+som med de periodiska villkoren leder till
+$$
+A\cos(\sqrt{\lambda}\pi)+B\sin(\sqrt{\lambda}\pi)=
+A\cos(\sqrt{\lambda}\pi)-B\sin(\sqrt{\lambda}\pi)
+$$
+och
+$$
+-\sqrt{\lambda}A\sin(\sqrt{\lambda}\pi)+\sqrt{\lambda}B\cos(\sqrt{\lambda}\pi)=
+\sqrt{\lambda}A\sin(\sqrt{\lambda}\pi)+\sqrt{\lambda}B\cos(\sqrt{\lambda}\pi).
+$$
+För $A,B\neq 0$ ger detta att $\sin(\sqrt{\lambda}\pi)=0 \ \forall \lambda$. Detta är sant för $\sqrt{\lambda}=n\in\mathbb{N}$. Alla egenvärden blir alltså $\lambda_n=n^2$. Detta sammanfattas: \\ \\
+Egenvärdet $\lambda_0=0$ har egenfunktion $\varphi_0=1$.\\
+Egenvärdena $\lambda_n, \ n>0,$ har egenfunktioner $\cos(nx)$ och $\sin(nx)$. \\ \\
+Funktionen $u$ kan uttryckas m h a Egenfunktionsutvecklingen med koefficienter $a_n,b_n$ enligt ovan:
+$$
+u(x)=1+\sum_{n=1}^{\infty}\big(a_n\cos(nx)+b_n\sin(nx)\big)
+$$
+\section{Sturm-Liouville i 2-3 dimensioner}
+Låt $\Omega$ vara något begränsat och sammanhängande område med styckvis glatt rand. Då är $\mathcal{A}$ en SL-operator om 
+$$
+\mathcal{A}u=\frac{1}{w(x)}\Big(-\overline{\nabla}\cdot\big(p\overline{\nabla} u\big)+qu\Big), \ D_{\mathcal{A}}=\{u\in\mathcal{C}^2(\Omega)| \ \alpha u + \beta \frac{\partial u}{\partial \overline{n}}=0, \ on \ \partial\Omega\}. 
+$$
+\textbf{\textsc{Sats 2:}} Antag att $\Omega$ är en rektangel och $\mathcal{A}=\mathcal{B}_x+\mathcal{C}_y$, där $\mathcal{B}_x+\mathcal{C}_y$ är SL-operatorer. Om nu 
+\begin{enumerate}[label=(\roman*)]
+\item $\mathcal{B}_x$ har egenvärden $\mu_i$ och egenfunktioner $X_i$ som är ortogonala i $L_2(w_x)$,\\
+\item $\mathcal{C}_x$ har egenvärden $\nu_j$ och egenfunktioner $Y_j$ som är ortogonala i $L_2(w_y)$,
+\end{enumerate}
+så har $\mathcal{A}$ egenvärden $\lambda_{ij}=\mu_i+\nu_j$ och egenfunktioner $X_iY_j$. Egenfunktionerna utgör en bas i $L_2(w,\Omega)$, där $w=w_xw_y$. Motsvarande gäller i 3D!
+\section{Bessel}
+Relationen
+\begin{equation}
+    \nabla^2u+\lambda u=0
+\end{equation} 
+kallas för Helmoltz ekvation och är vanlig att behöva lösa i polära eller sfäriska koordinater. Det kan lätt bekräftas att om $\lambda=1$ så är $e^{iy}$ är en lösning till (16) i kartesiska koordinater. I polära koordinater $r,\theta$ blir $x=r\cos(\theta), \ y=r\sin(\theta)$ och
+$$
+\nabla^2=\partial_r^2+\frac{1}{r}\partial_r+\frac{1}{r^2}\partial_{\theta}^2
+$$
+Här måste nu $e^{ir\sin(\theta)}$ vara en lösning vilket kan verifieras. $e^{ir\sin(\theta)}$ är en $2\pi$-periodisk funktion och kan enligt relationen \eqref{eq:ek2} uttryckas som följande:
+\begin{equation}\label{eq:ek17}
+    e^{ir\sin(\theta)}=\sum_{n\in\mathbb{Z}}J_n(r)e^{in\theta}, \quad J_n(r)=\frac{1}{2\pi}\int_Ie^{-in\theta}e^{ir\sin(\theta)}d\theta
+\end{equation}
+där $J_n$ är konventionen för just detta problem. Det verifieras vidare lätt att
+\begin{equation}\label{eq:ek18}
+    J_{-n}(r)=(-1)^nJ_n(r).
+\end{equation}
+Sätter man in serieuttrycket av funktionen i (16) så fås, efter derivering och förenkling:
+$$
+\sum_{n\in\mathbb{Z}}\Big(J''_n(r)+\frac{1}{r}J'_n(r)+J_n(r)-\frac{n^2}{r^2}J_n(r)\Big)e^{in\theta}=0.
+$$
+Entydighet hos Fourierserier ger vidare att för alla $n$ så
+\begin{equation}\label{eq:ek19}
+    J''_n(r)+\frac{1}{r}J'_n(r)+\Big(1-\frac{n^2}{r^2}\Big)J_n(r)=0.
+\end{equation}
+Ekvation \eqref{eq:ek19} kallas för bessels differentialekvation av heltalsordning $n$ och har lösningar angivna i \eqref{eq:ek17}. Det är av intresse att förenkla integraluttrycket för $J_n(r)$. Med relationen $e^{z}=\sum_0^{\infty}z^n/n!$ kan $J_n(r)$ skrivas som (jmfr \eqref{eq:ek17}):
+$$
+J_n(r)=\frac{1}{2\pi}\int_{-\pi}^{\pi}e^{in\theta}\sum_{m=0}^{\infty}\frac{(ir\sin(\theta))^m}{m!}d\theta=\frac{1}{2\pi}\sum_{m=0}^{\infty}r^m\frac{1}{m!}\int_{-\pi}^{\pi}(ir\sin(\theta))^md\theta=\sum_{m=0}^{\infty}a_mr^m.
+$$
+En förenkling av $a_m$ leder till
+\begin{equation*}
+    a_m=
+    \begin{cases}
+        0, \ &m<n \ $eller$ \ m=n+$udda tal$,\\
+        \frac{1}{2^{n+2k}}\frac{(-1)^k}{k!(n+k)!}, \ &m=n+2k.
+    \end{cases}
+\end{equation*}
+Med detta fås till slut, efter en del förenklande, att
+\begin{equation}
+    J_n(r)=\Big(\frac{r}{2}\Big)^2\sum_{k=0}^{\infty}\frac{1}{k!(n+k)!}\Big(-\frac{r^2}{4}\Big)^k.
+\end{equation}
+Detta är potensserieutvecklingen av $J_n(r)$ kring $r=0$.\\ \\
+Det är underförstått från relationen \eqref{eq:ek17} att för $J_n(r)$ så är $n$ ett heltal. Det är dock av intresse att kunna lösa en diffekvation på formen \eqref{eq:ek19} då $n$ är ett godtyckligt reellt tal. Detta löses genom att ersätta fakultettermen $(n+k)!$ med dess generaliserade form, gammafunktionen $\Gamma(n+k+1)$. Enligt konvention låter man $n$ istället vara $\nu$ om det handlar om reella tal. Alltså:
+\begin{equation}
+    J_{\nu}(r)=\Big(\frac{r}{2}\Big)^2\sum_{k=0}^{\infty}\frac{1}{k!\Gamma(\nu+k+1)}\Big(-\frac{r^2}{4}\Big)^k.
+\end{equation}
+är en lösning till diffekvationen
+\begin{equation}\label{eq:ek22}
+    u''+\frac{1}{r}u'+\Big(1-\frac{\nu^2}{r^2}\Big)u=0.
+\end{equation}
+Det ska anmärkas att gammafunktionen har poler då $\nu$ är ett negativt heltal. Detta specialfall tas om hand av relationen \eqref{eq:ek18}.\\ \\
+Nu är alltså \textit{en} lösning till bessels D.E känd. Ekvationen är dock av andra ordning så två oberoende lösningar ska utgöra den allmänna lösningen. För $\nu\neq -1,-2,...$ så inses att 
+$$
+aJ_{\nu}(r)+bJ_{-\nu}(r)
+$$
+är en allmän lösning till \eqref{eq:ek22}. Däremot är dessa inte oberoende om $\nu$ är ett negativt heltal då \eqref{eq:ek18} innebär att lösningarna inte är oberoende. Detta löste Neumann med att introducera
+\begin{equation}\label{eq:ekY}
+    Y_{\nu}(r)=\frac{J_{\nu}(r)\cos(\pi\nu)-J_{-\nu}(r)}{\sin(\pi\nu)}.
+\end{equation}
+
+För att ytterligare generalisera Bessels D.E och kunna lösa egenvärdesproblem så behöver ettan i parentesen i ekvationen \eqref{eq:ek22} kunna ersättas mot egenvärdet $\lambda$. Detta löses genom att ersätta argumentet i $J_{\nu}(r)$ med $J_{\nu}(\sqrt{\lambda}r)$. Vad som bestämt hitintills kan sammanfattas:\\ \\
+\textbf{\textsc{Sats 3:}} Den allmänna lösningen till Bessels diffekvation
+\begin{equation}\label{eq:ek23}
+    \frac{1}{r}(ru')'+\Big(\lambda-\frac{\nu^2}{r^2}\Big)u=u''+\frac{1}{r}u'+\Big(\lambda-\frac{\nu^2}{r^2}\Big)u=0
+\end{equation}
+är
+\begin{equation}\label{eq:ek24}
+    \begin{cases}
+       aJ_{\nu}(\sqrt{\lambda}r)+bY_{\nu}(\sqrt{\lambda}r), \quad &\lambda>0,\\ 
+       ar^{\nu}+br^{-\nu}, &\lambda=0, \ \nu\neq 0,\\
+       a+b\ln(r), &\lambda=\nu=0.
+    \end{cases}
+\end{equation}\\ \\
+
+Här är de två senare lösningar alltså enklare fall av Bessels D.E.\\ \\
+I lösningar av egenvärdesproblem så behöver inte $J_{\nu}$ och $Y_{\nu}$ skrivas ut explicit. Dessa är kända funktioner som finns med i numeriska matematikprogramm. Det finns dock viktiga egenskaper med dessa funktioner:\\ \\
+\textbf{a)} $Y_{\nu}$ är inte begränsad nära $r=0$. Alltså sätts $b=0$ om detta villkor finns.\\ \\
+\textbf{b)} $J_{\nu}$ har oändligt många nollstälen $\alpha_{\nu k}, \ k=1,2,...$ Dessa är viktiga och kan refereras till utan att ange dem explicit.\\ \\
+\textbf{\textsc{Exempel 2:}}\\
+Låt $\Omega=\{(x,y)| \ x^2+y^2\leq1\}, \ \mathcal{A}=-\nabla^2$ och $D_{\mathcal{A}}=\{u\in\mathcal{C}^2(\Omega)| \ u=0 $ på $\partial\Omega\}$.
+
+Egenvärdesproblemet blir alltså Dirichlets problem på enhetsskivan. Detta löses förslagsvis i polära koordinater. Eftersom att $\mathcal{A}$ är en SL-operator (semidefinit) så måste egenvärdena $\geq 0$. Det innebär vidare att egenvärdesproblemet blir Helmholtz ekvation och 
+$$
+\nabla^2u+\lambda u=0 \rightarrow \partial_r^2u+\frac{1}{r}\partial_r^2u+\frac{1}{r^2}\partial_{\theta}^2u+\lambda u=0, \ \lambda\geq 0.
+$$
+Problemet är alltså i två koordinater $u(r,\theta)$, vilket i vanlig ordning variabelsepareras till $R(r)\Theta(\theta)$. Efter förenklig blir PDEn
+$$
+\frac{R''}{R}+\frac{1}{r}\frac{R'}{R}+\frac{1}{r^2}\frac{\Theta''}{\Theta}+\lambda=0.
+$$
+Thetaberoendet kan flyttas till HL så att leden är beroende av respektive variabel och därmed konstanta. D v s uttrycket kan skrivas om:
+$$
+r^2\frac{R''}{R}+r\frac{R'}{R}+r^2\lambda=-\frac{\Theta''}{\Theta}=\mu
+$$
+\textbf{Thetaberoendet} är känt och behandlas först. Ekvationen $\Theta''+\mu\Theta=0$ har villkoret $\Theta(\theta)=\Theta(\theta+2\pi)$, vilket behandlades i Exempel 1, alltså gäller:
+
+Egenvärdet $\mu=0$ har egenfunktion $\Theta_0=1$.
+
+Egenvärdena $\mu_n=n^2, \ n\in\mathbb{Z}_+$ har oberoende egenfunktioner $\Theta_n=\cos(n\theta)$ och $\sin(n\theta)$.\\ \\
+\textbf{Radialberoendet} får formen
+$$
+r^2\frac{R''}{R}+r\frac{R'}{R}+r^2\lambda=\mu\implies R''+\frac{1}{r}R'+\Big(\lambda-\frac{\mu}{r^2}\Big)=0.
+$$
+Från thetaberoendet vet vi att $\mu=n^2$ måste gälla. Vi har alltså Bessels D.E \eqref{eq:ek23} med heltal $\nu=n$. Från $D_{\mathcal{A}}$ är det vidare känt att $u$ är begränsad i hela enhetsskivan. Nu fås fallen angivna i \eqref{eq:ek24}:\\ \\
+\textbf{a)} För $\lambda=0$ är lösningen $R(r)=ar^{\nu}+br^{-\nu}$, men $b$-termen är inte begränsad i origo, och $a=0$ p g a att funktionen är noll på randen. Alltså är inte $\lambda=0$ något egenvärde.\\ \\
+\textbf{b)} $\lambda>0$ har lösning $R(r)=aJ_n(\sqrt{\lambda}r)+bY_n(\sqrt{\lambda}r)$, men $Y_n$ är inte begränsad i origo så $b=0$.\\ \\
+Fortsättningsvis ger villkoret $R(1)=0$ att $J_n(\sqrt{\lambda})=0$. Alltså fås egenvärdena $\lambda$ helt enkelt av nollställena till Besselfunktionen $\sqrt{\lambda}=\alpha_{nk}\implies \lambda_{nk}=\alpha_{nk}^2$. Sammanfattningsvis så har Laplaceoperatorn $-\nabla^2$ på enhetsskivan:\\ \\
+\textbf{Egenvärden} 
+
+$\lambda_{0k}=\alpha_{0k}^2$ med multiplicitet ett.
+
+$\lambda_{nk}=\alpha_{nk}^2$ med multiplicitet två.\\ \\
+\textbf{Egenfunktioner}
+
+$\varphi_{0k}=J_0(\alpha_{0k}r)$.
+
+$\varphi_{nk}=J_n(\alpha_{nk}r)\cos(n\theta)$ och $J_n(\alpha_{nk}r)\sin(n\theta)$.\\ \\
+(Observera att $J_n$ har negativa nollställen, men $\sqrt{\lambda}\geq0$ så  det är positiva nollställen som gäller $\implies k=1,2,...$.)
+
+\section{Sfärisk Bessel och Legendre}
+\textbf{På samma sätt som Bessels DE uppkom då man löser egenvärdesproblemet för laplaceoperatorn på enhetsskivan så kommer andra typer av DE uppstå då man löser egenvärdesproblemet på enhetsklotet. Först behöver alltså dessa DE presenteras, som är Sfäriska DE och Legendres DE. Sedan kan enhetsklotet angripas, som är ett viktigt verktyg i ex kvantmekanik.}
+\subsection{Sfärisk Bessel}
+Från \eqref{eq:ek22} och \eqref{eq:ekY} går det att härleda fram att om $\nu=\ell+1/2, \ \ell\in\mathbb{N}$ så gäller det att $J_{1/2+\ell},Y_{1/2+\ell}$ är enkla elementära funktioner. Exempelvis så:
+$$J_{1/2}(r)=\sqrt{\frac{2}{\pi r}}\sin(r), \quad J_{3/2}(r)=\sqrt{\frac{2}{\pi r}}\Big(\frac{\sin(r)}{r}-\cos(r)\Big).$$
+$$Y_{1/2}(r)=-\sqrt{\frac{2}{\pi r}}\cos(r), \quad Y_{3/2}(r)=-\sqrt{\frac{2}{\pi r}}\Big(\frac{\cos(r)}{r}+\sin(r)\Big).$$
+Dessa relationer är viktiga och kallas för Bessels sfäriska funktioner. Det blir naturligt att definiera
+$$
+j_{\ell}(r)=\sqrt{\frac{\pi }{2r}}J_{1/2+\ell}, \quad \ell\in\mathbb{Z}.
+$$
+$$
+y_{\ell}(r)=\sqrt{\frac{\pi }{2r}}Y_{1/2+\ell}, \quad \ell\in\mathbb{Z}.
+$$
+Man tar alltså bort konstanten och plockar ut $r$ ur roten. Ex blir $j_0(r)=\sin(r)/r$.\\ \\
+Sätter man in $\nu=\ell+1/2$ i Bessels DE \eqref{eq:ek23} och förenklar så får man efter förenklig
+\begin{equation}\label{eq:Besf}
+    \frac{1}{r^2}(r^2u')'+\Big(\lambda-\frac{\ell(\ell+1)}{r^2}\Big)u=u''+\frac{2}{r}u'+\Big(\lambda-\frac{\ell(\ell+1)}{r^2}\Big)u=0.
+\end{equation}
+\textit{Observera 2an på den högra formen och jämför Sfäriska operatorn i SL-operatorer ovan.}\\
+I enlighet med tidigare argument så är $j_{\ell}(\sqrt{\lambda}r)$ och $y_{\ell}(\sqrt{\lambda}r)$ lösningar till \eqref{eq:Besf} som är en $"$sfärisk DE$"$.\\ \\
+\textbf{Observera} om man löser DEn $f''+(2/r)f'+\lambda f=0$ så får man den allmänna lösningen $f(r)=a_nj_0(\sqrt{\lambda_n}r)+b_ny_0(\sqrt{\lambda_n}r)$. Detta kan skrivas om till
+\begin{equation}
+    f(r)=c_n\frac{\sin(\sqrt{\lambda}(r-r_0))}{r}
+\end{equation}
+Där $r_0$ är en konstant. Sedan kan egenvärden och $c_n$ bestämmas m h a RV.
+\subsection{Legendres DE}
+Som i Definition 3(ii) utgör de speciella Legendrepolynomen en ortogonal bas i $L_2(1,I)$ med $I=(-1,1)$. (Observera att intervallet $(-1,1)$ är just enhetsintervallet). Alla Legendrepolynom fås av 
+$$
+P_0(x)=1, \quad P_1(x)=x, \quad P_2(x)=\frac{1}{2}(3x^2-1), \quad P_{\ell+1}(x) = \frac{2\ell + 1}{\ell+1} x P_\ell(x) - \frac{\ell}{\ell+1} P_{\ell-1}(x).
+$$
+Dessa är alltså ortogonala (observera \textit{inte} ortonormala) m a p den inre produkten
+$$
+\int_{-1}^1P_m(x)P_n(x)dx=\frac{2}{2n+1}\delta_{mn}.
+$$
+Dessa är egenfunktioner till en viktig SL-operator, nämligen Legendres som beskrevs i SL-sektionen. Allmänt gäller:\\ \\
+\textbf{\textsc{Sats 4:}} Legendres Differentialoperator
+$$\mathcal{A}u=-\frac{d}{dx}((1-x^2)\frac{du}{dx}), \quad I=(-1,1),
+$$
+$$
+D_{\mathcal{A}}=\{u\in\mathcal{C}^2(I)| \ u<\pm\infty\in I\}
+$$
+har egenfunktioner $P_{\ell}(x)$ med motsvarande egenvärden $\ell(\ell+1), \quad \ell\in\mathbb{N}$.\\ \\
+
+Nu kommer en ganska viktig poäng. Precis som i Bessels fall så finns det en lösning som kompletterar $P_{\ell}$. (För Bessel var detta $Y_{\nu}$). I Legendres fall kallas denna $Q_{\ell}(x)$ och den allmänna lösningen till egenvärdesproblemet 
+\begin{equation}\label{eq:legdiff}
+    ((1-x^2)u')'+\ell(\ell+1)u=0 \Longleftrightarrow (1-x^2)u''-2xu'+\ell(\ell+1)u=0
+\end{equation}
+är $u(x)=aP_{\ell}(x)+bQ_{\ell}(x)$.\\ 
+
+\textbf{Men} $Q_{\ell}$ är inte begränsad. Alltså har funktionen ingen betydelse i begränsade områden. Vidare så är $P_{\ell}$ \textit{den enda} begränsade funktionen av detta slag, alltså är denna den enda av intresse.\\ \\
+Det ska tyvärr visa sig att diffekvationen \eqref{eq:legdiff} inte är generell nog. Den behöver generaliseras i syftet att lösa dirichlets homogena problem på enhetsklotet. Vad som händer är att hela situationen generaliseras till:\\ \\
+\textbf{Den associerade Legendreekvationen}
+\begin{equation}\label{eq:asleg}
+    ((1-x^2)u')'-\frac{m^2}{1-x^2}u+\ell(\ell+1)u=(1-x^2)u''-2xu'-\frac{m^2}{1-x^2}u+\ell(\ell+1)u=0
+\end{equation}
+\textbf{(där}
+\begin{equation}
+  \mathcal{A}_mu=-((1-x^2)u')'+\frac{m^2}{1-x^2}u=(1-x^2)u''-2xu'-\frac{m^2}{1-x^2}u, \quad m\in\mathbb{Z}_+,
+\end{equation}
+\textbf{är en singulär SL-operator) har den allmänna lösningen}
+\begin{equation}\label{eq:alasleg}
+  aP_{\ell}^m(x)+bQ_{\ell}^m(x),
+\end{equation}
+\textbf{där}
+\begin{equation}
+  P_{\ell}^m(x)=(1-x^2)^{m/2}D^mP_{\ell}(x), \quad m=0,1,2,...,\ell
+\end{equation}
+\textbf{är den enda begränsade egenfunktionen till operatorn} $\mathcal{A}_m$, \textbf{svarande mot egenvärdena $\ell(\ell+1)$}. \textbf{$Q_{\ell}^m$ används endast i obegränsade fall.}\\ \\
+\textbf{\textsc{Anmärkning}}\\
+I kvantmekanik används associerade Legendrepolynom då $m$ kan vara ett negativt heltal. I detta fall definireras 
+$$
+P_{\ell}^{-m}(x)=(-1)^m\frac{(\ell-m)!}{(\ell+m)!}P_{\ell}^m, \quad m=1,2,...
+$$
+Där $\ell,m$ är s.k kvanttal.
+\newpage
+\subsection{Egenvärdesproblem}
+Nu är vi redo att tackla egenvärdesproblem i sfäriska koordinater. Dessa kommer som vanligt att ha formen av Helmholtz ekvation, vilken i sfäriska koordinater tar formen
+$$
+\nabla^2u+\lambda u=0\longrightarrow
+$$
+\begin{equation}\label{eq:helmsf}
+    \Big(\frac{1}{r}\partial_r^2r+\frac{1}{r^2}\Lambda\Big)u+\lambda u= \Big(\frac{1}{r^2}\partial_rr^2\partial_r+\frac{1}{r^2}\Lambda\Big)u+\lambda u=\Big(\partial_r^2+\frac{2}{r}\partial_r+\frac{1}{r^2}\Lambda\Big)u+\lambda u=0,
+\end{equation}
+$$
+\Lambda=\frac{1}{\sin(\theta)}\partial_{\theta}\sin(\theta)\partial_{\theta}+\frac{1}{\sin^2(\theta)}\partial_{\phi}^2,
+$$
+$$
+\Lambda=\partial_s(1-s^2)\partial_s+\frac{1}{1-s^2}\partial_{\phi}^2, \quad om \ s=\cos(\theta).
+$$
+Här är $\theta\in[0,\pi], \ \phi\in[0,2\pi)$ och $r\in(0,\infty)$.\\ \\
+\textbf{\textsc{Exempel 3:}}\\
+Här ska egenvärdesproblemet för den radiella sfäriska operatorn bestämmas. Denna skrivs ut, konventionellt i SL-stil, som
+$$
+\mathcal{A}u=-\frac{1}{r^2}(r^2u')',
+$$
+$$
+D_{\mathcal{A}}=\{u\in\mathcal{C}^2((0,1])| \  u \  beg \  vid \ 0, \ u(1)=0\}. 
+$$
+Operatorn har alltså utséendet av den andra formen av \eqref{eq:helmsf}, d v s den radiella delen. Vidare är det en singulär SL-operator med viktfunktion $r^2$.\\ \\
+Väljer man istället att skriva ut Helmholtz ekv som den första formen av \eqref{eq:helmsf} så fås
+$$
+\frac{1}{r}\partial_r^2ru+\lambda u=0 \implies \frac{1}{r}(ru)''+\lambda u=0 \implies (ru)''+\lambda(ru)=0.
+$$
+Här ska man alltså studera fallen $\lambda=0, \ \lambda>0$, (semidefinit $\implies \lambda\geq 0$). Det inses med randvillkor att $\lambda=0$ inte är ett egenvärde. Fallet då $\lambda>0$ är känd och har lösning:
+$$
+ru(r)=a\sin(\sqrt{\lambda}r)+b\cos(\sqrt{\lambda}r) \implies u(r)=a\frac{\sin(\sqrt{\lambda}r)}{r}+b\frac{\cos(\sqrt{\lambda}r)}{r}.
+$$
+Villkoret att $u$ begränsad vid $0\implies b=0$. Villkoret $u(1)=0\implies$ om $a\neq0$ så $\sqrt{\lambda}=n\pi, \ n\in\mathbb{N}$. Detta är allt och lösningen sammanfttas som\\
+Operatorn $\mathcal{A}$ har:
+
+\textbf{Egenvärden} $\lambda_n=n^2\pi^2, \ n\in\mathbb{Z}_+$,
+
+Med tillhörande \textbf{egenfunktioner} $\varphi_n(r)=\sin(n\pi r)/r$,
+
+vilka utgör en bas i $L_2(r^2,(0,1])$ m a p inre produkten
+$$
+\int_0^1\overline{u(r)}v(r)r^2dr.
+$$
+\newpage
+\noindent
+Med Exempel 3 i ryggen kan Dirichlets homogena egenvärdesproblen på enhetsklotet angripas.\\ \\
+\textbf{\textsc{Exempel 4:}}\\
+Låt $\Omega$ vara enhetsklotet i $\mathbb{R}^3$ och 
+$$
+\mathcal{A}=-\nabla^2,
+$$
+$$
+D_{\mathcal{A}}=\{u\in\mathcal{C}^2{\Omega}| \ u=0\in\partial\Omega\}.
+$$
+Inför sfäriska koordinater
+\begin{equation*}
+    \begin{cases}
+       x=r\sin(\theta)\cos(\phi)\\
+       y=r\sin(\theta)\sin(\phi),\\
+       z=r\cos(\theta).
+    \end{cases}
+\end{equation*}
+Gör sedan substitutionen $s=\cos(\theta)\implies z=rs$ så att den andra $\Lambda$-formen av \eqref{eq:helmsf} kan användas.\\ \\
+Gör nu variabelseparationen
+$$
+u(r,s,\phi)=R(r)F(s,\phi).
+$$
+Väljs den andra formen av $\nabla^2$ i relationen \eqref{eq:helmsf} så blir ekvationen $\nabla^2u+\lambda u=0$, efter lite förenklig:
+$$
+\frac{1}{R}((r^2R')'+\lambda r^2R)=-\frac{\Lambda F}{F}
+$$
+VL är endast $r$-beroende medan HL är $s,\phi$-beroende, alltså är leden konstanta. Sätt konstanten till $c$ så fås 
+\begin{equation*}
+    \begin{cases}
+        \Lambda F+cF=0,\\
+        (r^2R')'+\lambda r^2R-cR=0.
+    \end{cases}
+\end{equation*}
+Vi väntar med radialberoendet och fortsätter att variabelseparera $F=S(s)\Phi(\phi)$. Lambdaoperatorn uttryckt i $s$ ger nu att $\Lambda F+cF=0$ blir
+$$
+((1-s^2)S')'\Phi+\frac{1}{1-s^2}S\Phi''+cS\Phi=0 \implies
+$$
+$$
+\frac{(1-s^2)((1-s^2)S')'+c(1-s^2)S}{S}=-\frac{\Phi''}{\Phi}=d,
+$$
+där $d$ blir konstanten i denna ekvation. Nu finns alltså tre DE i varsin variabel:
+\begin{equation}
+    \begin{cases}
+        \Phi''+d\Phi=0, \quad &\Phi \ 2\pi-$periodisk$.\\
+        ((1-s^2)S')'-\frac{d}{1-s^2}S+cS=0, \ &S \ $begr. på$ \ (-1,1).\\
+        \frac{1}{r^2}(r^2R')'+(\lambda-\frac{c}{r^2})R=0, \ &R \ $begr$. \ R(1)=0.
+    \end{cases}
+\end{equation}
+Eftersom $\mathcal{A}$ är en SL-operator så söker vi endas egenvärden $\geq0$. Vi löser diffekvationerna en och en:\\ \\
+$\phi$-led:\\
+Denna är känd sedan tidigare. Eftersom den är begränsad överallt så blir:
+
+Egenvärdet $d_0=0,$ med egenfunktion $\Phi_0=1$.
+
+Egenvärden $d_n=n^2$ med egenfunktioner $\Phi_n=\sin(n\phi)$ och $\cos(n\phi), \quad n\in\mathbb{Z}_+$.\\ \\
+\newpage
+\noindent
+$\theta$-led ($s$):\\
+Från $\phi$-led är det känt att $d=n^2, \ n\in\mathbb{N}$. Sätter vi också $c=\ell(\ell+1)$ så fås den associerade Legendreekvationen \eqref{eq:asleg}. Eftersom att vi har att göra med en SL-operator så är $c\geq 0$. Denna DE har den allmänna lösningen \eqref{eq:alasleg}, och eftersom att vi söker en begränsad funktion så blir:\\
+
+Egenvärden $c_{\ell}=\ell(\ell+1), \ \ell\in\mathbb{N}$, med egenfunktioner $P_{\ell}^n(s)=P_{\ell}^n(\cos(\theta)), \ n=0,1,...,\ell$.\\ \\
+$r$-led:\\
+Till slut ska radiella delen lösas. Denna DE känns också igen, då vi vet att $c_{\ell}=\ell(\ell+1)$ så behöver vi lösa precis \eqref{eq:Besf}. Vi börjar med att undersöka\\ \\
+$\lambda>0$:\\
+Vi vet att detta fall har egenfunktioner $j_{\ell}(\sqrt{\lambda_{\ell k}}r)$ och $y_{\ell}(\sqrt{\lambda_{\ell k}}r)$. Men $y_{\ell}$ är inte begränsad nära $0$ och går därför bort. Vidare så innebär randvillkoret $R(1)=0$ att $j_{\ell}(\sqrt{\lambda_{\ell k}})=0$. Därför ska $\lambda_{\ell k}$ uppfylla nollställena till $j_{\ell}$: $\sqrt{\lambda_{\ell k}}=\alpha_{1/2+\ell,k}$. Sammanfattningsvis har vi i $r$-led:\\
+
+Egenvärden $\lambda_{\ell k}=\alpha_{1/2+\ell,k}^2$ med tillhörande egenfunktioner $j_{\ell}(\sqrt{\lambda_{\ell k}}r), \ k\in\mathbb{Z}_+$.\\ \\
+$\lambda=0$:\\
+I detta fall får man DEn
+$$
+R''+\frac{1}{r}R'-\frac{\ell(\ell+1)}{r^2}R=0\implies r^2R''+rR'-\ell(\ell+1)R=0
+$$
+Som är en känd DE av Eulertyp. Man söker lösningar på formen $r^p$ och hittar med insättning och förenkling att den allmänna lösningen är
+$$
+R(r)=ar^{\ell}+br^{-\ell-1}.
+$$
+Villkoren begränsad och $R(1)=0$ ger att $a=b=0$ och därför att $\lambda=0$ inte är ett egenvärde.\\ \\
+\textbf{\textsc{Svar}}\\
+Vi har kommit fram till att operatorn $\mathcal{A}=-\nabla^2$ på enhetsklotet, med homogena Dirichletvillkor, har\\
+
+\textbf{Egenvärden}
+\begin{equation}
+    \lambda_{\ell k}=\alpha_{1/2+\ell,k}^2
+\end{equation}
+
+\textbf{Egenfunktioner}
+\begin{equation}
+    R(r)S(\cos(\theta))\Phi(\phi)=j_{\ell}(\sqrt{\lambda_{\ell k}}r)P_{\ell}^0(\cos(\theta)), \quad \ell\in\mathbb{N}, \ k\in\mathbb{Z}_+.
+\end{equation}
+och
+\begin{equation}
+    R(r)S(\cos(\theta))\Phi(\phi)=j_{\ell}(\sqrt{\lambda_{\ell k}}r)P_{\ell}^n(\cos(\theta)){\cos(n\phi) \choose \sin(n\phi)}, \ 
+    \begin{cases}
+    \ell\in\mathbb{N},\\
+    k\in\mathbb{Z}_+,\\ 
+    n=1,2,...,\ell.
+    \end{cases}
+\end{equation}
+\newpage
+\section{Greenfunktioner}
+\subsection{Inledande}
+Betrakta Dirichlets allmänna problem för Poissons ekvation
+\begin{equation}\label{eq:almdir}
+    \begin{cases}
+        -\nabla^2u=f \ &$i$ \ \Omega,\\
+        u=g \ &$på$ \ \partial\Omega.
+    \end{cases}
+\end{equation}
+Under ganska allmänna förutsättningar går det att visa att lösningar existerar, sedan kan entydighet avgöras.\\ \\
+Problemet kan lösas m h a superpositionsprincipen. Löser man de individuella problemen:
+\begin{equation}
+    \begin{cases}
+        -\nabla^2u=f \ &$i$ \ \Omega,\\
+        u=0 \ &$på$ \ \partial\Omega.
+    \end{cases}
+\end{equation}
+Och
+\begin{equation}\label{eq:fall2}
+    \begin{cases}
+        -\nabla^2u=0 \ &$i$ \ \Omega,\\
+        u=g \ &$på$ \ \partial\Omega.
+    \end{cases}
+\end{equation}
+Så fås lösningen till \eqref{eq:almdir} enligt
+\begin{equation}\label{eq:almlsn}
+    u=\mathcal{S}_1f+\mathcal{S}_2g
+\end{equation}
+där $\mathcal{S}_1$ och $\mathcal{S}_2$ är linjära integraloperatorer. Följande exempel ger en bild av hur detta fungerar:\\ \\
+\textbf{\textsc{Exempel 5}}:\\
+Låt $u(x,y)$ vara en begränsad funktion på $\Omega=\{(x,y)\in\mathbb{R}^2|y>0\}$ så att $\partial\Omega$ är hela $x$-axeln. Betrakta Dirichlets problem på detta halvplan:
+\begin{equation}
+    \begin{cases}
+        \nabla^2u=0 \ &y>0,\\
+        u(x,0)=g(x), \ &$på$ \ \partial\Omega.
+    \end{cases}
+\end{equation}
+Det ska visa sig att en Fouriertransform i $x$ är gynnsamt. (Observera att Fouriertransformen tas i randvariabeln).
+$$
+\int_{-\infty}^{\infty}\frac{\partial^2}{\partial x^2}u(x,y)e^{-ikx}dx+\int_{-\infty}^{\infty}\frac{\partial^2}{\partial y^2}u(x,y)e^{-ikx}dx=0
+$$
+Regler gällande integraler ger att deriveringen av den oberoende ($y$) variabeln kan flyttas ut, samt att derivatan av den beroende ($x$) variabeln blir en multiplikation (se Fourierregler ovan).
+$$
+(ik)^2\hat{u}(k,y)+\frac{\partial^2}{\partial y^2}\hat{u}(k,y)=0.\implies \partial_y^2\hat{u}(k,y)-k^2\hat{u}(k,y)=0.
+$$
+Detta är en ordinär DE med allmänna lösningen
+\begin{equation}\label{eq:ekvbla}
+    \hat{u}(k,y)=a(k)e^{ky}+b(k)e^{-ky}.
+\end{equation}
+Fouriertransformeras randvillkoret $u(x,0)=g(x)\implies\hat{u}(k,0)=\hat{g}(k)$. Detta ger i \eqref{eq:ekvbla} att
+$$
+a(k)+b(k)=\hat{g}(k)
+$$
+Detta villkoret räcker ej. Men $u$ måste vara begränsad vilket ger ett villkor till:\\ \\
+Om $k>0$ i \eqref{eq:ekvbla} så går $a(k)e^{ky}\longrightarrow\infty$ då $y\longrightarrow\infty$.\\ \\
+Om $k<0$ i \eqref{eq:ekvbla} så går $b(k)e^{-ky}\longrightarrow\infty$ då $y\longrightarrow\infty$.\\ \\
+Detta ger följande:
+\begin{equation}
+    a(k)=\begin{cases}
+            \hat{g}(k), \ &$om$ \ k<0,\\
+            0 \ &$om$ \ k>0.
+        \end{cases}\quad
+    b(k)=\begin{cases}
+            \hat{g}(k), \ &$om$ \ k>0,\\
+            0, \ &$om$ \ k<0.
+        \end{cases}
+\end{equation}
+Alltså får vi:
+$$
+\hat{u}(k,y)=\hat{g}(k)e^{-|k|y}.
+$$
+Eftersom att $\mathcal{F}^{-1}(\hat{f}(k)\hat{g}(k))=(f*g)(x)$ så söker vi nu inverserna av funktionerna separat. Regler ger att
+$$
+\mathcal{F}_x^{-1}e^{-|k|y}=...=\frac{1}{\pi}\frac{y}{x^2+y^2}\equiv k(x,y).
+$$
+Nu fås $u(x,y)=(k*g)(x)$\\
+\textbf{\textsc{Svar}}:
+$$
+u(x,y)=(k*g)(x)=\int_{-\infty}^{\infty}k(x;\alpha,y)g(\alpha)d\alpha=\frac{1}{\pi}\int_{-\infty}^{\infty}\frac{y}{(x-\alpha)^2 +y^2}g(\alpha)d\alpha.
+$$\\
+
+\textbf{Observera} att om $g(x)=\delta(x)$ så
+$$
+u(x,y)=k(x,y).
+$$
+$k(x;\alpha,y)$ kallas för ett impulssvar eller en källfunktion. Den specifika källfunktionen som erhölls i exemplet kallas för Poissonkärnan. 
+
+Generellt går det att visa att om \eqref{eq:fall2} är \textit{translationsinvariant} så
+$$
+u(x)=(k*g)(x)
+$$
+där $k=k(x;\alpha)$ och $g$ är funktionen på randen.\\ \\
+\textbf{\textsc{Sats 5:}} Om systemet \eqref{eq:fall2} är translationsinvariant så är 
+$$
+u(\pmb{x})=(k*g)(\pmb{x})=\int k(\pmb{x}-\pmb{\alpha};\pmb{0})g(\pmb{\alpha})d\alpha
+$$
+där $k=k(\pmb{x};\pmb{\alpha})$ är problemets källfunktion, vilken löser problemet
+\begin{equation}\label{eq:greenprob}
+    \begin{cases}
+        \nabla^2u=0, \ &$i$ \ \Omega,\\
+        u=\delta(x) \ &$på$ \ \partial\Omega.
+    \end{cases}
+\end{equation}
+\newpage
+Att ett system är translationsinvariant betyder att om randvillkoret translateras så translateras lösningen på samma sätt. Detta är tydligt uppfyllt i Exempel 5. Det är detta villkor som gör att 
+$$
+k(x;\alpha)\longrightarrow k(x-\alpha)
+$$
+vilket är nödvändigt för en faltning. Om $x,\alpha$-beroendet har ett annat utséende så blir 
+$$
+u(x)=\int_{-\infty}^{\infty}k(x;\alpha)g(\alpha)d\alpha
+$$
+mer komplicerat. Vi ska endast betrakta translationsinvarianta system i denna kurs! Vi ser på ett translationsinvariant problem igen.\\ \\
+\textbf{\textsc{Exempel 6:}}\\
+Betrakta Dirichlets problem på $\Omega=$enhetsskivan. Vi använder såklart polära koordinater, samt har vi randvillkor $g(\theta)$ så att
+\begin{equation}
+    \begin{cases}
+        \nabla^2u=0, \ &$i$ \ \Omega,\\ u=g(\theta), \ &$på$ \ \partial\Omega
+    \end{cases}
+\end{equation}
+Det är enkelt att se att systemet är translationsinvariant i $\theta$-led, då $g(\theta+\alpha)\implies u(r,\theta+\alpha)$. Alltså räcker det med att lösa
+\begin{equation}
+    \begin{cases}
+        \nabla^2k=0, \ &$i$ \ \Omega,\\ k=\delta(\theta), \ &$på$ \ \partial\Omega
+    \end{cases}
+\end{equation}
+och sedan finna den allmänna lösningen enligt
+$$
+u(r,\theta)=(k*g)(\theta)=\int_{-\pi}^{\pi}k(r,\theta-\alpha;0)g(\alpha)d\alpha.
+$$
+Vi söker alltså $k$. Då $k(r,\theta)=k(r,\theta+2\pi)$ kan vi ansätta en fourierserie som lösning:
+$$
+k(r,\theta)=\sum_{-\infty}^{\infty}c_n(r)e^{in\theta}.
+$$
+Insättning i $\nabla_{r,\theta}^2k=0$ ger
+$$
+\frac{1}{r}\big(\partial_r (r\partial_rk)\big)+\frac{1}{r^2}\partial_{\theta}^2k=\partial_r^2k+\frac{1}{r}\partial_rk+\frac{1}{r^2}\partial_{\theta}^2k=0\implies
+$$
+$$
+\sum_{-\infty}^{\infty}\Big(c_n''(r)+\frac{1}{r}c_n'(r)-\frac{1}{r^2}n^2c_n(r)\Big)e^{in\theta}=0.
+$$
+Detta är noll för alla $n$, vilket löses med $\lambda=0$ i \eqref{eq:ek24}. Alltså
+\begin{equation}
+    k(r,\theta)=\begin{cases}
+        a_nr^n+b_nr^{-n}, \ &$om$ \ n\neq0,\\
+        a_n+b_n\ln(r) \ &$om$ \ n=0.
+    \end{cases}
+\end{equation}
+Eftersom $k$ är begränsad så måste $a_n=0$ om $n>0$, samt $b_n=0$ om $n<0$. Detta ger lösningen
+$$
+k(r,\theta)=\sum_{-\infty}^{\infty}c_nr^{|n|}e^{in\theta}.
+$$
+Konstanterna $c_n$ bestämmes m h a randvillkoret
+$$
+k(1,\theta)=\sum_{-\infty}^{\infty}c_ne^{in\theta}=\delta(\theta).
+$$
+Detta känns igen som en vanlig Fourierserie och $c_n$ bestäms enligt
+$$
+c_n=\frac{1}{2\pi}\int_{-\pi}^{\pi}e^{-in\theta}\delta(\theta)d\theta=\frac{1}{2\pi}.
+$$
+Alltså är
+$$
+k(r,\theta)=\frac{1}{2\pi}\sum_{-\infty}^{\infty}r^{|n|}e^{in\theta},
+$$
+vilket kan förenklas m h a geometriska serier:
+$$
+\sum_{-\infty}^{\infty}r^{|n|}e^{in\theta}=\sum_{n=0}^{\infty}\big(re^{i\theta}\big)^n+\sum_{n=0}^{\infty}\big(re^{-i\theta}\big)^n-1
+$$
+($-1$ eftersom att $n=0$ räknas två gånger). Detta kan förenklas så att $k$ bli
+$$
+k(r,\theta)=\frac{1}{2\pi}\frac{1-r^2}{1+r^2-2r\cos(\theta)}.
+$$
+(Denna funktion kallas för $"$Poissonkärnan för Dirichlets problem på enhetsskivan$"$). Nu kan alltså den ursprungliga funktionen $u(r,\theta)$ erhållas genom att ta $u=(k*g)(\theta)$:
+$$
+u(r,\theta)=\frac{1}{2\pi}\int_{-\pi}^{\pi}\frac{1-r^2}{1+r^2-2r\cos(\theta-\alpha)}g(\alpha)d\alpha
+$$
+\subsection{Mer allmänt}
+Vi har sett att om ett system är translationsinvariant så räcker det att lösa 
+\begin{equation}
+    \begin{cases}
+        \nabla^2k=0, \ &$i$ \ \Omega,\\ k=\delta(\pmb{x}), \ &$på$ \ \partial\Omega.
+    \end{cases}
+\end{equation}
+För att sedan svara på
+\begin{equation}
+    \begin{cases}
+        \nabla^2u=0, \ &$i$ \ \Omega,\\ u=g(\pmb{x}), \ &$på$ \ \partial\Omega
+    \end{cases}
+\end{equation}
+genom att ta $u=(k*g)(\pmb{x})$.
+
+Faktum är att samma metod fungerar för 
+\begin{equation}
+    \begin{cases}
+        \nabla^2u=f, \ &$i$ \ \Omega,\\ u=0, \ &$på$ \ \partial\Omega.
+    \end{cases}
+\end{equation}
+I detta fall löser man istället 
+\begin{equation}
+    \begin{cases}
+       \nabla^2k=\delta(\pmb{x}), \ &$i$ \ \Omega,\\ u=0, \ &$på$ \ \partial\Omega
+    \end{cases}
+\end{equation}
+För att sedan få $u=(k*f)(\pmb{x})$.
+I och med detta kan man alltså lösa \eqref{eq:almdir} komplett! (Givet translationsinvariant).
+\newpage
+\noindent
+För att bli ännu mer generell betraktas istället ett problem utan randvärden:
+\begin{equation}\label{eq:helaR}
+    -\nabla^2u=f, \ \Omega=\mathbb{R}^n.
+\end{equation}
+Det är lätt att övertyga sig om translationsinvarians, ty $f(\pmb{x})\longrightarrow f(\pmb{x}+\pmb{\alpha})$ $\implies$\\ $u(\pmb{x})\longrightarrow u(\pmb{x}+\pmb{\alpha})$. Sätt nu
+$$
+-\nabla^2K=\delta.
+$$
+($k$ blir nu $K$ då detta kallas för fundamentallösning). Nu är frågan om $u=(K*f)$. Räknelagar för faltning ger att
+$$
+-\nabla^2(K*f)=-(\nabla^2K)*f=\delta*f=f=-\nabla^2u.
+$$
+D v s $-\nabla^2u=-\nabla^2(K*f) \implies ! \ u=K*f$ (obs ej unikt) vilket övertygar oss om att detta fungerar. Följande fundamentallösningar gäller i $\mathbb{R}^2$ och $\mathbb{R}^3$:
+\begin{equation}
+    K(\pmb{x})=
+    \begin{cases}
+       -\frac{1}{2\pi}\ln(|\pmb{x}|) \ &$i$ \ \mathbb{R}^2,\\
+       \frac{1}{4\pi|\pmb{x}|} \ &$i$ \ \mathbb{R}^3.
+    \end{cases}
+\end{equation}
+\subsection{Def. Green}
+\textbf{\textsc{Definition 6:}} Låt $\pmb{\alpha}\in\Omega$. Lösningen till
+\begin{equation}
+    \begin{cases}
+    -\nabla^2u=\delta(\pmb{x}-\pmb{\alpha}), \ &\pmb{x}\in\Omega,\\
+    u(\pmb{x})=0, \ &\pmb{x}\in\partial\Omega
+    \end{cases}
+\end{equation}
+säges vara \textbf{Greenfunktion} för Dirichlets problem i $\Omega$. Den betecknas $G(\pmb{x};\pmb{\alpha})$.\\ \\
+Ur definitionen syns att Greenfunktionen beror av såväl $\pmb{x}$ som $\pmb{\alpha}$. \\ \\
+\textbf{\textsc{Sats 6:}} Det går att visa att $G(\pmb{x};\pmb{\alpha})=G(\pmb{\alpha};\pmb{x}).$\\ \\
+
+Följande sats kallas Huvudsatsen för Greenfunktioner:\\ \\
+\textbf{\textsc{Sats 7:}} Problemet
+\begin{equation}
+    \begin{cases}
+    -\nabla^2u=f, \ &$i$ \ \Omega,\\
+    u(\pmb{x})=g, \ &$på$ \ \partial\Omega
+    \end{cases}
+\end{equation}
+har lösningen 
+\begin{equation}\label{eq:almngreenfunk}
+    u(\pmb{x})=\int_{\Omega}G(\pmb{x};\pmb{\alpha})f(\pmb{\alpha})d\pmb\alpha-\oint_{\partial\Omega}\frac{\partial G}{\partial \pmb{n_{\alpha}}}(\pmb{x};\pmb{\alpha})g(\pmb{\alpha})dS_{\alpha} \ .
+\end{equation}
+\textbf{Anmärkning}\\
+Om $f=0$ i \eqref{eq:almngreenfunk} så fås problemet \eqref{eq:fall2}. Exemplena 5,6 visar att för områdena halvplanet och enhetsskivan så är 
+$$
+-\frac{\partial G}{\partial \pmb{n_{\alpha}}}(\pmb{x};\pmb{\alpha})
+$$
+lika med Poissonkärnan.
+\newpage
+\noindent
+\textsc{\textbf{Sats 8:}} Låt $\{\lambda_k\}_1^{\infty}$ och $\{\varphi_k\}_1^{\infty}$ vara egenvärden och normerade egenfunktioner för $-\nabla^2$ i $\Omega$ med homogena Dirichletvillkor. Då gäller, med konvergens i distributionsmening, att
+$$
+G(\pmb{x};\pmb{\alpha})=\sum_1^{\infty}\frac{1}{\lambda_k}\varphi_k(\pmb{x})\varphi_k(\pmb{\alpha}) \ .
+$$
+
+
+\section{Variationskalkyl}
+\subsection{Inledande}
+Börja med att studera en godtycklig kurva $C$ mellan två punkter $(x_1,y_1)$ och $(x_2,y_2)$. Låt $d\ell$ beskriva ett litet element av kurvan vid någon punkt. Då gäller det att längden av $d\ell$ fås av
+$$
+d\ell=\sqrt{dx^2+dy^2}=dx\sqrt{1+\Big(\frac{dy}{dx}\Big)^2}=\sqrt{1+y'(x)^2}dx \ .
+$$
+Om $d\ell$ integreras från $(x_1,y_1)$ till $(x_2,y_2)$  så erhålls längden $\ell$ av kurvan. Därför är 
+$$
+\ell=\int_C d\ell=\int_{x_0}^{x_1}\sqrt{1+y'(x)^2}dx \ .
+$$
+Kalla integralen $\int\mathcal{L}(y'(x)dx)=\int\sqrt{1+y'(x)^2}dx$ för kurvans funktional. Det ska visa sig att man kan arbeta med funktionalen för att få information om kurvan $C$ givet vissa krav. Speciellt kan man i detta fall bestämma vilken funktion $y(x)$ som minimerar integralen och därmed är den kortaste vägen mellan punkterna $(x_1,y_1)$ och $(x_2,y_2)$.
+
+Innan vi går igenom teorin för att minimera integralfunktioner av funktionaler så ser vi på ett exempel till av en funktional.\\ \\
+\textbf{Exempel 7:}\\ Betrakta en sträng fast inspänd mellan punkterna $(0,0)$ och $(a,0)$ i planet. Låt vidare strängen ha längddensitet $\rho_{\ell}$ och en inre spännkraft $S$. Vi kan ställa upp ett uttryck för stängens gravitationella potential $V_p$ genom att betrakta strängens avvikelse $y(x)$ från jämviktsläget $y(x)=0$. För en liten del $d\ell$ av strängen gäller det att
+$$
+dV_p=dmgy(x)=\rho_{\ell}d\ell gy(x)=\rho_{\ell}\sqrt{1+y'(x)^2}dx gy(x)
+$$
+vilket ger den totala gravitationspotentialen till
+$$
+V_p=\rho_{\ell}g\int_{x=0}^{x=a}\sqrt{1+y'(x)^2}y(x)dx \ .
+$$
+Integranden är nu $\mathcal{L}(y(x),y'(x))=\rho_{\ell}g\sqrt{1+y'(x)^2}y(x)$ och den funktion $y(x)$ som minimerar funktionalen ger den minsta gravitionella potentialen. (Naturen strävar alltid efter att formas så att storheter som denna är minimala.)
+\subsection{Euler-Lagranges ekvationer}
+Betrakta en allmän funktion $\mathcal{L}(\varphi(x),\varphi'(x),x)$ som är definierad i variabeln $x$ över intervallet $a\leq x\leq b$. Låt också tills vidare ändpunkterna $\varphi(a),\varphi(b)$ vara fixerade som i Exempel 7. Definiera en funktional
+\begin{equation}\label{eq:funktional1}
+    F[\varphi]=\int_a^b\mathcal{L}(\varphi(x),\varphi'(x),x)dx \ .
+\end{equation}
+Vi är intresserade av att hitta exstremvärden till $F[\varphi]$ och sedan bestämma vilket $\varphi$ som ger dessa (jämför vilka $x$ som ger extrempunkter till polynom.)\\
+
+Introducera en funktion $y(x,\varepsilon)$ som beskriver en variation av funktionen $\varphi(x)$ enligt $$
+y(x,\varepsilon)=\varphi(x)+\varepsilon\eta(x), \quad \varepsilon\geq 0 \ .
+$$
+I fallet med kortaste vägen $y(x)$ mellan två punkter i planet tar detta formen enligt Figur 1.
+\begin{figure}[H]
+\begin{center} 
+\includegraphics[width=0.5\textwidth]{bild}
+\caption{Variation av kortast avstånd mellan punkterna A och B.}
+\label{fig:fig1}
+\end{center}
+\end{figure}
+Funktionalen \eqref{eq:funktional1} tar nu istället formen
+\begin{equation}\label{eq:funktional2}
+    F[\varphi+\varepsilon\eta]=\int_a^b\mathcal{L}(\varphi+\varepsilon\eta,\varphi'+\varepsilon\eta',x)dx=\int_a^b\mathcal{L}(y(x,\varepsilon),y_x(x,\varepsilon),x)dx \ .
+\end{equation}
+Vad som nu ska inses är att man kan optimera \eqref{eq:funktional2} genom att derivera m a p $\varepsilon$ och söka extremum genom att sätta funktionen $F'[\varepsilon]=0$. Om speciellt $\varphi$ är den funktion som ger extremum så måste $\varepsilon\eta(x)=0$ för alla funktioner $\eta(x)$ vilket innebär att $\varepsilon=0$, d v s $F'[\varepsilon=0]=0$.
+
+Resonemanget går att följa matematiskt vilket ska leda till ett användbart samband som kallas för Euler-Lagranges ekvationer.\\ \\
+Börja med att derivera \eqref{eq:funktional2} m a p $\varepsilon$:
+\begin{equation}\label{eq:funktional3}
+    F'[\varepsilon]=\int_a^b\Big(\frac{\partial \mathcal{L}}{\partial y}\frac{\partial y}{\partial \varepsilon}+\frac{\partial \mathcal{L}}{\partial y_x}\frac{\partial y_x}{\partial \varepsilon}\Big)dx=\int_a^b\Big(\frac{\partial \mathcal{L}}{\partial y}\eta+\frac{\partial \mathcal{L}}{\partial y_x}\eta'\Big)dx \ .
+\end{equation}
+Eftersom att vi antar att $\varphi$ ger extremum till funktionen så kan vi här sätta $\varepsilon=0\implies y(x,\varepsilon)=\varphi(x)$. Samt så blir $F'[0]=0$. I \eqref{eq:funktional3} ger detta
+\begin{equation}\label{eq:funktional4}
+    F'[0]=\int_a^b\Big(\frac{\partial \mathcal{L}}{\partial \varphi}\eta+\frac{\partial \mathcal{L}}{\partial \varphi'}\eta'\Big)dx=\int_a^b\frac{\partial \mathcal{L}}{\partial \varphi}\eta dx +\int_a^b\frac{\partial \mathcal{L}}{\partial \varphi'}\eta'dx=0 \ .
+\end{equation}
+Den andra termen i det senaste uttrycket kan integreras partiellt:
+$$
+\int_a^b\frac{\partial \mathcal{L}}{\partial \varphi'}\eta'dx=\Big\{\int(fg)'=\int f'g+\int fg'\Big\}=\int_a^b\frac{d}{dx}\Big(\frac{\partial \mathcal{L}}{\partial \varphi'}\eta\Big)dx-\int_a^b\frac{d}{dx}\Big(\frac{\partial \mathcal{L}}{\partial \varphi'}\Big)\eta dx=
+$$
+\begin{equation}\label{eq:varkalk1}
+    =\Big[\frac{\partial \mathcal{L}}{\partial \varphi'}\eta\Big]_a^b-\int_a^b \frac{d}{dx}\Big(\frac{\partial \mathcal{L}}{\partial \varphi'}\Big)\eta dx \ .
+\end{equation}
+Eftersom $\eta(a)=\eta(b)=0$ (se Figur 1) så får vi i \eqref{eq:funktional4} att
+$$
+\int_a^b\Big(\frac{\partial \mathcal{L}}{\partial \varphi}- \frac{d}{dx}\Big(\frac{\partial \mathcal{L}}{\partial \varphi'}\Big)\Big)\eta dx=0 \ .
+$$
+Vidare så är $\eta$ en godtycklig funktion vilket innebär att uttrycket i parentesen måste vara noll. Vi får slutligen Euler-Lagranges ekvationer till
+\begin{equation}\label{eq:EUekv}
+    \frac{\partial \mathcal{L}}{\partial \varphi}-\frac{d}{dx}\frac{\partial\mathcal{L}}{\partial\varphi'}=0 \ .
+\end{equation}
+\textbf{Anmärkning 1:} Om integranden inte beror explicit på $\varphi(x)$ så blir \eqref{eq:EUekv}
+$$
+-\frac{d}{dx}\frac{\partial\mathcal{L}}{\partial\varphi'}=0\implies \frac{\partial\mathcal{L}}{\partial\varphi'}=C \ .
+$$
+\textbf{Anmärkning 2:} Om integranden beror av flera funktioner $\{\varphi_k\}_1^n$ så att $\mathcal{L}=\mathcal{L}(\varphi_k(x),\varphi_k'(x),x)$ så gäller relationen \eqref{eq:EUekv} för \textit{var och en av} $\varphi_k$ \textit{individuellt}:
+\begin{equation}\label{eq:EUekv2}
+    \frac{\partial \mathcal{L}}{\partial \varphi_k}-\frac{d}{dx}\frac{\partial\mathcal{L}}{\partial\varphi_k'}=0 \ .
+\end{equation}
+\textbf{Anmärkning 3:} Det går att använda \eqref{eq:varkalk1} för att visa att om ändpunkterna $x=a,b$ inte är fixerade så får man villkoret 
+\begin{equation}\label{eq:EUekv3}
+    \frac{\partial \mathcal{L}}{\partial\varphi'}\Big|_{x=a}=\frac{\partial \mathcal{L}}{\partial\varphi'}\Big|_{x=b}=0 \ .
+\end{equation}
+Om vidare ena ändpunkten är fixerad medan den andra är fri så erhåller man villkoret \eqref{eq:EUekv3} för den fria änden.\\ \\
+\textbf{Anmärkning 4:} Om integranden beror av högre ordnings derivator, $\mathcal{L}=\mathcal{L}(\varphi(x),\varphi'(x),...,\varphi^{(n)}(x),x)$ så tar \eqref{eq:EUekv} formen
+$$
+\sum_{k=0}^n(-1)^k\frac{d^k}{dx^k}\frac{\partial\mathcal{L}}{\partial\varphi^{(k)}}=0 \ .
+$$
+\newpage
+\noindent
+\textbf{Exempel 8:}\\ I den inledande sektionen 7.1 så erhölls integranden $\mathcal{L}(y'(x))=\sqrt{1+y'(x)^2}$ för avståndet mellan två punkter i planet. Vi kan identifiera $y'$ som $\varphi'$ i Euler-Lagranges ekvationer \eqref{eq:EUekv}. Funktionen $y(x)$ som minimerar avståndet ges alltså av relationen
+$$
+\frac{d}{dx}\frac{\partial\mathcal{L}}{\partial y'(x)}=0 \ .
+$$
+Vilket med integranden insatt ger
+$$
+\frac{d}{dx}\frac{y'(x)}{\sqrt{1+y'(x)^2}}=\frac{d}{dx}\frac{y'(x)}{\mathcal{L}}=0\implies y''(x)=0\implies y(x)=c_1x+c_2 \ .
+$$
+Detta känns igen som den räta linjens funktion. Med randvillkoren så fås också $c_1,c_2$ så att linjen går genom de specificerade punkterna $(x_1,y_1), \ (x_2,y_2)$.
+\subsection{Beltramis Identitet}
+Betrakta nu en integrand som inte är explicit beroende av variabeln $x$: $\mathcal{L}=\mathcal{L}(\varphi(x),\varphi'(x))$. Derivera nu m a p $x$:
+$$
+\frac{d\mathcal{L}}{d x}=\frac{\partial\mathcal{L}}{\partial x}+\frac{\partial\mathcal{L}}{\partial\varphi}\frac{d\varphi}{dx}+\frac{\partial\mathcal{L}}{\partial\varphi'}\frac{d\varphi'}{dx} \ .
+$$
+Då $\mathcal{L}$ ej beror av $x$ så måste $\partial\mathcal{L}/\partial x=0$. Alltså blir
+$$
+\frac{d\mathcal{L}}{d x}=\frac{\partial\mathcal{L}}{\partial\varphi}\varphi'+\frac{\partial\mathcal{L}}{\partial\varphi'}\varphi'' \ .
+$$
+Antag nu att $\varphi$ uppfyller Euler-Lagranges ekvation \eqref{eq:EUekv} och använd denna för att skriva om $\partial\mathcal{L}/\partial\varphi$:
+$$
+\frac{d\mathcal{L}}{d x}=\varphi'\frac{d}{dx}\frac{\partial\mathcal{L}}{\partial\varphi'}+\varphi''\frac{\partial\mathcal{L}}{\partial\varphi'} =\frac{d}{dx}\Big(\varphi'\frac{\partial\mathcal{L}}{\partial\varphi'}\Big) \ .
+$$
+Flytta över termerna i HL och integrera m a p $x$ så erhålls Beltramis identitet enligt
+\begin{equation}\label{eq:beltrami}
+    \varphi'(x)\frac{\partial\mathcal{L}}{\partial\varphi'}-\mathcal{L}=C \ .
+\end{equation}
+\textbf{Anmärkning:} Om integranden beror av flera funktioner $\{\varphi_k\}_1^n$ så \textit{summeras uttrycket}
+$$
+\sum_{k=1}^n\varphi_k'(x)\frac{\partial\mathcal{L}}{\partial\varphi_k'}-\mathcal{L}=C \ .
+$$
+\newpage
+\subsection{Exempel}
+\textbf{Exempel 7 forts.}\\
+Vi ställde upp ett uttryck för den gravitationella potentialen $V_p$ för en sträng i Exempel 7 som var
+$$
+V_p=\rho_{\ell}g\int_0^a\sqrt{1+y'(x)^2}y(x)dx \ .
+$$
+För små avvikelser kan approximationen göras att strängen endast rör sig i $y$-led. Detta förenklar uttrycket för en liten del av strängen till $dV_p=\rho_{\ell}gy(x)dx$ och potentialen blir istället
+$$
+V_p=\rho_{\ell}g\int_0^ay(x)dx \ .
+$$
+Den totala potentialen får även ett bidrag av en inre potential som beror av spännkraften i strängen $S$. Denna är proportionell mot längden av strängen och $S$, för en liten del av strängen fås därför $dV_S=S\sqrt{1+y'(x)^2}dx$
+och
+$$
+V_S=S\int_0^a\sqrt{1+y'(x)^2}dx \ .
+$$
+För båda potentialuttryck får vi integranden till $\mathcal{L}=\rho_{\ell}gy(x)+S\sqrt{1+y'(x)^2}=\mathcal{L}(y(x),y'(x))$, vilken ej beror explicit av variabeln $x$. Vi applicerar Beltramis identitet och erhåller
+$$
+y'\frac{\partial\mathcal{L}}{\partial y'}-\mathcal{L}=C\implies S\frac{y'^2}{\sqrt{1+y'^2}}-S\sqrt{1+y'^2}-\rho_{\ell}gy(x)=C
+$$
+Uttrycket känns ganska klumpigt så vi testar istället Euler-Lagrange:
+$$
+\frac{\partial\mathcal{L}}{\partial y}-\frac{d}{dx}\frac{\partial\mathcal{L}}{\partial y'}=0\implies\rho_{\ell}g-\frac{d}{dx}\frac{Sy'}{\sqrt{1+y'^2}}=\rho_{\ell}g-S\Big(\frac{y''}{\sqrt{1+y'^2}}-\frac{y'^2}{\sqrt{1+y'^2}^3}\Big)=
+$$
+$$
+=\rho_{\ell}g-S\frac{y''(1+y'^2)-y'^2}{\sqrt{1+y'^2}^3}=\rho_{\ell}g-\frac{Sy''}{\sqrt{1+y'^2}^3}=0 \implies y''= \frac{\rho_{\ell}g}{S}\sqrt{1+y'^2}^3 \ .
+$$
+Detta kan lineariseras till
+$$
+y''(x)=\frac{\rho_{\ell}g}{S}
+$$
+med randvärden $y(0)=y(a)=0$. D v s en parabel. (Om gravitationskraften är negativ så blir det en parabel i $"$rätt$"$ riktning.)\\ \\
+\textbf{Exempel 9, Brachistokron:}\\ \\
+\textit{Detta problem formulerades av Johan Bernoulli år 1696 och är känt för att vara det första problemet att formuleras m h a variationskalkyl.}\\ \\
+Betrakta en partikel med massa $m$ som glider från vila utan friktion längs en kurva $y(x)$ i planet under inverkan av gravitationskraften (se Figur 2.) Vilken kurva minimerar partikelns glidtid?\\
+\begin{figure}[H]
+\begin{center} 
+\includegraphics[width=0.5\textwidth]{hej}
+\caption{Vilken kurva minimerar glidtiden mellan två punkter i planet?}
+\label{fig:fig1}
+\end{center}
+\end{figure}
+Låt utgångspunkten vara $A=(x_A,y_A)$ och slutpunkten vara $B=(x_B,y_B)$. Då energin för systemet är konservativ är $E=T+V$ konstant och vi får för en godtycklig punkt längs kurvan att
+$$
+T+V=T_A+V_A\implies \frac{m}{2}v^2+mgy=0+mgy_A \implies v=\sqrt{2g(y_A-y)} \ .
+$$
+$$
+v=\frac{ds}{dt}=\frac{\sqrt{1+y'^2}}{dt}dx\implies dt=\sqrt{\frac{1+y'^2}{2g(y_A-y)}}dx \ .
+$$
+Vilket ger funktionalen
+$$
+t=\frac{1}{\sqrt{2g}}\int_{x_A}^{x_B}\sqrt{\frac{1+y'^2}{y_A-y}}dx \ .
+$$
+(Ingen integralkonstant behövs då $t=0$ i $A$. ) Vi söker nu funktionen $y$ som minimerar funktionalen och kan därför använda oss av variationskalkyl för att hitta ett $y$ som ger exremum. Integranden är $\mathcal{L}=\sqrt{1+y(x)'^2}/\sqrt{y_A-y(x)}=\mathcal{L}(y(x),y'(x))$ och vi noterar att den är oberoende av variabeln $x$. Beltramis identitet kan då användas:
+$$
+y'\frac{\partial\mathcal{L}}{\partial y'}-\mathcal{L}=C \implies \frac{y'^2}{\sqrt{(y_A-y)(1+y'^2)}}-\sqrt{\frac{1+y'^2}{y_A-y}}=C \ .
+$$
+Skriv ihop bråken så erhålls
+$$
+\frac{1}{\sqrt{(y_A-y)(1+y'^2)}}=-C=\frac{1}{D} \ .
+$$
+Kvadrera och korsmultiplicera
+$$
+(y_A-y)\Big[1+\Big(\frac{dy}{dx}\Big)^2\Big]=D^2\implies \Big(\frac{dy}{dx}\Big)^2=\frac{D^2-(y_A-y)}{y_A-y} \ .
+$$
+Skriv om på differentialform
+$$
+dx=\frac{\sqrt{y_A-y}}{\sqrt{D^2-(y_A-y)}}dy \ .
+$$
+Variabelsubstituera
+$$
+y_A-y=D^2\sin^2\phi \implies dy=-2D^2\sin\phi\cos\phi d\phi \ .
+$$
+Observera att $\phi=0$ ger att $y=y_A$. Insatt ger detta
+$$
+dx=-\frac{D\sin\phi}{D\sqrt{1-\sin^2\phi}}2D\sin\phi\cos\phi d\phi=-2D^2\sin^2\phi d\phi \ .
+$$
+Integreras detta så erhålls
+$$
+x=-2D^2\frac{1}{2}\Big(\phi-\frac{1}{2}\sin(2\phi)\Big)+E \ .
+$$
+där $E$ är integrationskonstanten. Vi önskar att då $\phi=0\implies x=x_A$. Detta ger
+$$
+x=x_A-D^2\Big(\phi-\frac{1}{2}\sin(2\phi)\Big) \ .
+$$
+Skriver vi om $y$ m h a $\sin^2\phi=(1/2)(1-\cos(2\phi))$ så får vi parametreformen av lösningen till
+\begin{equation*}
+    \begin{cases}
+    x=x_A-\frac{D^2}{2}\big(2\phi-\sin(2\phi)\big) \ ,\\
+    y=y_A-\frac{D^2}{2}\big(1-\cos(2\phi)\big) \ .
+    \end{cases}
+\end{equation*}
+Utan att förlora inforamtion kan vi skriva om detta till
+\begin{equation}\label{eq:brachpar}
+    \begin{cases}
+    x=x_A-R\big(\theta-\sin(\theta)\big) \ ,\\
+    y=y_A-R\big(1-\cos(\theta)\big) \ .
+    \end{cases}
+\end{equation}
+
+För att visualisera lösningen söks den exakta kurvan för en specifik start och slutpunkt. Vi vet att att $\phi=0\implies (x,y)=(x_A,y_A).$ För enkelhets skull sätter vi $(x_A,y_A)=(0,1)$ och $(x_B,y_B)=(1,0)$. Sätt in $(x,y)=(x_B,y_B)$ i \eqref{eq:brachpar} så erhålls
+\begin{equation*}
+    \begin{cases}
+    1=-R\big(\theta_B-\sin(\theta_B)\big)\\
+    0=1-R\big(1-\cos(\theta_B)\big)
+    \end{cases}\implies
+    \begin{cases}
+    \frac{1}{R}=\sin(\theta_B)-\theta_B\\
+    \frac{1}{R}=1-\cos(\theta_B)
+    \end{cases}\implies
+    \sin(\theta_b)+\cos(\theta_B)-\theta_B=1 \ .
+\end{equation*}
+Denna ekvation har två lösningar. Enkelt är en lösning $\theta_B=0$, ytterligare en lösning hittas numeriskt till $\theta_B\approx -2.41$. Nu kan $R$ bestämmas:
+$$
+R=\frac{1}{1-\cos(\theta_B)}\approx 0.573 \ .
+$$
+I Figur 3 plottas den anpassade kurva som går mellan $A=(0,1)\rightarrow B=(1,0)$, samt två kurvor som har anpassats till $(0,1)\rightarrow (2,0)$ och $(0,1)\rightarrow (3,0)$. Notera formen av den fortsatta kurvan, som kallas för en cykloidkurva.\\ \\
+\textbf{Anmärkning:} Två olika cykloider som båda börjar i $(0,1)$ (eller någon annan punkt) kan inte skära samma snett underliggande punkt (ex. $(2,0)$.)
+
+\begin{figure}[H]
+\begin{center} 
+\includegraphics[width=0.5\textwidth]{bilddd}
+\caption{Vägen i planet som minimerar glidtiden mellan punkterna för en partikel som kan glida friktionsfritt.}
+\label{fig:fig1}
+\end{center}
+\end{figure}
+
+
+
+\subsection{Rörelsekonstanter}
+
+Vi ska nu endast studera variationskalkyl tillämpad på fysikaliska system i rörelse. Detta är ett alternativ till den Newtonska fysiken och är tillämpbart i många områden.\\ \\
+\textbf{Exempel 10:}\\
+Ett känt exempel på en rörelsekonstant är energin i ett konservativt system. Betrakta exempelvis en partikel med massa $m$ som rör sig under verkan av en gravitationspotential $V(\bar{x})$ i tre dimensioner. Partikelns totala energi beskrivs av energiekvationen
+$$
+E=\frac{m}{2}\dot{\bar{x}}^2+V(\bar{x}) \ .
+$$
+Utnyttjar vi att $E$ är en rörelsekonstant så måste
+$$
+\frac{dE}{dt}=0\implies m\dot{\bar{x}}\cdot\ddot{\bar{x}}+\dot{\bar{x}}\cdot\nabla V(\bar{x})=\dot{\bar{x}}\cdot\big(m\ddot{\bar{x}}+\nabla V(\bar{x})\big)=0 \ .
+$$
+Detta är Newtons 2a lag härledd i ett konservativt system: 
+$$
+m\ddot{\bar{x}}=-\nabla V(\bar{x}) \ .
+$$
+Skulle vi däremot tillåta potentialen att variera med tiden så tappar systemet sin konservativa natur. Vi skulle istället erhålla
+$$
+E=\frac{m}{2}\dot{\bar{x}}^2+V(\bar{x},t) \ .
+$$
+Nu ger derivering med $t$
+$$
+\frac{dE}{dt}=m\dot{\bar{x}}\cdot\ddot{\bar{x}}+\frac{\partial V}{\partial t}+\dot{\bar{x}}\cdot\nabla V(\bar{x})=\dot{\bar{x}}\big(m\ddot{\bar{x}}+\nabla V(\bar{x},t)\big)+\frac{\partial V}{\partial t} \ .
+$$
+Med Newtons 2a lag erhålls därför
+$$
+\frac{dE}{dt}=\frac{\partial}{\partial t}V(\bar{x},t) \ .
+$$\\
+
+Mer allmänt så kan rörelsekonstanter erhållas m h a Euler-Lagranges ekvationer och Beltramis identitet. \\ \\
+\textbf{\textsc{Funktional oberoende av funktionen}}\\
+Om funktionalen är oberoende av funktionen, exempelvis $\mathcal{L}=\mathcal{L}(\varphi'(x),x)$, så kan Euler-Lagranges ekvationer användas för att ge
+$$
+\frac{\partial\mathcal{L}}{\partial\varphi}=0\implies \frac{d}{dx}\frac{\partial\mathcal{L}}{\partial\varphi'}=0\implies \frac{\partial\mathcal{L}}{\partial\varphi'}=C \ .
+$$
+Här är alltså $\partial\mathcal{L}/\partial\varphi'$ \textit{en första integral för rörelseekvationerna}.\\ \\
+\textbf{\textsc{Funktional oberoende av variabeln}}\\
+Om funktionalen är oberoende av variabeln, exempelvis $\mathcal{L}=\mathcal{L}(\varphi(x),\varphi'(x))$ så ger Beltramis identitet direkt
+$$
+\varphi'(x)\frac{\partial\mathcal{L}}{\partial\varphi'}-\mathcal{L}=C \ .
+$$
+Här är alltså VL en första integral av rörelseekvationerna.
+\subsection{Rörelseekvationer}
+Med teorin för variationskalkylen fastställd kan nu allt appliceras på ett viktigt användningsområde inom speciellt mekanik. Nämligen ett sätt att bestämma rörelseekvationer för system där Newtons lagar inte är praktiskt tillämpbara..\\ \\
+\textbf{\textsc{Hamiltons variationsprincip}}\\
+I detta kapitel kommer vi att sudera exempel där vi applicerar något som kallas Hamiltons variationsprincip. Vad man gör är att man för ett konservativt system introducerar funktionalen $\int Ldt=\int (T-V)dt$, där man kallar $L$ för $"$Lagrangianen$"$. Denna kommer att vara beroende av rörelsekoordinater såsom $x,\dot{x},y,..$ som alltså behandlas precis som i teorin tidigare i detta kapitel. D v s, utséendet av systemet kommer att minimera Lagrangianen. Exemplen kommer att ge en klar bild av vad som är nyttigt med detta. \\ \\
+\textbf{Exempel 11:}\\
+Vi börjar enkelt med att härleda rörelseekvationerna för en partikel av massa $m$ i ett konstant gravitationsfält. Energiekvationen ger
+$$
+L=\frac{m}{2}\dot{\bar{x}}^2-mgz=\frac{m}{2}(\dot{x}^2+\dot{y}^2+\dot{z}^2)-mgz \ .
+$$
+Lagrangianen skrivs här som $L=L(x(t),y(t),z(t),t)$. Euler-Lagranges ekvationer ger
+$$
+\frac{\partial L}{\partial x}-\frac{d}{dt}\frac{\partial L}{\partial \dot{x}}=0 \implies m\ddot{x}=0 \ ,
+$$
+$$
+\frac{\partial L}{\partial y}-\frac{d}{dt}\frac{\partial L}{\partial \dot{y}}=0 \implies m\ddot{y}=0 \ ,
+$$
+$$
+\frac{\partial L}{\partial z}-\frac{d}{dt}\frac{\partial L}{\partial \dot{z}}=0 \implies m\ddot{z}=-mg \ .
+$$
+Detta är ett välkänt system av differentialekvationer. Variationskalkylen verkar alltså stämma överrens med Newtons lagar för rörelse.\\ \\
+\textbf{Exempel 12:}\\
+En vikt med massa $m$ är fäst med en fjäder med fjäderkonstant $k$ i origo och snurrar friktionslöst i planet. Härled rörelseekvationerna för fjädern. \\ \\
+Inför cylinderkoordinater så att
+$$
+\bar{r}(t)=r\bar{e}_r=r(\cos(\theta(t)),\sin(\theta(t)) \ .
+$$
+Konservativt system ger konstant energi. Samt är den potentiella energin uttrycket för energin lagrad i fjädern då den stäcks ut från jämviktsläget $\ell_0$:
+$$
+L=T-V=\frac{m}{2}v^2-\frac{1}{2}k(r-\ell_0)^2 \ .
+$$
+Hastigheten i cyliderkoordinater fås enligt:
+$$
+\dot{\bar{r}}=\dot{r}\bar{e}_r+r\dot{\bar{e}}=\dot{r}\bar{e}_r+r\dot{\theta}(-\sin\theta,\cos\theta)\equiv\dot{r}\bar{e}_r+r\dot{\theta}\bar{e}_{\theta} \ .
+$$
+Och därmed är
+$$
+v^2=\dot{\bar{r}}\cdot\dot{\bar{r}}=\dot{r}^2+r^2\dot{\theta}^2 \ .
+$$
+Lagrangianen blir därmed 
+$$
+L=\frac{m}{2}(\dot{r}^2+r^2\dot{\theta}^2)-\frac{1}{2}k(r-\ell_0)^2 \ .
+$$
+Vi söker nu rörelseekvationerna. Vi utnyttjar Euler-Lagrange och tar fram de derivator vi behöver:
+$$
+\frac{\partial L}{\partial r}=m\dot{\theta}^2r-k(r-\ell_0) \ , \quad \frac{d}{dt}\frac{\partial L}{\partial\dot{r}}=\frac{d}{dt}(m\dot{r})=m\ddot{r} \ .
+$$
+$$
+\frac{\partial L}{\partial \theta}=0 \ , \quad \frac{d}{dt}\frac{\partial L}{\partial\dot{\theta}}=\frac{d}{dt}(mr^2\dot{\theta})=2m\dot{r}\dot{\theta}+mr^2\ddot{\theta} .
+$$
+Nu ger Euler-Lagrange:
+$$
+\frac{\partial L}{\partial r}-\frac{d}{dt}\frac{\partial L}{\partial\dot{r}}=0 \implies m\ddot{r}=m\dot{\theta}^2r-k(r-\ell_0) \ ,
+$$
+$$
+2m\dot{r}\dot{\theta}+mr^2\ddot{\theta} =0 \ .
+$$
+Detta kan skrivas om på den vanliga formen för acceleration i cylinderkoordinater i de olika frihetsgraderna:
+$$
+r: \quad m(\ddot{r}-r\dot{\theta})=-k(r-\ell_0) \ ,
+$$
+$$
+\theta: \quad m(r^2\ddot{\theta}+2\dot{r}\dot{\theta})=0 \ .
+$$
+\newpage
+\noindent
+\textbf{Exempel 13:}
+\begin{figure}[H]
+\begin{center} 
+\includegraphics[width=0.3\textwidth]{bilden}
+\caption{}
+\label{fig:fig1}
+\end{center}
+\end{figure}
+Låt vagnen $A$ i figuren ha massa $m_1$ och kunna rulla fritt. Låt fjädern ha fjäderkonstant $k$. Stången betraktas som lätt och kan svänga fritt. Partikeln $B$ i stångens ände har massa $m_2$. Härled systemets rörelseekvationer.\\ \\
+\textbf{Lösning:}\\
+Inför positionskoordinaterna för $A$ och $B$:
+\begin{equation*}
+    \begin{cases}
+        x_A=x\\
+        y_A=0
+    \end{cases}, \ 
+    \begin{cases}
+      x_B=x+\ell\sin\theta\\
+      y_B=\ell\cos\theta
+    \end{cases}.
+\end{equation*}
+Vi kommer att behöva tidsderivatan i uttrycket för kinetiska energin. Detivering m a p $t$ ger:
+\begin{equation*}
+    \begin{cases}
+        \dot{x}_A=\dot{x}\\
+        \dot{y}_A=0
+    \end{cases}, \ 
+    \begin{cases}
+      \dot{x}_B=\dot{x}+\ell\dot{\theta}\cos\theta\\
+      \dot{y}_B=-\ell\dot{\theta}\sin\theta
+    \end{cases}.
+\end{equation*}
+Uttrycket för den kinetiska energin blir nu
+$$
+T=\frac{m_1}{2}(\dot{x_A}^2+\dot{y_A}^2)+\frac{m_2}{2}(\dot{x_B}^2+\dot{y_B}^2) =\frac{1}{2}(m_1+m_2)\dot{x}^2+m_2\ell\dot{x}\dot{\theta}\cos\theta+\frac{1}{2}m_2\ell^2\dot{\theta}^2 \ .
+$$
+Den potentiella energin är en summa av bidraget från pendeln och fjädern. Gravitationen har positiv riktning, samt så väljer vi att pendelns gravitationella energi är noll då $\theta=0$:
+$$
+V=m_2g(\ell-\ell\cos\theta)+\frac{1}{2}k(x-d)^2 \ .
+$$
+Vi får Lagrangianen $L=T-V$ till 
+$$
+L=\frac{1}{2}(m_1+m_2)\dot{x}^2+m_2\ell\dot{x}\dot{\theta}\cos\theta+\frac{1}{2}m_2\ell^2\dot{\theta}^2-m_2g(\ell-\ell\cos\theta)-\frac{1}{2}k(x-d)^2 
+$$
+Nu behöver de partiella derivatorna i Euler-Lagranges ekvationer bestämmas för att få ut rörelseekvationerna för systemet. Vi får efter lite förenkling:
+$$
+\frac{\partial L}{\partial x}=-k(x-d) \ , \quad \frac{d}{dt}\frac{\partial L}{\partial \dot{x}}=(m_1+m_2)\ddot{x}+m_2\ell(\ddot{\theta}\cos\theta-\dot{\theta}^2\sin\theta) \ .
+$$
+$$
+\frac{\partial L}{\partial\theta}=-m_2\ell(\dot{x}\dot{\theta}\sin\theta+g\sin\theta) \ , \quad \frac{d}{dt}\frac{\partial L}{\partial \dot{\theta}}=m_2\ell(\ell\ddot{\theta}-\dot{x}\dot{\theta}\sin\theta) \ .
+$$
+\newpage
+\noindent
+\textbf{Exempel 14:}\\
+Paraboliska koordinater i två dimensioner definieras enligt
+$$
+x=uv \ , \quad y=\frac{1}{2}(u^2-v^2) \ .
+$$
+En partikel med massa $m$ rör sig i en potential som ges av $V=ku^2/2$. Hitta rörelseekvationerna för partikeln i paraboliska koordinater genom att applicera Hamilton princip.\\ \\
+\textbf{Lösning}\\
+Hamiltons variationsprincip säger att den partikelbana som minimerar Lagrangianen $L=T-V$ är den bana som partikeln kommer att följa. Vi söker alltså att bestämma den kinetiska energin (potentialen är angiven i uppgiften.)
+$$
+T=\frac{m}{2}(\dot{x}^2+\dot{y}^2)=\frac{m}{2}\Big((\dot{u}v+u\dot{v})^2+\frac{1}{4}(2u\dot{u}-2v\dot{v})^2\Big)=
+$$
+$$
+=\frac{m}{2}\Big(\dot{u}^2v^2+2\dot{u}\dot{v}uv+u^2\dot{v}^2+u^2\dot{u}^2-2\dot{u}\dot{v}uv+v^2\dot{v}^2\Big)=
+$$
+$$
+=\frac{m}{2}\Big(\dot{u}^2u^2+\dot{v}^2v^2+\dot{u}^2v^2+u^2\dot{v}^2\Big)=\frac{m}{2}\big(\dot{u}^2+\dot{v}^2\big)\big(u^2+v^2\big) \ .
+$$
+Lagrangianen blir nu
+$$
+L=T-V=\frac{m}{2}\big(\dot{u}^2+\dot{v}^2\big)\big(u^2+v^2\big)-k\frac{u^2}{2} \ .
+$$
+För att bestämma rörelseekvationerna behöver vi bestämma de partiella derivatorna i Euler-Lagranges ekvationer:
+$$
+\frac{\partial L}{\partial u}=m\dot{u}^2u+m\dot{v}^2u-ku \ , \quad \frac{\partial L}{\partial v}=m\dot{v}^2v+m\dot{u}^2v \ .
+$$
+$$
+\frac{d}{dt}\frac{\partial L}{\partial \dot{u}}=2mu\dot{u}^2+2mv\dot{v}\dot{u}+mu^2\ddot{u}+mv^2\ddot{u} \ , \quad \frac{d}{dt}\frac{\partial L}{\partial \dot{v}}=2mv\dot{v}^2+2mu\dot{u}\dot{v}+mv^2\ddot{v}+mu^2\ddot{v} \ .
+$$
+Efter lite förenkling fås
+$$
+\frac{\partial L}{\partial u}-\frac{d}{dt}\frac{\partial L}{\partial \dot{u}}=0 \implies \underline{\ddot{u}(u^2+v^2)+u(\dot{u}^2-\dot{v}^2)+2v\dot{u}\dot{v}+\frac{k}{m}u=0} \ .
+$$
+Och
+$$
+\frac{\partial L}{\partial v}-\frac{d}{dt}\frac{\partial L}{\partial \dot{v}}=0 \implies \underline{\ddot{v}(u^2+v^2)+v(\dot{v}^2-\dot{u}^2)+2u\dot{u}\dot{v}=0} \ .
+$$
+Detta är de efterfrågade rörelseekvationerna. Då Lagrangianen ej beror av $t$ explicit så kan Beltramis identitet också användas, denna får utséendet
+$$
+\dot{u}\frac{\partial L}{\partial \dot{u}}+\dot{v}\frac{\partial L}{\partial \dot{v}}-L=C \ .
+$$
+Det visar sig att denna leder till relationen $T+V=C$, där $T$ och $L$ är de funna uttrycken ovan. Detta bekräftar energins bevarande.
+\newpage
+\noindent
+\textbf{Exempel 15:}\\
+I Exempel 10 studerade vi en partikel i en gravitationspotential. Vi härledde Newtons 2a lag med inskränkningen att systemets energi $E=T+V$ var konservativ. Detta går att visa mer allmänt m h a variationskalkyl.\\
+
+Låt en partikel med massa $m$ röra sig i ett tredimensionellt potentialfält beroende av position och tid $V(\bar{x},t)$. Bestäm systemets rörelseekvationer och visa att
+$$
+\frac{dE}{dt}=\frac{\partial V(\bar{x},t)}{\partial t} \ .
+$$
+\textbf{Lösning:}\\
+Det verkliga systemets utséende har enligt Hamiltons variationsprincip extremum till funktionalen
+$$
+\mathcal{S}=\int_{t_1}^{t_2}L(\bar{x},\dot{\bar{x}},t)dt \ .
+$$
+Lagrangianen är som bekant $L=T-V$ där
+$$
+T=\frac{m}{2}\dot{\bar{x}}^2
+$$
+och potentialen $V=V(\bar{x},t)$ är given i uppgiften. Vi behöver bestämma Euler-Lagranges ekvationer. Låt $\bar{x}=(x_1,x_2,x_3)$ så att
+$$
+T=\frac{m}{2}\dot{x}_i^2
+$$
+där summering över $i$ är underförstått. Vi behöver de partiella derivatorna:
+$$
+\frac{\partial L}{\partial x_k}=-\frac{\partial V(\bar{x},t)}{\partial x_k} \ , \quad \frac{d}{dt}\frac{\partial L}{\partial \bar{x}_k}=m\ddot{x}_k \ .
+$$
+Och därmed får vi
+$$
+\frac{\partial L}{\partial x_k}-\frac{d}{dt}\frac{\partial L}{\partial \dot{x}_k}=0 \implies -\frac{\partial V(\bar{x},t)}{\partial x_k}-m\ddot{x}_k=0 \ .
+$$
+OBS! Detta är sant för alla variabler individuellt och därmed gäller också
+$$
+m\big(\ddot{x}_1,\ddot{x}_2,\ddot{x}_3\big)=-\Big(\frac{\partial V}{\partial x_1},\frac{\partial V}{\partial x_2},\frac{\partial V}{\partial x_3}\Big) \implies m\ddot{\bar{x}}=-\nabla V(\bar{x},t) \ .
+$$
+Detta är alltså Newtons 2a lag härledd via variationskalkyl. För att följa i spåret av Exempel 10 kan vi derivera systemets totala energi $E=T+V$ m a p $t$:
+$$
+\frac{dE}{dt}=\frac{m}{2}2\dot{\bar{x}}\cdot\ddot{\bar{x}}+\dot{\bar{x}}\cdot\nabla V(\bar{x},t)+\frac{\partial V(\bar{x},t)}{\partial t}=\dot{\bar{x}}\big(m\ddot{\bar{x}}+\nabla V(\bar{x},t)\big)+\frac{\partial V(\bar{x},t)}{\partial t} \ .
+$$
+Med den härledda formen av Newtons 2a lag blir uttrycket i parentesen noll och därför är
+$$
+\frac{dE}{dt}=\frac{\partial V(\bar{x},t)}{\partial t} \ .
+$$
+\end{document}
